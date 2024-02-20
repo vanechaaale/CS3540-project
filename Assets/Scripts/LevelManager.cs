@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
     public float levelDuration = 60.0f;
+    public static bool isGameOver;
     public Text timerText;
     public Text gameText;
     float countDown;
-    bool isGameOver;
+    
     bool startGame;
     // Start is called before the first frame update
     void Start()
@@ -54,6 +56,19 @@ public class LevelManager : MonoBehaviour
         isGameOver = true;
         gameText.text = "GAME OVER!";
         gameText.gameObject.SetActive(true);
+    }
+
+    public void LevelLost() {
+        
+        isGameOver = true;
+        gameText.text = "YOU LOST!";
+        gameText.gameObject.SetActive(true);
+
+         Invoke("LoadCurrentLevel", 3);
+    }
+
+    void LoadCurrentLevel() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void StartGame() {
