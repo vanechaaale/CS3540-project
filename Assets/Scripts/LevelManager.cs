@@ -10,10 +10,12 @@ public class LevelManager : MonoBehaviour
     public Text gameText;
     float countDown;
     bool isGameOver;
+    bool startGame;
     // Start is called before the first frame update
     void Start()
     {
         isGameOver = false;
+        startGame = false;
         countDown = levelDuration;
 
         if(timerText == null) {
@@ -30,13 +32,13 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isGameOver) {
+        if (!isGameOver && startGame) {
             if (countDown > 0) {
                 countDown -= Time.deltaTime;
             } else {
                 countDown = 0.0f;
 
-                LevelLost();
+                LevelBeat();
             }
             SetTimerText();
         }
@@ -50,13 +52,13 @@ public class LevelManager : MonoBehaviour
     public void LevelBeat() {
         
         isGameOver = true;
-        gameText.text = "YOU WIN!";
+        gameText.text = "GAME OVER!";
         gameText.gameObject.SetActive(true);
     }
 
-    public void LevelLost() {
-        isGameOver = true;
-        gameText.text = "YOU LOSE! TRY AGAIN!";
-        gameText.gameObject.SetActive(true);
+    public void StartGame() {
+        if (!startGame) {
+            startGame = true;
+        }
     }
 }
