@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class ShoppingListBehavior : MonoBehaviour
 {
-    // 30 seconds for the customer to wait
-    public float startWaitTime = 30;
+    // time for a customer to wait
+    public float startWaitTime = 40;
     public float currentWaitTime;
     public Slider waitTimeSlider;
+    public bool customerHasLeft = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,11 +27,12 @@ public class ShoppingListBehavior : MonoBehaviour
             currentWaitTime -= Time.deltaTime;
             waitTimeSlider.value = currentWaitTime;
         }
-        // If the customer is done waiting, destroy the customer
-        else
+        // If the customer is done waiting, destroy the customer's list
+        else if (currentWaitTime <= 0 && !customerHasLeft)
         {
-            // Debug.Log("Customer has left the store");
+            customerHasLeft = true;
             Destroy(gameObject, 1);
+            FindObjectOfType<CustomerManagerBehavior>().RemoveCustomer();
         }
     }
 }
