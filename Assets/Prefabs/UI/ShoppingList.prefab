@@ -50,9 +50,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3acc22c48ba9ce84181d674fe7ec6805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startWaitTime: 5
+  startWaitTime: 45
   currentWaitTime: 0
   waitTimeSlider: {fileID: 8572673682037806033}
+  customerHasLeft: 0
 --- !u!1 &675966468737808148
 GameObject:
   m_ObjectHideFlags: 0
