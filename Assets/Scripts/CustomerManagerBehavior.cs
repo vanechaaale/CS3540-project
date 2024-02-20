@@ -21,7 +21,18 @@ public class CustomerManagerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // spawn a new customer at the top left of the screen every 5 seconds
+        // if level manager has started the game, spawn customers
+        if (GameObject.Find("LevelManager").GetComponent<LevelManager>().startGame)
+        {
+            SpawnCustomers();
+        }
+        
+        
+    }
+
+    public void SpawnCustomers()
+    {
+        // spawn a new shopping list ticket at the top left of the screen every 5 seconds
         if (currentCustomers < maxCustomers)
         {
             if ((Time.frameCount % (spawnRate * 60) == 0) || currentCustomers == 0)
@@ -29,7 +40,6 @@ public class CustomerManagerBehavior : MonoBehaviour
                 AddCustomer();
             }
         }
-        
     }
 
     public void AddCustomer()

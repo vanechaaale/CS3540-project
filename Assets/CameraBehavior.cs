@@ -20,5 +20,17 @@ public class CameraBehavior : MonoBehaviour
     {
         transform.position = player.position + offset;
 
+        // q and e to rotate the camera
+        if (Input.GetKey(KeyCode.Q))
+        {
+            transform.RotateAround(player.position, Vector3.up, 20 * Time.deltaTime);
+            offset = transform.position - player.position;
+        }
+        if (Input.GetKey(KeyCode.E))
+        {
+            transform.RotateAround(player.position, Vector3.up, -20 * Time.deltaTime);
+            offset = transform.position - player.position;
+        }
+
     }
 }

@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     public Text gameText;
     float countDown;
     bool isGameOver;
-    bool startGame;
+    public bool startGame;
     // Start is called before the first frame update
     void Start()
     {

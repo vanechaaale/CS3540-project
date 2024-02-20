@@ -25,8 +25,18 @@ public class PlayerMovement : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal") * playerSpeed * Time.deltaTime;
         float moveVertical = Input.GetAxis("Vertical") * playerSpeed * Time.deltaTime;   
 
-        transform.LookAt(rb.velocity);
+        // player looks in the direction of movement
+        if (moveHorizontal != 0 || moveVertical != 0)
+        {
+            transform.rotation = Quaternion.LookRotation(new Vector3(moveHorizontal, 0f, moveVertical));
+        }
 
         transform.position += new Vector3(moveHorizontal, 0f, moveVertical);
+
+        // if there is no input, stop the player
+        if (moveHorizontal == 0 && moveVertical == 0)
+        {
+            rb.velocity = Vector3.zero;
+        }
     }
 }
