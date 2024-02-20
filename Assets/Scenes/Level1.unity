@@ -1648,6 +1648,7 @@ GameObject:
   - component: {fileID: 514344362}
   - component: {fileID: 514344361}
   - component: {fileID: 514344360}
+  - component: {fileID: 514344363}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1723,12 +1724,25 @@ Transform:
   m_GameObject: {fileID: 514344359}
   serializedVersion: 2
   m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
-  m_LocalPosition: {x: 0, y: 25, z: 5.25}
+  m_LocalPosition: {x: 10.738856, y: 15, z: -40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
+--- !u!114 &514344363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514344359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e006bc246b78f42b3975552892b404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!1001 &565991267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1858,6 +1872,10 @@ PrefabInstance:
     - target: {fileID: 3334265454918746291, guid: 14c8bac0004c5d02d91d854727c7ed42, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526201097631476384, guid: 14c8bac0004c5d02d91d854727c7ed42, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3976,7 +3994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 7.1
       objectReference: {fileID: 0}
     - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5837,6 +5855,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1237906053648612730, guid: 58e17fb0ac8640c49941e69fb36ebbc1, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7012441669985448601, guid: 58e17fb0ac8640c49941e69fb36ebbc1, type: 3}
       propertyPath: m_Name
       value: Store

@@ -29,7 +29,7 @@ public class ShoppingListBehavior : MonoBehaviour
         // If the customer is done waiting, destroy the customer
         else
         {
-            // Debug.Log("Customer has left the store");
+            Debug.Log("Customer has left the store");
             Destroy(gameObject, 1);
         }
     }
