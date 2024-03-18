@@ -6,7 +6,7 @@ using UnityEngine;
 public class ItemCollection : MonoBehaviour
 {
     //list of items that the player collected
-    public List<GameObject> itemList;
+    public static List<GameObject> itemList;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +38,11 @@ public class ItemCollection : MonoBehaviour
                 }
             }
         }
-        
+    }
+
+    //removes the given item from the list
+    public void removeFromList(GameObject item)
+    {
+        itemList.Remove(item);
     }
 }
