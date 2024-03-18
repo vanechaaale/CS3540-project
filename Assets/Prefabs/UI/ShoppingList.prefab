@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3921378006321759393}
   - component: {fileID: 9165749592185132305}
+  - component: {fileID: -8205010856104772986}
   m_Layer: 5
   m_Name: ShoppingList
   m_TagString: Untagged
@@ -54,6 +55,23 @@ MonoBehaviour:
   currentWaitTime: 0
   waitTimeSlider: {fileID: 8572673682037806033}
   customerHasLeft: 0
+--- !u!114 &-8205010856104772986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344228747887511011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f0fbb4cafea4a159b4920eaa3072e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customerItems:
+  - {fileID: 1998466318430720, guid: 6fbeeda97cbb4e84c9bb0180938aba76, type: 3}
+  - {fileID: 1476756692356820, guid: 7b7ed779076a711439b117150f31a519, type: 3}
+  - {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
+  groceryCount: 3
 --- !u!1 &675966468737808148
 GameObject:
   m_ObjectHideFlags: 0
