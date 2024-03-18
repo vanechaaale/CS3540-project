@@ -28,7 +28,6 @@ public class CustomerManagerBehavior : MonoBehaviour
 
     public AudioClip customerEnterSFX;
     public AudioClip customerLeaveSFX;
-    public AudioClip customerAngrySFX;
 
     // Start is called before the first frame update
     void Start()
@@ -93,9 +92,14 @@ public class CustomerManagerBehavior : MonoBehaviour
         customersLeft++;
 
         // Play SFX when customer leaves
-        // AudioSource.PlayClipAtPoint(customerLeaveSFX, Camera.main.transform.position);
+        Invoke("PlayLeaveSFX", 0.5f);
     }
 
+    public void PlayLeaveSFX()
+    {
+        AudioSource.PlayClipAtPoint(customerLeaveSFX, Camera.main.transform.position);
+    }
+    
     public void UpdateShoppingList(List<string> removedItems)
     {
         // remove the given items from the shopping list of the first customer in line
