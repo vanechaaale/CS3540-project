@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class MatchItems : MonoBehaviour
 {
-    GameObject[] customerList;
-    List<GameObject> playerCollected;
+    List<string> customerList;
+    List<string> playerCollected;
 
     // Start is called before the first frame update
     void Start()
     {
-        customerList = ShoppingListRandomizer.groceryItems;
+        // customersList is a list of all the items that each customer needs
+        customerList = FindObjectOfType<CustomerManagerBehavior>().customerList[0];
         playerCollected = ItemCollection.itemList;
 
-        Debug.Log("size: " + customerList.Length);
-        foreach (GameObject obj in customerList) {
-            Debug.Log("Boop: " + obj.name);
+        Debug.Log("size: " + customerList.Count);
+        foreach (string item in customerList) {
+            Debug.Log("Boop: " + item);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        foreach (GameObject customerItem in customerList)
+        foreach (string customerItem in customerList)
         {
             if (playerCollected.Contains(customerItem))
             {
@@ -35,14 +36,13 @@ public class MatchItems : MonoBehaviour
     //UNUSED AS OF NOW
     bool isInList(string itemName)
     {
-        bool itemInList = false;
-        foreach (GameObject customerItem in customerList)
+        foreach (string item in customerList)
         {
-            if (customerItem.name == itemName)
+            if (item == itemName)
             {
-                itemInList = true;
+                return true;
             }
         }
-        return itemInList;
+        return false;
     }
 }

@@ -6,13 +6,16 @@ using UnityEngine;
 public class ItemCollection : MonoBehaviour
 {
     //list of items that the player collected
-    public static List<GameObject> itemList;
+    public static List<string> itemList;
+
+    // range that the player can collect items from
+    float range = 5.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         //create an empty list to start
-        itemList = new List<GameObject>();
+        itemList = new List<string>();
     }
 
     // Update is called once per frame
@@ -25,14 +28,39 @@ public class ItemCollection : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit hit;
+
+
             if (Physics.Raycast(ray, out hit))
             {
-                //if an item is clicked, then add it to the list of items and destroy it
-                if (hit.collider.CompareTag("Item"))
-                {
-                    Debug.Log("Item was clicked.");
+                
+                // get player position
+                Vector3 playerPos = transform.position;
+                // get the player's x and z coordinates
+                float playerX = playerPos.x;
+                float playerZ = playerPos.z;
 
-                    itemList.Add(hit.collider.gameObject);
+                // get item position
+                Vector3 itemPos = hit.collider.gameObject.transform.position;
+                // get the item's x and z coordinates
+                float itemX = itemPos.x;
+                float itemZ = itemPos.z;
+
+                // distance from player to item
+                float distance = Mathf.Sqrt(Mathf.Pow((itemX - playerX), 2) + Mathf.Pow((itemZ - playerZ), 2));
+
+                //if an item is clicked and the player is close enough,
+                //  then add it to the list of items and destroy it
+                if (hit.collider.CompareTag("Item") && distance <= range)
+                {
+                    Debug.Log("Item was picked up: ");
+                    Debug.Log(hit.collider.gameObject.name);
+                    Debug.Log("Current Items in Inventory: ");
+                    foreach (string item in itemList)
+                    {
+                        Debug.Log(item);
+                    }
+
+                    itemList.Add(hit.collider.gameObject.name);
 
                     Destroy(hit.collider.gameObject);
                 }
@@ -41,7 +69,7 @@ public class ItemCollection : MonoBehaviour
     }
 
     //removes the given item from the list
-    public void removeFromList(GameObject item)
+    public void removeFromList(string item)
     {
         itemList.Remove(item);
     }
