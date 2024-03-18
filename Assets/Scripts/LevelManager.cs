@@ -5,12 +5,22 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
+    public enum PowerUp
+    {
+        None,
+        SpeedBoost,
+        SlowTime
+    }
+
     public float levelDuration = 60.0f;
     public Text timerText;
     public Text gameText;
     float countDown;
     bool isGameOver;
     public bool startGame;
+
+    public static float money = 0f;
+    public static PowerUp currentPowerup = PowerUp.None;
 
     // Start is called before the first frame update
     void Start()

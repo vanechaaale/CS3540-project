@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class ItemCollection : MonoBehaviour
 {
     //list of items that the player collected
     public static List<string> itemList;
+
+    public float powerupCost = 5.00f;
 
     // range that the player can collect items from
     float range = 5.0f;
@@ -64,6 +67,17 @@ public class ItemCollection : MonoBehaviour
 
                     Destroy(hit.collider.gameObject);
                 }
+
+                else if (hit.collider.CompareTag("Powerup") && distance <= range && LevelManager.money >= powerupCost)
+                {
+                    Debug.Log("Powerup selected");
+                    LevelManager.money -= powerupCost;
+                    var possiblePowerups = (LevelManager.PowerUp[])Enum.GetValues(typeof(LevelManager.PowerUp));
+                    while(LevelManager.currentPowerup != LevelManager.PowerUp.None)
+                    {
+                        LevelManager.currentPowerup = possiblePowerups[UnityEngine.Random.Range(0, possiblePowerups.Length)];
+                    }
+                }
             }
         }
     }
@@ -73,4 +87,5 @@ public class ItemCollection : MonoBehaviour
     {
         itemList.Remove(item);
     }
+
 }

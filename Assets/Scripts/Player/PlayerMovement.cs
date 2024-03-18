@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         if (moveHorizontal != 0 || moveVertical != 0)
         {
             transform.rotation = Quaternion.LookRotation(new Vector3(moveHorizontal, 0f, moveVertical));
+            gameObject.GetComponent<Animator>().SetInteger("moveState", 1);
         }
 
         transform.position += new Vector3(moveHorizontal, 0f, moveVertical);
@@ -37,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
         if (moveHorizontal == 0 && moveVertical == 0)
         {
             rb.velocity = Vector3.zero;
+            gameObject.GetComponent<Animator>().SetInteger("moveState", 0);
         }
     }
 }
