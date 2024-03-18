@@ -19,6 +19,7 @@ public class LevelManager : MonoBehaviour
     public float powerupDuration = 20f;
     public Text timerText;
     public Text gameText;
+    public Text customersLeftText;
     float countDown;
     float powerupCountDown = 0f;
     bool isGameOver;
@@ -40,6 +41,11 @@ public class LevelManager : MonoBehaviour
 
         if(gameText == null) {
             gameText = GameObject.Find("GameText").GetComponent<Text>();
+        }
+
+        if (customersLeftText == null)
+        {
+            customersLeftText = GameObject.Find("CustomersLeftText").GetComponent<Text>();
         }
 
         SetTimerText();
