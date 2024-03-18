@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static GroceryItems;
 
 public class ShoppingListBehavior : MonoBehaviour
 {
@@ -10,12 +11,50 @@ public class ShoppingListBehavior : MonoBehaviour
     public float currentWaitTime;
     public Slider waitTimeSlider;
     public bool customerHasLeft = false;
+    public List<string> groceryList;
+    public Text[] groceryListText;
+
+    // min and max number of items a customer can have on their shopping list
+    public int minItems = 2;
+    public int maxItems = 3;
+    public int numItems;
+
 
     // Start is called before the first frame update
     void Start()
     {
         currentWaitTime = startWaitTime;
         waitTimeSlider.maxValue = startWaitTime;
+
+        // set the number of items on the shopping list
+        numItems = Random.Range(minItems, maxItems + 1);
+        groceryList = new List<string>();
+        // Add to the shopping list's Label component
+        for (int i = 0; i < numItems; i++)
+        {
+            // Get a random item from the GroceryItems enum
+            GroceryItems item = (GroceryItems)Random.Range(0, System.Enum.GetValues(typeof(GroceryItems)).Length);
+            string itemStr = "• " + item.ToString();
+            // if item isn't already on the list, add it
+            if (!groceryList.Contains(itemStr))
+            {
+                groceryList.Add(itemStr);
+            }
+            // if it is, decrement the counter and try again
+            else
+            {
+                i--;
+            }
+        }
+        groceryListText = GetComponentsInChildren<Text>();
+        for (int i = 0; i < groceryList.Count; i++)
+        {
+            groceryListText[i].text = groceryList[i];
+        }
+
+        // Add the list to the customer manager's list of customers
+        FindObjectOfType<CustomerManagerBehavior>().AddCustomer(groceryList);
+
     }
 
     // Update is called once per frame
