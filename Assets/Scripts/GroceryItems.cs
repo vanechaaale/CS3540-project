@@ -3,6 +3,7 @@ public enum GroceryItems
 {
     Watermelon,
     Soup,
-    Cereal,
-    Fish
+    CerealBox,
+    PeaStew,
+    Minestrone
 }
