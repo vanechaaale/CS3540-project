@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     float countDown;
     bool isGameOver;
     public bool startGame;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,4 +62,5 @@ public class LevelManager : MonoBehaviour
             startGame = true;
         }
     }
+
 }

@@ -148,6 +148,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startCustomers: 0
   currentCustomers: 0
-  maxCustomers: 4
+  customerLimit: 2
+  totalCustomers: 2
+  spawnedCustomers: 0
   spawnRate: 45
   shoppingListPrefab: {fileID: 344228747887511011, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
+  customerEnterSFX: {fileID: 8300000, guid: ba86a309529945e45adac00ff37f317e, type: 3}
+  customerLeaveSFX: {fileID: 0}
