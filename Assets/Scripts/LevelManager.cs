@@ -27,7 +27,7 @@ public class LevelManager : MonoBehaviour
 
     public static float money = 0f;
     public int pointsToWin = 50;
-    public static PowerUp currentPowerup = PowerUp.SlowTime;
+    public static PowerUp currentPowerup = PowerUp.None;
 
     // Start is called before the first frame update
     void Start()
