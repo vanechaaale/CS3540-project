@@ -9,7 +9,7 @@ public class CheckoutBehavior : MonoBehaviour
     public float checkoutTimer = 0.5f;
     public float minDistance = 1f;
     float checkoutCountdown = 0.5f;
-    public List<string> itemList;
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,7 @@ public class CheckoutBehavior : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
         }
         customerList = new List<string>();
-        itemList = new List<string>();
+
         GetNextCustomer();
     }
 
@@ -35,8 +35,6 @@ public class CheckoutBehavior : MonoBehaviour
     }
 
     void CheckoutCustomer() {
-
-        Debug.Log(itemList);
 
         if (checkoutCountdown <= 0) {
             // check if the customer's item is found in the player's basket
