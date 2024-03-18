@@ -45,17 +45,22 @@ public class ShoppingListBehavior : MonoBehaviour
             // Get a random item from the GroceryItems enum
             GroceryItems item = (GroceryItems)Random.Range(0, System.Enum.GetValues(typeof(GroceryItems)).Length);
             string itemStr = "• " + item.ToString();
-            // if item isn't already on the list, add it
-            if (!formattedGroceryList.Contains(itemStr))
-            {
-                formattedGroceryList.Add(itemStr);
-                groceryList.Add(item.ToString());
-            }
-            // if it is, decrement the counter and try again
-            else
-            {
-                i--;
-            }
+
+            // FOR UNIQUE ITEMS
+            // // if item isn't already on the list, add it
+            // if (!formattedGroceryList.Contains(itemStr))
+            // {
+            //     formattedGroceryList.Add(itemStr);
+            //     groceryList.Add(item.ToString());
+            // }
+            // // if it is, decrement the counter and try again
+            // else
+            // {
+            //     i--;
+            // }
+
+            // DUPLICATES ALLOWED
+            formattedGroceryList.Add(itemStr);
         }
         groceryListText = GetComponentsInChildren<Text>();
         for (int i = 0; i < formattedGroceryList.Count; i++)

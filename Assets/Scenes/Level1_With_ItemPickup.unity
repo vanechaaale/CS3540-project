@@ -339,6 +339,10 @@ PrefabInstance:
       propertyPath: totalCustomers
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 899499401306069871, guid: ebf425f9dfbc515428afb5f4f8e00a3f, type: 3}
+      propertyPath: customerLeaveSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 2f9c11f3f685cdd4ab7ebc499aac5f49, type: 3}
     - target: {fileID: 7093386068487274512, guid: ebf425f9dfbc515428afb5f4f8e00a3f, type: 3}
       propertyPath: m_Name
       value: CustomerManager

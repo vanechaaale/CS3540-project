@@ -1,9 +1,9 @@
 // Enum class for grocery items
 public enum GroceryItems 
 {
-    Watermelon,
+    //Watermelon,
     Soup,
-    CerealBox,
-    PeaStew,
-    Minestrone
+    //CerealBox,
+    //PeaStew,
+    //Minestrone
 }
