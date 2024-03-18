@@ -38,6 +38,7 @@ public class CheckoutBehavior : MonoBehaviour
 
     void CheckoutCustomer() {
 
+        Debug.Log("Checking out customer");
         if (checkoutCountdown <= 0) {
             List<string> removedItems = new List<string>();
             // check if any of the the customer's shopping list items are found in the player's basket
