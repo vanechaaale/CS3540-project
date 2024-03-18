@@ -44,7 +44,7 @@ public class CheckoutBehavior : MonoBehaviour
                 ItemCollection.itemList.Remove(customerList[0]);
                 FindObjectOfType<ItemCollection>().removeFromList(customerList[0]);
 
-                if (customerList.Count > 0) {
+                if (customerList.Count == 0) {
                     // remove the customer from the Shopping list
                     FindObjectOfType<CustomerManagerBehavior>().RemoveCustomer();
                     // TODO: INCREMENT SCORE
