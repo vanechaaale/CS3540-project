@@ -11,8 +11,12 @@ public class ShoppingListBehavior : MonoBehaviour
     public float currentWaitTime;
     public Slider waitTimeSlider;
     public bool customerHasLeft = false;
+    public List<string> formattedGroceryList;
     public List<string> groceryList;
     public Text[] groceryListText;
+
+    // customer's place in line
+    public int index;
 
     // min and max number of items a customer can have on their shopping list
     public int minItems = 2;
@@ -28,32 +32,44 @@ public class ShoppingListBehavior : MonoBehaviour
 
         // set the number of items on the shopping list
         numItems = Random.Range(minItems, maxItems + 1);
-        groceryList = new List<string>();
+
+        // the formatted grocery list with bullet points
+        formattedGroceryList = new List<string>();
+
+        // the regular grocery list of strings
+        List<string> groceryList = new List<string>();
+
         // Add to the shopping list's Label component
         for (int i = 0; i < numItems; i++)
         {
             // Get a random item from the GroceryItems enum
             GroceryItems item = (GroceryItems)Random.Range(0, System.Enum.GetValues(typeof(GroceryItems)).Length);
             string itemStr = "• " + item.ToString();
-            // if item isn't already on the list, add it
-            if (!groceryList.Contains(itemStr))
-            {
-                groceryList.Add(itemStr);
-            }
-            // if it is, decrement the counter and try again
-            else
-            {
-                i--;
-            }
+
+            // FOR UNIQUE ITEMS
+            // // if item isn't already on the list, add it
+            // if (!formattedGroceryList.Contains(itemStr))
+            // {
+            //     formattedGroceryList.Add(itemStr);
+            //     groceryList.Add(item.ToString());
+            // }
+            // // if it is, decrement the counter and try again
+            // else
+            // {
+            //     i--;
+            // }
+
+            // DUPLICATES ALLOWED
+            formattedGroceryList.Add(itemStr);
         }
         groceryListText = GetComponentsInChildren<Text>();
-        for (int i = 0; i < groceryList.Count; i++)
+        for (int i = 0; i < formattedGroceryList.Count; i++)
         {
-            groceryListText[i].text = groceryList[i];
+            groceryListText[i].text = formattedGroceryList[i];
         }
 
         // Add the list to the customer manager's list of customers
-        FindObjectOfType<CustomerManagerBehavior>().AddCustomer(groceryList);
+        FindObjectOfType<CustomerManagerBehavior>().AddGroceryList(groceryList);
 
     }
 
@@ -73,5 +89,6 @@ public class ShoppingListBehavior : MonoBehaviour
             Destroy(gameObject, 1);
             FindObjectOfType<CustomerManagerBehavior>().RemoveCustomer();
         }
+
     }
 }

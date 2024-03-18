@@ -12,16 +12,21 @@ public class LevelManager : MonoBehaviour
         SlowTime
     }
 
-    public float levelDuration = 60.0f;
+    public int score = 0;
+    public Text scoreText;
+
+    //public float levelDuration = 60.0f;
     public float powerupDuration = 20f;
-    public Text timerText;
+    // public Text timerText;
     public Text gameText;
-    float countDown;
+    public Text customersLeftText;
+    //float countDown;
     float powerupCountDown = 0f;
     bool isGameOver;
     public bool startGame;
 
     public static float money = 0f;
+    public int pointsToWin = 50;
     public static PowerUp currentPowerup = PowerUp.SlowTime;
 
     // Start is called before the first frame update
@@ -29,31 +34,44 @@ public class LevelManager : MonoBehaviour
     {
         isGameOver = false;
         startGame = false;
-        countDown = levelDuration;
+        //countDown = levelDuration;
 
-        if(timerText == null) {
-            timerText = GameObject.Find("TimerText").GetComponent<Text>();
-        }
+        // if(timerText == null) {
+        //     timerText = GameObject.Find("TimerText").GetComponent<Text>();
+        // }
 
         if(gameText == null) {
             gameText = GameObject.Find("GameText").GetComponent<Text>();
         }
 
-        SetTimerText();
+        if (customersLeftText == null)
+        {
+            customersLeftText = GameObject.Find("CustomersLeftText").GetComponent<Text>();
+        }
+
+        //SetTimerText();
+        SetCustomersLeftText();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (!isGameOver && startGame) {
-            if (countDown > 0) {
-                countDown -= Time.deltaTime / (currentPowerup == PowerUp.SlowTime? 2: 1);
-            } else {
-                countDown = 0.0f;
-
+            // if (countDown > 0) {
+            //     countDown -= Time.deltaTime / (currentPowerup == PowerUp.SlowTime? 2: 1);
+            // } else {
+            //     countDown = 0.0f;
+            //     LevelBeat();
+            // }
+            //SetTimerText();
+            
+            // if all customers have left, the level is over
+            if (FindObjectOfType<CustomerManagerBehavior>().customersLeft == FindObjectOfType<CustomerManagerBehavior>().totalCustomers)
+            {
                 LevelBeat();
             }
-            SetTimerText();
+
+            SetCustomersLeftText();
 
             if (currentPowerup != PowerUp.None)
             {
@@ -67,15 +85,28 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    void SetTimerText()
+    // Commented out this because we decided to use Customers Left instead of a timer
+    // void SetTimerText()
+    // {
+    //     timerText.text = "Timer: " +  countDown.ToString("0.00");
+    // }
+
+    void SetCustomersLeftText()
     {
-        timerText.text = "Timer: " +  countDown.ToString("0.00");
+        customersLeftText.text = "Customers Left: " + (FindObjectOfType<CustomerManagerBehavior>().totalCustomers - FindObjectOfType<CustomerManagerBehavior>().customersLeft).ToString();
     }
 
     public void LevelBeat() {
         
         isGameOver = true;
-        gameText.text = "GAME OVER!";
+
+        // check if player won the level
+        if (score >= pointsToWin) {
+            gameText.text = "You Win!";
+        } else {
+            gameText.text = "You Lose!";
+        }
+        
         gameText.gameObject.SetActive(true);
     }
 
@@ -83,6 +114,11 @@ public class LevelManager : MonoBehaviour
         if (!startGame) {
             startGame = true;
         }
+    }
+
+    public void AddScore(int scoreToAdd) {
+        score += scoreToAdd;
+        scoreText.text = score.ToString();
     }
 
 }
