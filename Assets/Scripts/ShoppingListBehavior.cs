@@ -86,31 +86,4 @@ public class ShoppingListBehavior : MonoBehaviour
         }
 
     }
-
-    // remove the given items from the shopping list of the first customer in line
-    public void UpdateShoppingList(List<string> removedItems) {
-        Debug.Log("update shopping list in ShoppingListBehavior");
-        // get the first customer in line
-        List<string> firstCustomerList = FindObjectOfType<CustomerManagerBehavior>().groceryLists[0];
-        for (int i = 0; i < firstCustomerList.Count; i++) {
-            Debug.Log(firstCustomerList[i]);
-        }
-        // remove the items from the customer's shopping list
-        for (int i = 0; i < removedItems.Count; i++) {
-            firstCustomerList.Remove(removedItems[i]);
-        }
-        // update the shopping list of the customer in line with the new list
-        FindObjectOfType<CustomerManagerBehavior>().groceryLists[0] = firstCustomerList;
-
-        // update the label 
-        groceryListText = GetComponentsInChildren<Text>();
-
-
-        // // if the customer's shopping list is empty, remove the customer from the line
-        // if (firstCustomerList.Count == 0) {
-        //     FindObjectOfType<CustomerManagerBehavior>().RemoveFirstCustomer();
-        // }
-
-        
-    }
 }

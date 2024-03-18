@@ -17,6 +17,9 @@ public class CustomerManagerBehavior : MonoBehaviour
 
     public int spawnedCustomers = 0;
 
+    // the number of customers that have left the store, either by leaving or by being served
+    public int customersLeft = 0;
+
     public List<List<string>> groceryLists;
 
     public int spawnRate = 30;
@@ -86,6 +89,8 @@ public class CustomerManagerBehavior : MonoBehaviour
         }
         // remove the first customer from the list of customer shopping lists
         groceryLists.RemoveAt(0);
+
+        customersLeft++;
 
         // Play SFX when customer leaves
         // AudioSource.PlayClipAtPoint(customerLeaveSFX, Camera.main.transform.position);
