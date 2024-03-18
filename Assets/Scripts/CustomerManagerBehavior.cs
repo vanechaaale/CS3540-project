@@ -46,7 +46,7 @@ public class CustomerManagerBehavior : MonoBehaviour
 
     public void SpawnCustomers()
     {
-        // spawn a new shopping list ticket at the top left of the screen every 5 seconds
+        // spawn a new shopping list ticket at the top left of the screen
         if (currentCustomers < customerLimit && spawnedCustomers < totalCustomers)
         {
 

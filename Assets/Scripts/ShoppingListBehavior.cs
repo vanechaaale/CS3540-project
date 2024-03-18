@@ -11,6 +11,7 @@ public class ShoppingListBehavior : MonoBehaviour
     public float currentWaitTime;
     public Slider waitTimeSlider;
     public bool customerHasLeft = false;
+    public List<string> formattedGroceryList;
     public List<string> groceryList;
     public Text[] groceryListText;
 
@@ -28,7 +29,13 @@ public class ShoppingListBehavior : MonoBehaviour
 
         // set the number of items on the shopping list
         numItems = Random.Range(minItems, maxItems + 1);
-        groceryList = new List<string>();
+
+        // the formatted grocery list with bullet points
+        formattedGroceryList = new List<string>();
+
+        // the regular grocery list of strings
+        List<string> groceryList = new List<string>();
+
         // Add to the shopping list's Label component
         for (int i = 0; i < numItems; i++)
         {
@@ -36,9 +43,10 @@ public class ShoppingListBehavior : MonoBehaviour
             GroceryItems item = (GroceryItems)Random.Range(0, System.Enum.GetValues(typeof(GroceryItems)).Length);
             string itemStr = "• " + item.ToString();
             // if item isn't already on the list, add it
-            if (!groceryList.Contains(itemStr))
+            if (!formattedGroceryList.Contains(itemStr))
             {
-                groceryList.Add(itemStr);
+                formattedGroceryList.Add(itemStr);
+                groceryList.Add(item.ToString());
             }
             // if it is, decrement the counter and try again
             else
@@ -47,9 +55,9 @@ public class ShoppingListBehavior : MonoBehaviour
             }
         }
         groceryListText = GetComponentsInChildren<Text>();
-        for (int i = 0; i < groceryList.Count; i++)
+        for (int i = 0; i < formattedGroceryList.Count; i++)
         {
-            groceryListText[i].text = groceryList[i];
+            groceryListText[i].text = formattedGroceryList[i];
         }
 
         // Add the list to the customer manager's list of customers

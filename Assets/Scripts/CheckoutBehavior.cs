@@ -7,7 +7,7 @@ public class CheckoutBehavior : MonoBehaviour
     public GameObject player;
     public List<string> customerList;
     public float checkoutTimer = 0.5f;
-    public float minDistance = 1f;
+    float minDistance = 4f;
     float checkoutCountdown = 0.5f;
 
 
@@ -40,6 +40,7 @@ public class CheckoutBehavior : MonoBehaviour
             // check if the customer's item is found in the player's basket
             if (ItemCollection.itemList.Contains(customerList[0])) {
                 
+                
                 // remove the item from both customer and player's list if found
                 ItemCollection.itemList.Remove(customerList[0]);
                 FindObjectOfType<ItemCollection>().removeFromList(customerList[0]);
@@ -47,7 +48,9 @@ public class CheckoutBehavior : MonoBehaviour
                 if (customerList.Count == 0) {
                     // remove the customer from the Shopping list
                     FindObjectOfType<CustomerManagerBehavior>().RemoveCustomer();
-                    // TODO: INCREMENT SCORE
+                    
+                    // increment score in level manager
+                    FindObjectOfType<LevelManager>().AddScore(1);
                 }
 
                 // restart the countdown timer

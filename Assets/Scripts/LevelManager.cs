@@ -12,6 +12,9 @@ public class LevelManager : MonoBehaviour
         SlowTime
     }
 
+    public int score = 0;
+    public Text scoreText;
+
     public float levelDuration = 60.0f;
     public float powerupDuration = 20f;
     public Text timerText;
@@ -83,6 +86,11 @@ public class LevelManager : MonoBehaviour
         if (!startGame) {
             startGame = true;
         }
+    }
+
+    public void AddScore(int scoreToAdd) {
+        score += scoreToAdd;
+        scoreText.text = score.ToString();
     }
 
 }
