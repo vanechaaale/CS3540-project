@@ -504,3 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3681d5548c231394e8b2768e548bd77a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  customerList: []
+  checkoutTimer: 0.5
+  checkoutSFX: {fileID: 8300000, guid: 1125b0b0baec1a54cada1f697fe15c7b, type: 3}

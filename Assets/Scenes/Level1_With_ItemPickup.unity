@@ -510,7 +510,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_Name
-      value: Soup
+      value: Cereal
       objectReference: {fileID: 0}
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_TagString
@@ -588,7 +588,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_Name
-      value: Soup
+      value: Watermelon
       objectReference: {fileID: 0}
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_TagString
@@ -4372,7 +4372,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_Name
-      value: Soup
+      value: Fish
       objectReference: {fileID: 0}
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_TagString
@@ -5102,6 +5102,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShoppingList
       objectReference: {fileID: 0}
+    - target: {fileID: 344228747887511011, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5189,6 +5193,14 @@ PrefabInstance:
     - target: {fileID: 4836304229190860648, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165749592185132305, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
+      propertyPath: maxItems
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165749592185132305, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
+      propertyPath: minItems
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5747,7 +5759,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3847736536689124261, guid: 8de7cd4d6b380194c8d0954be83496c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.634208
+      value: 8.88
       objectReference: {fileID: 0}
     - target: {fileID: 3847736536689124261, guid: 8de7cd4d6b380194c8d0954be83496c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5755,7 +5767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3847736536689124261, guid: 8de7cd4d6b380194c8d0954be83496c3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -29.301773
+      value: -29.31
       objectReference: {fileID: 0}
     - target: {fileID: 3847736536689124261, guid: 8de7cd4d6b380194c8d0954be83496c3, type: 3}
       propertyPath: m_LocalRotation.w

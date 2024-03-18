@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9165749592185132305}
   m_Layer: 5
   m_Name: ShoppingList
-  m_TagString: Untagged
+  m_TagString: ShoppingLists
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,8 +54,13 @@ MonoBehaviour:
   currentWaitTime: 0
   waitTimeSlider: {fileID: 8572673682037806033}
   customerHasLeft: 0
+  formattedGroceryList: []
+  groceryList: []
+  groceryListText: []
+  index: 0
   minItems: 2
   maxItems: 3
+  numItems: 0
 --- !u!1 &675966468737808148
 GameObject:
   m_ObjectHideFlags: 0
