@@ -13,14 +13,16 @@ public class LevelManager : MonoBehaviour
     }
 
     public float levelDuration = 60.0f;
+    public float powerupDuration = 20f;
     public Text timerText;
     public Text gameText;
     float countDown;
+    float powerupCountDown = 0f;
     bool isGameOver;
     public bool startGame;
 
     public static float money = 0f;
-    public static PowerUp currentPowerup = PowerUp.None;
+    public static PowerUp currentPowerup = PowerUp.SlowTime;
 
     // Start is called before the first frame update
     void Start()
@@ -45,13 +47,23 @@ public class LevelManager : MonoBehaviour
     {
         if (!isGameOver && startGame) {
             if (countDown > 0) {
-                countDown -= Time.deltaTime;
+                countDown -= Time.deltaTime / (currentPowerup == PowerUp.SlowTime? 2: 1);
             } else {
                 countDown = 0.0f;
 
                 LevelBeat();
             }
             SetTimerText();
+
+            if (currentPowerup != PowerUp.None)
+            {
+                powerupCountDown += Time.deltaTime;
+                if (powerupCountDown > powerupDuration)
+                {
+                    currentPowerup = PowerUp.None;
+                    powerupCountDown = 0;
+                }
+            }
         }
     }
 
