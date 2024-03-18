@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class CustomerManagerBehavior : MonoBehaviour
 {
@@ -15,7 +17,10 @@ public class CustomerManagerBehavior : MonoBehaviour
 
     public int spawnedCustomers = 0;
 
-    public List<List<string>> customerList;
+    // the number of customers that have left the store, either by leaving or by being served
+    public int customersLeft = 0;
+
+    public List<List<string>> groceryLists;
 
     public int spawnRate = 30;
     
@@ -23,11 +28,12 @@ public class CustomerManagerBehavior : MonoBehaviour
 
     public AudioClip customerEnterSFX;
     public AudioClip customerLeaveSFX;
+    public AudioClip customerAngrySFX;
 
     // Start is called before the first frame update
     void Start()
     {
-        customerList = new List<List<string>>();
+        groceryLists = new List<List<string>>();
         currentCustomers = startCustomers;
         
     }
@@ -46,7 +52,7 @@ public class CustomerManagerBehavior : MonoBehaviour
 
     public void SpawnCustomers()
     {
-        // spawn a new shopping list ticket at the top left of the screen every 5 seconds
+        // spawn a new shopping list ticket at the top left of the screen
         if (currentCustomers < customerLimit && spawnedCustomers < totalCustomers)
         {
 
@@ -66,13 +72,11 @@ public class CustomerManagerBehavior : MonoBehaviour
         newCustomer.transform.SetParent(GameObject.FindGameObjectWithTag("ShoppingLists").transform);
     }
 
-    public void AddCustomer(List<string> shoppingList)
+    public void AddGroceryList(List<string> shoppingList)
     {
         // Add the shopping list to the customer manager's list of customer shopping lists
-        customerList.Add(shoppingList);
+        groceryLists.Add(shoppingList);
     }
-
-
 
     public void RemoveCustomer()
     {
@@ -82,6 +86,36 @@ public class CustomerManagerBehavior : MonoBehaviour
         foreach (Transform child in GameObject.FindGameObjectWithTag("ShoppingLists").transform)
         {
             child.position = new Vector3(child.position.x - 100, child.position.y, child.position.z);
+        }
+        // remove the first customer from the list of customer shopping lists
+        groceryLists.RemoveAt(0);
+
+        customersLeft++;
+
+        // Play SFX when customer leaves
+        // AudioSource.PlayClipAtPoint(customerLeaveSFX, Camera.main.transform.position);
+    }
+
+    public void UpdateShoppingList(List<string> removedItems)
+    {
+        // remove the given items from the shopping list of the first customer in line
+        for (int i = 0; i < removedItems.Count; i++)
+        {
+            groceryLists[0].Remove(removedItems[i]);
+        }
+
+        // get the child text components of the first ShoppingList prefab
+        Text[] groceryListText = GameObject.FindGameObjectWithTag("ShoppingLists").GetComponentInChildren<ShoppingListBehavior>().GetComponentsInChildren<Text>();
+
+        // clear the label
+        for (int i = 0; i < 4; i++)
+        {
+            groceryListText[i].text = "";
+        }
+        // update the label
+        for (int i = 0; i < groceryLists[0].Count; i++)
+        {
+            groceryListText[i].text = "• " + groceryLists[0][i];
         }
     }
 }

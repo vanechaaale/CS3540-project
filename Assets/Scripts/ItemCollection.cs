@@ -55,27 +55,18 @@ public class ItemCollection : MonoBehaviour
                 //  then add it to the list of items and destroy it
                 if (hit.collider.CompareTag("Item") && distance <= range)
                 {
-                    Debug.Log("Item was picked up: ");
-                    Debug.Log(hit.collider.gameObject.name);
-                    Debug.Log("Current Items in Inventory: ");
-                    foreach (string item in itemList)
-                    {
-                        Debug.Log(item);
-                    }
-
                     itemList.Add(hit.collider.gameObject.name);
-
                     Destroy(hit.collider.gameObject);
                 }
 
                 else if (hit.collider.CompareTag("Powerup") && distance <= range && LevelManager.money >= powerupCost)
                 {
-                    Debug.Log("Powerup selected");
+                    Debug.Log("Powerup selected"); 
                     LevelManager.money -= powerupCost;
                     var possiblePowerups = (LevelManager.PowerUp[])Enum.GetValues(typeof(LevelManager.PowerUp));
-                    while(LevelManager.currentPowerup != LevelManager.PowerUp.None)
+                    while (LevelManager.currentPowerup != LevelManager.PowerUp.None)
                     {
-                        LevelManager.currentPowerup = possiblePowerups[UnityEngine.Random.Range(0, possiblePowerups.Length)];
+                       LevelManager.currentPowerup = possiblePowerups[UnityEngine.Random.Range(0, possiblePowerups.Length)];
                     }
                 }
             }
