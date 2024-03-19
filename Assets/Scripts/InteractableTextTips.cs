@@ -27,7 +27,7 @@ public class InteractableTextTips : MonoBehaviour
                 new Vector3(transform.position.x, 0, transform.position.z),
                 new Vector3(hit.collider.transform.position.x, 0, hit.collider.transform.position.z)) )
         {
-            Debug.Log(hit.collider.tag);
+            
             if (hit.collider.CompareTag("Item"))
             {
                 tipText.text = "Pickup Item";

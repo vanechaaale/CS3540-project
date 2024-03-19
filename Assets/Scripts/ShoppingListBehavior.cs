@@ -78,7 +78,7 @@ public class ShoppingListBehavior : MonoBehaviour
         // If the customer is waiting, decrement the wait time (1 second at a time)
         if (currentWaitTime > 0)
         {
-            currentWaitTime -= Time.deltaTime;
+            currentWaitTime -= Time.deltaTime / (LevelManager.currentPowerup == LevelManager.PowerUp.SlowTime? 2 : 1);
             waitTimeSlider.value = currentWaitTime;
         }
         // If the customer is done waiting, destroy the customer's list
