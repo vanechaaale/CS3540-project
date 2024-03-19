@@ -3,7 +3,7 @@ public enum GroceryItems
 {
     //Watermelon,
     Soup,
-    //CerealBox,
-    //PeaStew,
-    //Minestrone
+    //Cereal,
+    PeaStew,
+    Minestrone
 }

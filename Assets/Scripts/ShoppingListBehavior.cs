@@ -15,9 +15,6 @@ public class ShoppingListBehavior : MonoBehaviour
     public List<string> groceryList;
     public Text[] groceryListText;
 
-    // customer's place in line
-    public int index;
-
     // min and max number of items a customer can have on their shopping list
     public int minItems = 2;
     public int maxItems = 3;
@@ -31,8 +28,8 @@ public class ShoppingListBehavior : MonoBehaviour
         waitTimeSlider.maxValue = startWaitTime;
 
         // set the number of items on the shopping list
-        //numItems = Random.Range(minItems, maxItems + 1);
-        numItems = 1;
+        numItems = Random.Range(minItems, maxItems + 1);
+        // numItems = 1;
 
         // the formatted grocery list with bullet points
         formattedGroceryList = new List<string>();
@@ -48,21 +45,21 @@ public class ShoppingListBehavior : MonoBehaviour
             string itemStr = "• " + item.ToString();
 
             // FOR UNIQUE ITEMS
-            // // if item isn't already on the list, add it
-            // if (!formattedGroceryList.Contains(itemStr))
-            // {
-            //     formattedGroceryList.Add(itemStr);
-            //     groceryList.Add(item.ToString());
-            // }
-            // // if it is, decrement the counter and try again
-            // else
-            // {
-            //     i--;
-            // }
+            // if item isn't already on the list, add it
+            if (!formattedGroceryList.Contains(itemStr))
+            {
+                formattedGroceryList.Add(itemStr);
+                groceryList.Add(item.ToString());
+            }
+            // if it is, decrement the counter and try again
+            else
+            {
+                i--;
+            }
 
-            // DUPLICATES ALLOWED
-            formattedGroceryList.Add(itemStr);
-            groceryList.Add(item.ToString());
+            // // DUPLICATES ALLOWED
+            // formattedGroceryList.Add(itemStr);
+            // groceryList.Add(item.ToString());
         }
         groceryListText = GetComponentsInChildren<Text>();
         for (int i = 0; i < formattedGroceryList.Count; i++)

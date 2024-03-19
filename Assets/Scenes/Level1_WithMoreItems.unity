@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -341,6 +341,14 @@ PrefabInstance:
       propertyPath: spawnRate
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 899499401306069871, guid: ebf425f9dfbc515428afb5f4f8e00a3f, type: 3}
+      propertyPath: totalCustomers
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 899499401306069871, guid: ebf425f9dfbc515428afb5f4f8e00a3f, type: 3}
+      propertyPath: customerLeaveSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 2f9c11f3f685cdd4ab7ebc499aac5f49, type: 3}
     - target: {fileID: 7093386068487274512, guid: ebf425f9dfbc515428afb5f4f8e00a3f, type: 3}
       propertyPath: m_Name
       value: CustomerManager
@@ -360,7 +368,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_Name
-      value: TomatoSoup (22)
+      value: Soup
       objectReference: {fileID: 0}
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_TagString
@@ -512,7 +520,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_Name
-      value: TomatoSoup (13)
+      value: Soup
       objectReference: {fileID: 0}
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_TagString
@@ -908,6 +916,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30d9b9580755bc146b34b329870e2034, type: 3}
+--- !u!114 &196514788 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7835146094867623866, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+  m_PrefabInstance: {fileID: 2014124037}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &197640358 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4096565676083030, guid: 0b5404da58d77384eac105547be6a633, type: 3}
@@ -923,7 +942,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1990544889166946, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_Name
-      value: CerealBox
+      value: Cereal
       objectReference: {fileID: 0}
     - target: {fileID: 4096565676083030, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1376,7 +1395,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1990544889166946, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_Name
-      value: CerealBox
+      value: Cereal
       objectReference: {fileID: 0}
     - target: {fileID: 4096565676083030, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1507,7 +1526,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_Name
-      value: TomatoSoup (20)
+      value: Soup
       objectReference: {fileID: 0}
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_TagString
@@ -1673,7 +1692,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_Name
-      value: TomatoSoup (14)
+      value: Soup
       objectReference: {fileID: 0}
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_TagString
@@ -2256,7 +2275,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1990544889166946, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_Name
-      value: CerealBox
+      value: Cereal
       objectReference: {fileID: 0}
     - target: {fileID: 4096565676083030, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2455,153 +2474,6 @@ LightingSettings:
   m_PVRTiledBaking: 0
   m_NumRaysToShootPerTexel: -1
   m_RespectSceneVisibilityWhenBakingGI: 0
---- !u!1001 &640573806
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194183040664380125, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8039080219135950719, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_Pivot.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8039080219135950719, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8039080219135950719, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8039080219135950719, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8039080219135950719, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8039080219135950719, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8039080219135950719, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9027261929435796119, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-      propertyPath: m_Name
-      value: GameInfo
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
---- !u!114 &640573807 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4257410163303134228, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-  m_PrefabInstance: {fileID: 640573806}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &640573808 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4578358720613205046, guid: 444abce4d7f012e43908eb6bed8e3619, type: 3}
-  m_PrefabInstance: {fileID: 640573806}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &676780391
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3203,7 +3075,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_Name
-      value: TomatoSoup (19)
+      value: Soup
       objectReference: {fileID: 0}
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_TagString
@@ -3626,7 +3498,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1990544889166946, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_Name
-      value: CerealBox
+      value: Cereal
       objectReference: {fileID: 0}
     - target: {fileID: 4096565676083030, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3979,7 +3851,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1990544889166946, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_Name
-      value: CerealBox
+      value: Cereal
       objectReference: {fileID: 0}
     - target: {fileID: 4096565676083030, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4211,7 +4083,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_Name
-      value: TomatoSoup (8)
+      value: Soup
       objectReference: {fileID: 0}
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_TagString
@@ -4627,6 +4499,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30d9b9580755bc146b34b329870e2034, type: 3}
+--- !u!114 &1146698333 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8679642503155799180, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+  m_PrefabInstance: {fileID: 2014124037}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1153814272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4742,7 +4625,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1990544889166946, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_Name
-      value: CerealBox
+      value: Cereal
       objectReference: {fileID: 0}
     - target: {fileID: 4096565676083030, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4888,7 +4771,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_Name
-      value: TomatoSoup (12)
+      value: Soup
       objectReference: {fileID: 0}
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_TagString
@@ -5403,7 +5286,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1990544889166946, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_Name
-      value: CerealBox
+      value: Cereal
       objectReference: {fileID: 0}
     - target: {fileID: 4096565676083030, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5485,7 +5368,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1990544889166946, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_Name
-      value: CerealBox
+      value: Cereal
       objectReference: {fileID: 0}
     - target: {fileID: 4096565676083030, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5584,115 +5467,6 @@ Transform:
   - {fileID: 274210949}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1359067065
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 344228747887511011, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_Name
-      value: ShoppingList
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 7.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921378006321759393, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4836304229190860648, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9165749592185132305, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: minItems
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9165749592185132305, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
-      propertyPath: itemTextPrefab
-      value: 
-      objectReference: {fileID: 3736916126869186123, guid: 3e9481aa64bd3c44f8876109a72da8ad, type: 3}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e903269de1d5a004f997138f3959e8d5, type: 3}
 --- !u!1001 &1384474163
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5703,7 +5477,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_Name
-      value: TomatoSoup (15)
+      value: Soup
       objectReference: {fileID: 0}
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_TagString
@@ -6059,7 +5833,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1990544889166946, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_Name
-      value: CerealBox
+      value: Cereal
       objectReference: {fileID: 0}
     - target: {fileID: 4096565676083030, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6254,6 +6028,10 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9134428869076942225, guid: 8de7cd4d6b380194c8d0954be83496c3, type: 3}
+      propertyPath: playerSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 9192431965345304033, guid: 8de7cd4d6b380194c8d0954be83496c3, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -6350,7 +6128,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_Name
-      value: TomatoSoup (18)
+      value: Soup
       objectReference: {fileID: 0}
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_TagString
@@ -6726,6 +6504,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4987047488713308, guid: 7b7ed779076a711439b117150f31a519, type: 3}
   m_PrefabInstance: {fileID: 1517163505}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1536983157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1536983158}
+  m_Layer: 0
+  m_Name: ShoppingLists
+  m_TagString: ShoppingLists
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1536983158
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536983157}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 269.53482, y: -69.96544, z: 517.91364}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1573206952
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6912,15 +6721,23 @@ PrefabInstance:
     - target: {fileID: 1765387891803682366, guid: ce45b03dccb1cc84fba06ae90e3ea5b2, type: 3}
       propertyPath: gameText
       value: 
-      objectReference: {fileID: 640573807}
+      objectReference: {fileID: 1146698333}
+    - target: {fileID: 1765387891803682366, guid: ce45b03dccb1cc84fba06ae90e3ea5b2, type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 1779112784}
     - target: {fileID: 1765387891803682366, guid: ce45b03dccb1cc84fba06ae90e3ea5b2, type: 3}
       propertyPath: timerText
       value: 
-      objectReference: {fileID: 640573808}
+      objectReference: {fileID: 0}
     - target: {fileID: 1765387891803682366, guid: ce45b03dccb1cc84fba06ae90e3ea5b2, type: 3}
       propertyPath: levelDuration
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 1765387891803682366, guid: ce45b03dccb1cc84fba06ae90e3ea5b2, type: 3}
+      propertyPath: customersLeftText
+      value: 
+      objectReference: {fileID: 196514788}
     - target: {fileID: 5342648929362680756, guid: ce45b03dccb1cc84fba06ae90e3ea5b2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7089,7 +6906,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_Name
-      value: TomatoSoup (21)
+      value: Soup
       objectReference: {fileID: 0}
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_TagString
@@ -7354,6 +7171,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7879172816190273736, guid: 30d9b9580755bc146b34b329870e2034, type: 3}
   m_PrefabInstance: {fileID: 1800989401}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1779112784 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4957215325304923281, guid: 1b11dc9089b513f49ae6b155d7453a2f, type: 3}
+  m_PrefabInstance: {fileID: 2112104033}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1800989401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7596,7 +7424,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_Name
-      value: TomatoSoup (17)
+      value: Soup
       objectReference: {fileID: 0}
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_TagString
@@ -7674,7 +7502,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1990544889166946, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_Name
-      value: CerealBox
+      value: Cereal
       objectReference: {fileID: 0}
     - target: {fileID: 4096565676083030, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7731,7 +7559,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1990544889166946, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_Name
-      value: CerealBox
+      value: Cereal
       objectReference: {fileID: 0}
     - target: {fileID: 4096565676083030, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7964,6 +7792,103 @@ Transform:
   - {fileID: 1515818967}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1001 &2014124037
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740509124875314752, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395188508770106614, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
+      propertyPath: m_Name
+      value: GameInfo
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2b06a8ef8ceb79d44b98e54e816e9ec7, type: 3}
 --- !u!1 &2030016695
 GameObject:
   m_ObjectHideFlags: 0
@@ -8184,7 +8109,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1990544889166946, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_Name
-      value: CerealBox
+      value: Cereal
       objectReference: {fileID: 0}
     - target: {fileID: 4096565676083030, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8271,7 +8196,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1990544889166946, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_Name
-      value: CerealBox
+      value: Cereal
       objectReference: {fileID: 0}
     - target: {fileID: 4096565676083030, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8348,7 +8273,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_Name
-      value: TomatoSoup (16)
+      value: Soup
       objectReference: {fileID: 0}
     - target: {fileID: 1519537717051864, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
       propertyPath: m_TagString
@@ -8749,7 +8674,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1990544889166946, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_Name
-      value: CerealBox
+      value: Cereal
       objectReference: {fileID: 0}
     - target: {fileID: 4096565676083030, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8935,7 +8860,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1990544889166946, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_Name
-      value: CerealBox
+      value: Cereal
       objectReference: {fileID: 0}
     - target: {fileID: 4096565676083030, guid: 0b5404da58d77384eac105547be6a633, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8989,8 +8914,6 @@ SceneRoots:
   - {fileID: 514344362}
   - {fileID: 1702461354}
   - {fileID: 1652142607}
-  - {fileID: 640573806}
-  - {fileID: 1359067065}
   - {fileID: 5207620919213594661}
   - {fileID: 1349538929}
   - {fileID: 1182254275}
@@ -9004,3 +8927,5 @@ SceneRoots:
   - {fileID: 1234473936}
   - {fileID: 1056774091}
   - {fileID: 1469445067}
+  - {fileID: 2014124037}
+  - {fileID: 1536983158}
