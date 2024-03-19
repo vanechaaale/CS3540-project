@@ -12,18 +12,19 @@ public class EnemyAI : MonoBehaviour
     }
 
     public FSMStates currentState;
-    public float enemySpeed = 5;
+    public float enemySpeed = 3;
     public float chaseDistance = 5;
-    public float attackDistance = 2;
+    public float attackDistance = 1;
     public GameObject player;
     
+    float enemyRunSpeed = 5;
     GameObject[] wanderPoints;
     Vector3 nextDestination;
 
     Animator anim;
     int currentDestinationIndex = 0;
     float distanceToPlayer;
-    float elapsedTime = 0;
+
     
 
     // Start is called before the first frame update
@@ -41,7 +42,6 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         distanceToPlayer =  Vector3.Distance(transform.position, player.transform.position);
-    
         switch(currentState) {
             case FSMStates.Patrol:
                 UpdatePatrolState();
@@ -53,9 +53,8 @@ public class EnemyAI : MonoBehaviour
                 UpdateAttackState();
                 break;
         }
+
         
-        Debug.Log("Current State: " + currentState);
-        elapsedTime += Time.deltaTime;
     }
 
     void Initialize() {
@@ -95,19 +94,21 @@ public class EnemyAI : MonoBehaviour
         }
 
         FaceTarget(nextDestination);
+        transform.position = Vector3.MoveTowards(transform.position, nextDestination, enemyRunSpeed * Time.deltaTime);
     }
 
     private void UpdatePatrolState()
     {
-        anim.SetInteger("animState", 2);
+        anim.SetInteger("animState", 1);
 
-        if (Vector3.Distance(transform.position, nextDestination) == 0) {
+        if (Vector3.Distance(transform.position, nextDestination) < 1) {
             FindNextPoint();
         } else if (distanceToPlayer <= chaseDistance) {
             currentState = FSMStates.Chase;
         }
 
         FaceTarget(nextDestination);
+        transform.position = Vector3.MoveTowards(transform.position, nextDestination, enemySpeed * Time.deltaTime);
 
     }
 
@@ -122,7 +123,7 @@ public class EnemyAI : MonoBehaviour
     }
 
     private void AttackPlayer() {
-        
+        // do something
     }
 
     void FindNextPoint() {

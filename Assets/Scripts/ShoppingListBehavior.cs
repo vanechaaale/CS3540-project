@@ -31,7 +31,8 @@ public class ShoppingListBehavior : MonoBehaviour
         waitTimeSlider.maxValue = startWaitTime;
 
         // set the number of items on the shopping list
-        numItems = Random.Range(minItems, maxItems + 1);
+        //numItems = Random.Range(minItems, maxItems + 1);
+        numItems = 1;
 
         // the formatted grocery list with bullet points
         formattedGroceryList = new List<string>();
@@ -61,6 +62,7 @@ public class ShoppingListBehavior : MonoBehaviour
 
             // DUPLICATES ALLOWED
             formattedGroceryList.Add(itemStr);
+            groceryList.Add(item.ToString());
         }
         groceryListText = GetComponentsInChildren<Text>();
         for (int i = 0; i < formattedGroceryList.Count; i++)
