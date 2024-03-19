@@ -53,7 +53,7 @@ public class ItemCollection : MonoBehaviour
 
                 //if an item is clicked and the player is close enough,
                 //  then add it to the list of items and destroy it
-                if (hit.collider.CompareTag("Item") && distance <= range)
+                if (hit.collider.CompareTag("Item"))// && distance <= range)
                 {
                     itemList.Add(hit.collider.gameObject.name);
                     Destroy(hit.collider.gameObject);
