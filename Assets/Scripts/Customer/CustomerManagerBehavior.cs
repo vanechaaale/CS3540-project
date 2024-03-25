@@ -45,6 +45,12 @@ public class CustomerManagerBehavior : MonoBehaviour
         {
             SpawnCustomers();
         }
+
+        // if there are customers in line, update the shopping list text
+        if (currentCustomers > 0)
+        {
+            UpdateShoppingListText();
+        }
         
         
     }
@@ -89,7 +95,11 @@ public class CustomerManagerBehavior : MonoBehaviour
         // remove the first customer from the list of customer shopping lists
         groceryLists.RemoveAt(0);
 
+        // increment the number of customers that have left the store
         customersLeft++;
+
+        // destroy the first ShoppingList object
+        GameObject.FindGameObjectWithTag("ShoppingLists").GetComponentInChildren<ShoppingListBehavior>().DestroyCustomer();
 
         // Play SFX when customer leaves
         Invoke("PlayLeaveSFX", 0.5f);
@@ -108,18 +118,30 @@ public class CustomerManagerBehavior : MonoBehaviour
             groceryLists[0].Remove(removedItems[i]);
         }
 
-        // get the child text components of the first ShoppingList prefab
-        Text[] groceryListText = GameObject.FindGameObjectWithTag("ShoppingLists").GetComponentInChildren<ShoppingListBehavior>().GetComponentsInChildren<Text>();
+        // update the shopping list text
+        UpdateShoppingListText();
+    }
 
-        // clear the label
+    public void UpdateShoppingListText()
+    {
+        // get the child text components of the first ShoppingList prefab
+        if (groceryLists == null || groceryLists.Count == 0)
+        {
+            return;
+        }
+
+        Text[] groceryListText = GameObject.FindGameObjectWithTag("ShoppingLists").GetComponentInChildren<ShoppingListBehavior>().GetComponentsInChildren<Text>();
+    
+        // update the label with the new shopping list
         for (int i = 0; i < 4; i++)
         {
-            groceryListText[i].text = "";
+            if (i >= groceryLists[0].Count) {
+                groceryListText[i].text = "";
+            } else {
+                groceryListText[i].text = "• " + groceryLists[0][i] + "\n";
+            }
+            
         }
-        // update the label
-        for (int i = 0; i < groceryLists[0].Count; i++)
-        {
-            groceryListText[i].text = "• " + groceryLists[0][i];
-        }
+
     }
 }

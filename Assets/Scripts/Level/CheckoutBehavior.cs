@@ -11,6 +11,8 @@ public class CheckoutBehavior : MonoBehaviour
     float checkoutCountdown = 0.5f;
 
     public AudioClip checkoutSFX;
+    // the partcle system that will be played when the player completes an order
+    public GameObject moneyEarned;
 
 
     // Start is called before the first frame update
@@ -38,13 +40,13 @@ public class CheckoutBehavior : MonoBehaviour
 
     void CheckoutCustomer() {
 
-        Debug.Log("Checking out customer");
         if (checkoutCountdown <= 0) {
             List<string> removedItems = new List<string>();
             // check if any of the the customer's shopping list items are found in the player's basket
             
             foreach (string customerItem in customerList) {
                 if (ItemCollection.itemList.Contains(customerItem)) {
+                    // Debug.Log("Customer wants " + customerItem);
                     // remove the item from the player's basket
                     ItemCollection.itemList.Remove(customerItem);
                     removedItems.Add(customerItem);
@@ -69,8 +71,14 @@ public class CheckoutBehavior : MonoBehaviour
                 // Play SFX
                 AudioSource.PlayClipAtPoint(checkoutSFX, Camera.main.transform.position);
 
+                // play the particle system at the checkout register
+                Instantiate(moneyEarned, transform.position, Quaternion.identity);
+
                 // restart the countdown timer
                 checkoutCountdown = checkoutTimer;
+
+                // destroy the first ShoppingList object
+                GameObject.FindGameObjectWithTag("ShoppingLists").GetComponentInChildren<ShoppingListBehavior>().DestroyCustomer();
             }
             
         } else if (customerList.Count > 0) {

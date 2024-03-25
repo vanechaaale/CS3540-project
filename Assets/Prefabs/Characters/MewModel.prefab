@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 5
+  moneyEarned: {fileID: 6782340904917583287, guid: 1c1ebb0b2d49c9841a83702e664644ea, type: 3}
 --- !u!54 &7449969221068211830
 Rigidbody:
   m_ObjectHideFlags: 0
