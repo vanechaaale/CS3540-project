@@ -138,7 +138,7 @@ public class CustomerManagerBehavior : MonoBehaviour
             if (i >= groceryLists[0].Count) {
                 groceryListText[i].text = "";
             } else {
-                groceryListText[i].text = "• " + groceryLists[0][i] + "\n";
+                groceryListText[i].text = "- " + groceryLists[0][i] + "\n";
             }
             
         }
