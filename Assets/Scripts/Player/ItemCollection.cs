@@ -2,28 +2,38 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //for the Player
 public class ItemCollection : MonoBehaviour
 {
     //list of items that the player collected
-    public static List<string> itemList;
+    public static List<string> itemList = new List<string>();
+
+    // UI component displaying the list of items in the player's basket
+    public Text itemListText;
+
+    // the max number of items the player can have in their basket before their movement speed is halved
+    public int maxItems = 3;
+
+    // whether or not the basket is full
+    public bool isBasketFull = false;
 
     public float powerupCost = 5.00f;
 
     // range that the player can collect items from
-    float range = 5.0f;
+    float range = Constants.ITEM_PICKUP_DISTANCE;
 
     // Start is called before the first frame update
     void Start()
     {
-        //create an empty list to start
-        itemList = new List<string>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        DisplayBasketText();
         //if user clicks with mouse
         if (Input.GetMouseButtonDown(0))
         {
@@ -44,6 +54,8 @@ public class ItemCollection : MonoBehaviour
 
                 // get item position
                 Vector3 itemPos = hit.collider.gameObject.transform.position;
+
+           
                 // get the item's x and z coordinates
                 float itemX = itemPos.x;
                 float itemZ = itemPos.z;
@@ -53,9 +65,10 @@ public class ItemCollection : MonoBehaviour
 
                 //if an item is clicked and the player is close enough,
                 //  then add it to the list of items and destroy it
-                if (hit.collider.CompareTag("Item"))// && distance <= range)
+                if (hit.collider.CompareTag("Item") && distance <= range && itemList.Count < maxItems)
                 {
-                    itemList.Add(hit.collider.gameObject.name);
+                    string item_name = hit.collider.name.Replace("_", " ");
+                    itemList.Add(item_name);
                     Destroy(hit.collider.gameObject);
                 }
 
@@ -71,12 +84,38 @@ public class ItemCollection : MonoBehaviour
                 }
             }
         }
+
+        // if the player's list of items is full, then their movement speed is reduced
+        if (itemList.Count >= maxItems)
+        {
+            gameObject.GetComponent<PlayerMovement>().playerSpeed = Constants.REDUCED_PLAYER_SPEED;
+            isBasketFull = true;
+            // particle system for when player has reduced speed
+            gameObject.GetComponent<PlayerMovement>().isSpeedReduced = true;
+        }
+        else
+        {
+            gameObject.GetComponent<PlayerMovement>().playerSpeed = Constants.PLAYER_SPEED;
+            isBasketFull = false;
+            gameObject.GetComponent<PlayerMovement>().isSpeedReduced = false;
+        }
     }
 
     //removes the given item from the list
     public void removeFromList(string item)
     {
         itemList.Remove(item);
+    }
+
+    //updates the UI component displaying the list of items in the player's basket
+    public void DisplayBasketText()
+    {
+        itemListText.text = "Items In Basket: " + itemList.Count + "/" + maxItems + "\n";
+        // get text component
+        for (int i = 0; i < itemList.Count; i++)
+        {
+            itemListText.text += "- " + itemList[i] + "\n";
+        }
     }
 
 }

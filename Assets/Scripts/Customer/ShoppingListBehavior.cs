@@ -37,36 +37,31 @@ public class ShoppingListBehavior : MonoBehaviour
         // the regular grocery list of strings
         List<string> groceryList = new List<string>();
 
-        // Add to the shopping list's Label component
+        // update the shopping list's Label component
         for (int i = 0; i < numItems; i++)
         {
             // Get a random item from the GroceryItems enum
             GroceryItems item = (GroceryItems)Random.Range(0, System.Enum.GetValues(typeof(GroceryItems)).Length);
-            string itemStr = "• " + item.ToString();
+            string itemStr = "• " + item.ToString().Replace("_", " ");
 
             // FOR UNIQUE ITEMS
             // if item isn't already on the list, add it
             if (!formattedGroceryList.Contains(itemStr))
             {
                 formattedGroceryList.Add(itemStr);
-                groceryList.Add(item.ToString());
+                groceryList.Add(item.ToString().Replace("_", " "));
             }
             // if it is, decrement the counter and try again
             else
             {
                 i--;
             }
-
-            // // DUPLICATES ALLOWED
-            // formattedGroceryList.Add(itemStr);
-            // groceryList.Add(item.ToString());
         }
         groceryListText = GetComponentsInChildren<Text>();
         for (int i = 0; i < formattedGroceryList.Count; i++)
         {
             groceryListText[i].text = formattedGroceryList[i];
         }
-
         // Add the list to the customer manager's list of customers
         FindObjectOfType<CustomerManagerBehavior>().AddGroceryList(groceryList);
 
@@ -85,9 +80,13 @@ public class ShoppingListBehavior : MonoBehaviour
         else if (currentWaitTime <= 0 && !customerHasLeft)
         {
             customerHasLeft = true;
-            Destroy(gameObject, 1);
+            DestroyCustomer();
             FindObjectOfType<CustomerManagerBehavior>().RemoveCustomer();
         }
+    }
 
+    public void DestroyCustomer()
+    {
+        Destroy(gameObject, 1);
     }
 }

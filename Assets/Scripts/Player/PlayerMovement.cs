@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float playerSpeed = 5f;
+    public int playerSpeed = Constants.PLAYER_SPEED;
+
+    public bool isSpeedBoosted = false;
+    public bool isSpeedReduced = false;
+
 
     Rigidbody rb;
 
@@ -12,11 +16,26 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        gameObject.GetComponentsInChildren<ParticleSystem>()[0].Pause();
+        gameObject.GetComponentsInChildren<ParticleSystem>()[1].Pause();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isSpeedBoosted) {
+            gameObject.GetComponentsInChildren<ParticleSystem>()[0].Play();
+        } 
+        else if (isSpeedReduced) {
+            gameObject.GetComponentsInChildren<ParticleSystem>()[1].Play();
+        }
+        else {
+            gameObject.GetComponentsInChildren<ParticleSystem>()[0].Pause();
+            gameObject.GetComponentsInChildren<ParticleSystem>()[0].Clear();
+            gameObject.GetComponentsInChildren<ParticleSystem>()[1].Pause();
+            gameObject.GetComponentsInChildren<ParticleSystem>()[1].Clear();
+        }
         
     }
     
@@ -25,14 +44,20 @@ public class PlayerMovement : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");   
 
-        // player looks in the direction of movement
+        // get camera forward direction
+        Vector3 cameraForward = Camera.main.transform.forward;
+        cameraForward.y = 0;
+        cameraForward.Normalize();
+
         if (moveHorizontal != 0 || moveVertical != 0)
         {
             var direction = new Vector3(moveHorizontal, 0f, moveVertical).normalized;
             transform.rotation = Quaternion.LookRotation(direction);
             gameObject.GetComponent<Animator>().SetInteger("moveState", 1);
-            transform.position += new Vector3(direction.x, 0, direction.z) * playerSpeed * Time.deltaTime * 
-                (LevelManager.currentPowerup == LevelManager.PowerUp.SpeedBoost? 2: 1);
+            //transform.position += new Vector3(direction.x, 0, direction.z) * playerSpeed * Time.deltaTime * 
+             //   (LevelManager.currentPowerup == LevelManager.PowerUp.SpeedBoost? 2: 1);
+            rb.velocity = new Vector3(direction.x, 0, direction.z) * playerSpeed * 
+                (isSpeedBoosted? 2: 1) * (isSpeedReduced? 0.5f: 1);
         }
         // if there is no input, stop the player
         else

@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour
     public int score = 0;
     public Text scoreText;
 
+    public Text goalScoreText;
+
     //public float levelDuration = 60.0f;
     public float powerupDuration = 20f;
     // public Text timerText;
@@ -51,6 +53,7 @@ public class LevelManager : MonoBehaviour
 
         //SetTimerText();
         SetCustomersLeftText();
+        SetScoreGoalText();
     }
 
     // Update is called once per frame
@@ -93,8 +96,15 @@ public class LevelManager : MonoBehaviour
 
     void SetCustomersLeftText()
     {
-        customersLeftText.text = "Customers Left: " + (FindObjectOfType<CustomerManagerBehavior>().totalCustomers - FindObjectOfType<CustomerManagerBehavior>().customersLeft).ToString();
+        customersLeftText.text = "Customers Remaining: " + (FindObjectOfType<CustomerManagerBehavior>().totalCustomers - FindObjectOfType<CustomerManagerBehavior>().customersLeft).ToString();
     }
+
+    void SetScoreGoalText()
+    {
+        goalScoreText.text = "Points to Win: " + pointsToWin.ToString();
+    }
+
+
 
     public void LevelBeat() {
         
