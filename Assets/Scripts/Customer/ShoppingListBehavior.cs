@@ -63,7 +63,9 @@ public class ShoppingListBehavior : MonoBehaviour
             groceryListText[i].text = formattedGroceryList[i];
         }
         // Add the list to the customer manager's list of customers
-        FindObjectOfType<CustomerManagerBehavior>().AddGroceryList(groceryList);
+        if (FindObjectOfType<CustomerManagerBehavior>() != null && groceryList.Count > 0) {
+            FindObjectOfType<CustomerManagerBehavior>().AddGroceryList(groceryList);
+        }
 
     }
 

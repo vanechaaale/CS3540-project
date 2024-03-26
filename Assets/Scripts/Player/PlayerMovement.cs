@@ -53,7 +53,15 @@ public class PlayerMovement : MonoBehaviour
         {
             var direction = new Vector3(moveHorizontal, 0f, moveVertical).normalized;
             transform.rotation = Quaternion.LookRotation(direction);
-            gameObject.GetComponent<Animator>().SetInteger("moveState", 1);
+            if (isSpeedBoosted)
+            {
+                gameObject.GetComponent<Animator>().SetInteger("moveState", 2);
+            }
+            else
+            {
+                gameObject.GetComponent<Animator>().SetInteger("moveState", 1);
+            }
+
             //transform.position += new Vector3(direction.x, 0, direction.z) * playerSpeed * Time.deltaTime * 
              //   (LevelManager.currentPowerup == LevelManager.PowerUp.SpeedBoost? 2: 1);
             rb.velocity = new Vector3(direction.x, 0, direction.z) * playerSpeed * 

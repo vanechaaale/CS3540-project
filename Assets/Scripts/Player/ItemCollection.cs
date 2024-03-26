@@ -24,6 +24,8 @@ public class ItemCollection : MonoBehaviour
     // range that the player can collect items from
     float range = Constants.ITEM_PICKUP_DISTANCE;
 
+    public GameObject loseItemVFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -99,6 +101,19 @@ public class ItemCollection : MonoBehaviour
             isBasketFull = false;
             gameObject.GetComponent<PlayerMovement>().isSpeedReduced = false;
         }
+    }
+
+    public void LoseItem()
+    {
+        // lose a random item from the player's basket
+        if (itemList.Count > 0)
+        {
+            int index = UnityEngine.Random.Range(0, itemList.Count);
+            itemList.RemoveAt(index);
+            // particle system for when player loses an item
+            Instantiate(loseItemVFX, transform.position, Quaternion.identity);
+        }
+        
     }
 
     //removes the given item from the list
