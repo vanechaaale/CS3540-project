@@ -14,6 +14,7 @@ public class ShoppingListBehavior : MonoBehaviour
     public List<string> formattedGroceryList;
     public List<string> groceryList;
     public Text[] groceryListText;
+    public Image[] customerPicturePrefabs;
 
     // min and max number of items a customer can have on their shopping list
     public int minItems = 2;
@@ -26,6 +27,14 @@ public class ShoppingListBehavior : MonoBehaviour
     {
         currentWaitTime = startWaitTime;
         waitTimeSlider.maxValue = startWaitTime;
+
+        // set the image of the customer
+        int customerIndex = Random.Range(0, customerPicturePrefabs.Length);
+        for (int i = 0; i < customerPicturePrefabs.Length; i++)
+        {
+            customerPicturePrefabs[i].gameObject.SetActive(false);
+        }
+        customerPicturePrefabs[customerIndex].gameObject.SetActive(true);
 
         // set the number of items on the shopping list
         numItems = Random.Range(minItems, maxItems + 1);
@@ -42,7 +51,7 @@ public class ShoppingListBehavior : MonoBehaviour
         {
             // Get a random item from the GroceryItems enum
             GroceryItems item = (GroceryItems)Random.Range(0, System.Enum.GetValues(typeof(GroceryItems)).Length);
-            string itemStr = "• " + item.ToString().Replace("_", " ");
+            string itemStr = "- " + item.ToString().Replace("_", " ");
 
             // FOR UNIQUE ITEMS
             // if item isn't already on the list, add it
@@ -63,7 +72,9 @@ public class ShoppingListBehavior : MonoBehaviour
             groceryListText[i].text = formattedGroceryList[i];
         }
         // Add the list to the customer manager's list of customers
-        FindObjectOfType<CustomerManagerBehavior>().AddGroceryList(groceryList);
+        if (FindObjectOfType<CustomerManagerBehavior>() != null && groceryList.Count > 0) {
+            FindObjectOfType<CustomerManagerBehavior>().AddGroceryList(groceryList);
+        }
 
     }
 

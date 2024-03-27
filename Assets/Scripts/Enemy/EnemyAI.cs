@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -13,11 +14,14 @@ public class EnemyAI : MonoBehaviour
 
     public FSMStates currentState;
     public float enemySpeed = 3;
-    public float chaseDistance = 5;
-    public float attackDistance = 1;
+    public float chaseDistance = 10;
+    public float attackDistance = 3;
+    public float biteRate;
+    public float elapsedTime = 0;
+
     public GameObject player;
     
-    float enemyRunSpeed = 5;
+    public float enemyRunSpeed = 5;
     GameObject[] wanderPoints;
     Vector3 nextDestination;
 
@@ -25,7 +29,7 @@ public class EnemyAI : MonoBehaviour
     int currentDestinationIndex = 0;
     float distanceToPlayer;
 
-    
+    NavMeshAgent agent;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +38,7 @@ public class EnemyAI : MonoBehaviour
         wanderPoints = GameObject.FindGameObjectsWithTag("WanderPoint");
         anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
+        agent = GetComponent<NavMeshAgent>();
 
         Initialize();
     }
@@ -54,6 +59,9 @@ public class EnemyAI : MonoBehaviour
                 break;
         }
 
+        elapsedTime += Time.deltaTime;
+
+
         
     }
 
@@ -66,7 +74,6 @@ public class EnemyAI : MonoBehaviour
     private void UpdateAttackState()
     {
         nextDestination = player.transform.position;
-
         if (distanceToPlayer <= attackDistance) {
             currentState = FSMStates.Attack;
         } else if (distanceToPlayer > attackDistance && distanceToPlayer <= chaseDistance){
@@ -76,14 +83,12 @@ public class EnemyAI : MonoBehaviour
         }
 
         FaceTarget(nextDestination);
-
         anim.SetInteger("animState", 3);
         AttackPlayer();
     }
 
     private void UpdateChaseState()
     {
-        anim.SetInteger("animState", 2);
 
         nextDestination = player.transform.position;
 
@@ -92,23 +97,32 @@ public class EnemyAI : MonoBehaviour
         } else if (distanceToPlayer > chaseDistance) {
             currentState = FSMStates.Patrol;
         }
-
-        FaceTarget(nextDestination);
-        transform.position = Vector3.MoveTowards(transform.position, nextDestination, enemyRunSpeed * Time.deltaTime);
-    }
-
-    private void UpdatePatrolState()
-    {
-        anim.SetInteger("animState", 1);
-
-        if (Vector3.Distance(transform.position, nextDestination) < 1) {
-            FindNextPoint();
-        } else if (distanceToPlayer <= chaseDistance) {
+        else if (distanceToPlayer > attackDistance && distanceToPlayer <= chaseDistance) {
             currentState = FSMStates.Chase;
         }
 
         FaceTarget(nextDestination);
-        transform.position = Vector3.MoveTowards(transform.position, nextDestination, enemySpeed * Time.deltaTime);
+        anim.SetInteger("animState", 2);
+        agent.speed = enemyRunSpeed;
+        agent.SetDestination(nextDestination);
+    }
+
+    private void UpdatePatrolState()
+    {
+
+        if (Vector3.Distance(transform.position, nextDestination) <= 3) {
+            FindNextPoint();
+        } else if (distanceToPlayer <= chaseDistance) {
+            currentState = FSMStates.Chase;
+        }
+        else if (distanceToPlayer <= attackDistance) {
+            currentState = FSMStates.Attack;
+        }
+
+        anim.SetInteger("animState", 1);
+        agent.speed = enemySpeed;
+        FaceTarget(nextDestination);
+        agent.SetDestination(nextDestination);
 
     }
 
@@ -123,7 +137,20 @@ public class EnemyAI : MonoBehaviour
     }
 
     private void AttackPlayer() {
-        // do something
+
+        biteRate = anim.GetCurrentAnimatorStateInfo(0).length;
+        if (elapsedTime >= biteRate) {
+            Invoke("BiteAttack", biteRate);
+            elapsedTime = 0;
+        }
+        
+    }
+
+    private void BiteAttack() {
+        if (distanceToPlayer <= attackDistance) {
+            player.GetComponent<ItemCollection>().LoseItem();
+        }
+        
     }
 
     void FindNextPoint() {
