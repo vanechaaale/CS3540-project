@@ -26,6 +26,9 @@ public class ItemCollection : MonoBehaviour
 
     public GameObject loseItemVFX;
 
+    //sound that plays when an item is picked up
+    public AudioClip pickupSFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,9 +72,13 @@ public class ItemCollection : MonoBehaviour
                 //  then add it to the list of items and destroy it
                 if (hit.collider.CompareTag("Item") && distance <= range && itemList.Count < maxItems)
                 {
+                    //play audio clip when the item is clicked on 
+                    AudioSource.PlayClipAtPoint(pickupSFX, Camera.main.transform.position);
+
                     string item_name = hit.collider.name.Replace("_", " ");
                     itemList.Add(item_name);
                     Destroy(hit.collider.gameObject);
+
                 }
 
                 else if (hit.collider.CompareTag("Powerup") && distance <= range && LevelManager.money >= powerupCost)
