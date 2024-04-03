@@ -24,6 +24,9 @@ public class ItemCollection : MonoBehaviour
     // range that the player can collect items from
     float range = Constants.ITEM_PICKUP_DISTANCE;
 
+    // range that the player can start a bakery order
+    float bakeryRange = 3f;
+
     public GameObject loseItemVFX;
 
     //sound that plays when an item is picked up
@@ -53,7 +56,7 @@ public class ItemCollection : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                
+
                 // get player position
                 Vector3 playerPos = transform.position;
                 // get the player's x and z coordinates
@@ -63,7 +66,7 @@ public class ItemCollection : MonoBehaviour
                 // get item position
                 Vector3 itemPos = hit.collider.gameObject.transform.position;
 
-           
+
                 // get the item's x and z coordinates
                 float itemX = itemPos.x;
                 float itemZ = itemPos.z;
@@ -86,12 +89,12 @@ public class ItemCollection : MonoBehaviour
 
                 else if (hit.collider.CompareTag("Powerup") && distance <= range && LevelManager.money >= powerupCost)
                 {
-                    Debug.Log("Powerup selected"); 
+                    Debug.Log("Powerup selected");
                     LevelManager.money -= powerupCost;
                     var possiblePowerups = (LevelManager.PowerUp[])Enum.GetValues(typeof(LevelManager.PowerUp));
                     while (LevelManager.currentPowerup != LevelManager.PowerUp.None)
                     {
-                       LevelManager.currentPowerup = possiblePowerups[UnityEngine.Random.Range(0, possiblePowerups.Length)];
+                        LevelManager.currentPowerup = possiblePowerups[UnityEngine.Random.Range(0, possiblePowerups.Length)];
                     }
                 }
                 //if the player clicks on the trash can, remove the last item from the player's inventory
@@ -103,6 +106,30 @@ public class ItemCollection : MonoBehaviour
                     AudioSource.PlayClipAtPoint(trashSFX, Camera.main.transform.position);
 
                     itemList.RemoveAt(itemList.Count - 1);
+                }
+                //if the player clicks on the baker, check for available bakery item or start bakery order
+                else if (hit.collider.CompareTag("Baker") && distance <= bakeryRange)
+                {
+                    // the bakery has no order in progress or any order ready
+                    if (!BakeryNPCBehavior.orderReady && !BakeryNPCBehavior.orderInProgress)
+                    {
+                        BakeryNPCBehavior.clickedOn = true;
+                    }
+                    // the bakery is in progress of an order
+                    else if (BakeryNPCBehavior.orderInProgress)
+                    {
+                        // UI (order in progress)
+                    }
+                    // the baker has an item available
+                    else if (BakeryNPCBehavior.orderReady)
+                    {
+                        // puts a bakery item in the basket
+                        //play audio clip when the item is clicked on 
+                        AudioSource.PlayClipAtPoint(pickupSFX, Camera.main.transform.position);
+
+                        itemList.Add("Bakery");
+                    }
+
                 }
             }
         }
@@ -133,7 +160,7 @@ public class ItemCollection : MonoBehaviour
             // particle system for when player loses an item
             Instantiate(loseItemVFX, transform.position, Quaternion.identity);
         }
-        
+
     }
 
     //removes the given item from the list

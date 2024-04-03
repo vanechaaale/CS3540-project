@@ -7,6 +7,7 @@ public class InteractableTextTips : MonoBehaviour
 {
     public Text tipText;
     float maxDistance = Constants.ITEM_PICKUP_DISTANCE;
+    float bakeryRange = 3f;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class InteractableTextTips : MonoBehaviour
         RaycastHit hit;
 
 
-        if (Physics.Raycast(ray, out hit)) 
+        if (Physics.Raycast(ray, out hit))
         {
             // get player position
             Vector3 playerPos = transform.position;
@@ -38,7 +39,7 @@ public class InteractableTextTips : MonoBehaviour
 
             // distance from player to item
             float distance = Mathf.Sqrt(Mathf.Pow((itemX - playerX), 2) + Mathf.Pow((itemZ - playerZ), 2));
-            
+
             if (hit.collider.CompareTag("Item") && distance <= maxDistance)
             {
                 // if itemCollection isBasketFull, display "Basket is full" instead of "Pick up"
@@ -61,6 +62,37 @@ public class InteractableTextTips : MonoBehaviour
                 tipText.text = "Purchase Power Up"; // + gameObject.GetComponent<ItemCollection>().powerupCost.ToString("0.00");
                 // dark green
                 tipText.color = new Color(0, 0.5f, 0);
+            }
+            else if (hit.collider.CompareTag("Baker") && distance <= bakeryRange)
+            {
+                // if itemCollection isBasketFull, display "Basket is full" instead of "Pick up"
+                if (gameObject.GetComponent<ItemCollection>().isBasketFull)
+                {
+                    tipText.text = "Basket is Full!";
+                    // red
+                    tipText.color = new Color(1, 0, 0);
+                }
+                // the bakery has no order in progress or any order ready
+                if (!BakeryNPCBehavior.orderReady && !BakeryNPCBehavior.orderInProgress)
+                {
+                    tipText.text = "Start Bakery Order";
+                    // yellow
+                    tipText.color = new Color(1, 1, 0);
+                }
+                // the bakery is in progress of an order
+                else if (BakeryNPCBehavior.orderInProgress)
+                {
+                    tipText.text = "Order In Progress";
+                    // red
+                    tipText.color = new Color(1, 0, 0);
+                }
+                // the baker has an item available
+                else if (BakeryNPCBehavior.orderReady)
+                {
+                    tipText.text = "Pick Up Order";
+                    // yellow
+                    tipText.color = new Color(1, 1, 0);
+                }
             }
             else
             {
