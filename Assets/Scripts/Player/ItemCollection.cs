@@ -29,6 +29,9 @@ public class ItemCollection : MonoBehaviour
     //sound that plays when an item is picked up
     public AudioClip pickupSFX;
 
+    //sound that plays when an item is thrown out
+    public AudioClip trashSFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -90,6 +93,16 @@ public class ItemCollection : MonoBehaviour
                     {
                        LevelManager.currentPowerup = possiblePowerups[UnityEngine.Random.Range(0, possiblePowerups.Length)];
                     }
+                }
+                //if the player clicks on the trash can, remove the first item from the player's inventory
+                else if (hit.collider.CompareTag("TrashCan") && distance <= range && itemList.Count > 0)
+                {
+                    Debug.Log("trash can");
+
+                    //play audio clip when an item is thrown out 
+                    AudioSource.PlayClipAtPoint(trashSFX, Camera.main.transform.position);
+
+                    itemList.RemoveAt(0);
                 }
             }
         }
