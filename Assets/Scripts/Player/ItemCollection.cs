@@ -94,7 +94,7 @@ public class ItemCollection : MonoBehaviour
                        LevelManager.currentPowerup = possiblePowerups[UnityEngine.Random.Range(0, possiblePowerups.Length)];
                     }
                 }
-                //if the player clicks on the trash can, remove the first item from the player's inventory
+                //if the player clicks on the trash can, remove the last item from the player's inventory
                 else if (hit.collider.CompareTag("TrashCan") && distance <= range && itemList.Count > 0)
                 {
                     Debug.Log("trash can");
