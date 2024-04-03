@@ -26,6 +26,12 @@ public class ItemCollection : MonoBehaviour
 
     public GameObject loseItemVFX;
 
+    //sound that plays when an item is picked up
+    public AudioClip pickupSFX;
+
+    //sound that plays when an item is thrown out
+    public AudioClip trashSFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,9 +75,13 @@ public class ItemCollection : MonoBehaviour
                 //  then add it to the list of items and destroy it
                 if (hit.collider.CompareTag("Item") && distance <= range && itemList.Count < maxItems)
                 {
+                    //play audio clip when the item is clicked on 
+                    AudioSource.PlayClipAtPoint(pickupSFX, Camera.main.transform.position);
+
                     string item_name = hit.collider.name.Replace("_", " ");
                     itemList.Add(item_name);
                     Destroy(hit.collider.gameObject);
+
                 }
 
                 else if (hit.collider.CompareTag("Powerup") && distance <= range && LevelManager.money >= powerupCost)
@@ -83,6 +93,16 @@ public class ItemCollection : MonoBehaviour
                     {
                        LevelManager.currentPowerup = possiblePowerups[UnityEngine.Random.Range(0, possiblePowerups.Length)];
                     }
+                }
+                //if the player clicks on the trash can, remove the last item from the player's inventory
+                else if (hit.collider.CompareTag("TrashCan") && distance <= range && itemList.Count > 0)
+                {
+                    Debug.Log("trash can");
+
+                    //play audio clip when an item is thrown out 
+                    AudioSource.PlayClipAtPoint(trashSFX, Camera.main.transform.position);
+
+                    itemList.RemoveAt(itemList.Count - 1);
                 }
             }
         }
