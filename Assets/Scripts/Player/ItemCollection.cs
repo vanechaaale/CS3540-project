@@ -102,7 +102,7 @@ public class ItemCollection : MonoBehaviour
                     //play audio clip when an item is thrown out 
                     AudioSource.PlayClipAtPoint(trashSFX, Camera.main.transform.position);
 
-                    itemList.RemoveAt(0);
+                    itemList.RemoveAt(itemList.Count - 1);
                 }
             }
         }
