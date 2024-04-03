@@ -41,6 +41,11 @@ public class PlayerMovement : MonoBehaviour
     
     void FixedUpdate()
     {
+        if (!GameObject.Find("LevelManager").GetComponent<LevelManager>().startGame)
+        {
+            return;
+        }
+        
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");   
 

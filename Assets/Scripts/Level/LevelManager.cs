@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class LevelManager : MonoBehaviour
 
     public Text goalScoreText;
 
+    public Text levelInfoText;
+
     //public float levelDuration = 60.0f;
     public float powerupDuration = 20f;
     // public Text timerText;
@@ -27,7 +30,7 @@ public class LevelManager : MonoBehaviour
     bool isGameOver;
     public bool startGame;
 
-    public static float money = 0f;
+    public float money = 0f;
     public int pointsToWin = 50;
     public static PowerUp currentPowerup = PowerUp.None;
 
@@ -54,6 +57,16 @@ public class LevelManager : MonoBehaviour
         //SetTimerText();
         SetCustomersLeftText();
         SetScoreGoalText();
+
+        // Level 1
+        // Help All the Customers and Earn Enough Points to Win!
+        // after 2 seconds, the level will start
+        // get level name
+
+        string levelName = SceneManager.GetActiveScene().name;
+        levelInfoText.text = levelName + ":\n Help All the Customers!";
+
+        Invoke("StartGame", 3.5f);
     }
 
     // Update is called once per frame
@@ -124,6 +137,9 @@ public class LevelManager : MonoBehaviour
         if (!startGame) {
             startGame = true;
         }
+
+        // clear the level info text
+        levelInfoText.text = "";
     }
 
     public void AddScore(int scoreToAdd) {

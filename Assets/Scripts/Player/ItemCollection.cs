@@ -150,6 +150,37 @@ public class ItemCollection : MonoBehaviour
         }
     }
 
+    public void PickupItem(string item)
+    {
+        // add the item to the player's basket
+        itemList.Add(item);
+        // play the sound effect for picking up an item
+        AudioSource.PlayClipAtPoint(pickupSFX, transform.position);
+    }
+
+    public void PurchasePowerup(string powerup)
+    {
+        // check if the player has enough money to purchase the powerup
+        if (FindObjectOfType<LevelManager>().money >= powerupCost)
+        {
+            // remove the cost of the powerup from the player's money
+            FindObjectOfType<LevelManager>().money -= powerupCost;
+            // add the powerup to the player's basket
+            itemList.Add(powerup);
+        }
+    }
+
+    public void TrashItem()
+    {
+        // remove the last item from the player's basket
+        if (itemList.Count > 0)
+        {
+            itemList.RemoveAt(itemList.Count - 1);
+            // play the sound effect for throwing out an item
+            AudioSource.PlayClipAtPoint(trashSFX, transform.position);
+        }
+    }
+
     public void LoseItem()
     {
         // lose a random item from the player's basket
