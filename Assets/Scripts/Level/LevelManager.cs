@@ -25,12 +25,18 @@ public class LevelManager : MonoBehaviour
     // public Text timerText;
     public Text gameText;
     public Text customersLeftText;
+    public Slider powerUpSlider;
+    public Text powerupText;
+
     //float countDown;
     float powerupCountDown = 0f;
     bool isGameOver;
     public bool startGame;
 
+<<<<<<< HEAD
+=======
     public static float money = 0f;
+>>>>>>> main
     public int pointsToWin = 50;
     public static PowerUp currentPowerup = PowerUp.None;
 
@@ -72,7 +78,10 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (!isGameOver && startGame) {
+            
+
             // if (countDown > 0) {
             //     countDown -= Time.deltaTime / (currentPowerup == PowerUp.SlowTime? 2: 1);
             // } else {
@@ -80,7 +89,7 @@ public class LevelManager : MonoBehaviour
             //     LevelBeat();
             // }
             //SetTimerText();
-            
+
             // if all customers have left, the level is over
             if (FindObjectOfType<CustomerManagerBehavior>().customersLeft == FindObjectOfType<CustomerManagerBehavior>().totalCustomers)
             {
@@ -91,13 +100,9 @@ public class LevelManager : MonoBehaviour
 
             if (currentPowerup != PowerUp.None)
             {
-                powerupCountDown += Time.deltaTime;
-                if (powerupCountDown > powerupDuration)
-                {
-                    currentPowerup = PowerUp.None;
-                    powerupCountDown = 0;
-                }
+                HandlePowerups();
             }
+
         }
     }
 
@@ -145,6 +150,54 @@ public class LevelManager : MonoBehaviour
     public void AddScore(int scoreToAdd) {
         score += scoreToAdd;
         scoreText.text = score.ToString();
+    }
+
+    public void HandlePowerups()
+    {
+        powerUpSlider.value = (powerupDuration - powerupCountDown) / powerupDuration * 20;
+        if (currentPowerup == PowerUp.SlowTime)
+        {
+            powerupText.gameObject.SetActive(true);
+            powerUpSlider.gameObject.SetActive(true);
+            powerupCountDown += Time.deltaTime;
+            Debug.Log(powerupCountDown.ToString());
+            powerUpSlider.value = (powerupDuration - powerupCountDown) / powerupDuration * 20;
+            if (powerupCountDown > powerupDuration)
+            {
+                currentPowerup = PowerUp.None;
+                powerupText.gameObject.SetActive(false);
+                powerUpSlider.gameObject.SetActive(false);
+                powerUpSlider.value = 0;
+                powerupCountDown = 0;
+                FindObjectOfType<PlayerMovement>().isSpeedBoosted = false;
+            }
+        }
+        else if (currentPowerup == PowerUp.SpeedBoost)
+        {
+            powerupText.gameObject.SetActive(true);
+            powerUpSlider.gameObject.SetActive(true);
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                FindObjectOfType<PlayerMovement>().isSpeedBoosted = true;
+
+                powerupCountDown += Time.deltaTime;
+                powerUpSlider.value = (powerupDuration - powerupCountDown)/powerupDuration * 20;
+            }
+            else
+            {
+                FindObjectOfType<PlayerMovement>().isSpeedBoosted = false;
+            }
+
+            if (powerupCountDown > powerupDuration)
+            {
+                currentPowerup = PowerUp.None;
+                powerupText.gameObject.SetActive(false);
+                powerUpSlider.gameObject.SetActive(false);
+                powerUpSlider.value = 0;
+                powerupCountDown = 0;
+                FindObjectOfType<PlayerMovement>().isSpeedBoosted = false;
+            }
+        }
     }
 
 }
