@@ -67,14 +67,24 @@ public class CheckoutBehavior : MonoBehaviour
                     // remove the customer from the Shopping list
                     FindObjectOfType<CustomerManagerBehavior>().RemoveCustomer();
 
-                    // increment score in level manager
-                    FindObjectOfType<LevelManager>().AddScore(25);
+                    // Get the wait time for the customer by getting the first shoppingListBehavior
+                    float percentWaited = FindObjectOfType<ShoppingListBehavior>().GetTimeWaited();
 
+                    // if the customer has waited less than 50% of their wait time, score multiplier is 2
+                    if (percentWaited < 0.5)
+                    {
+                        FindObjectOfType<LevelManager>().AddScore(50);
+                    }
+                    // increment score in level manager
+                    else {
+                        FindObjectOfType<LevelManager>().AddScore(25);
+                    }
                     // Play SFX
                     AudioSource.PlayClipAtPoint(checkoutSFX, Camera.main.transform.position);
 
-                    // play the particle system at the checkout register
-                    Instantiate(moneyEarned, transform.position, Quaternion.identity);
+                    // play the particle system at the checkout register and rotate X by 270
+
+                    Instantiate(moneyEarned, transform.position, Quaternion.Euler(270, 0, 0));
                 }
         }
     }

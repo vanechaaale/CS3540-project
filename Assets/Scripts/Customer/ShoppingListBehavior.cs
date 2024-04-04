@@ -10,6 +10,7 @@ public class ShoppingListBehavior : MonoBehaviour
     // time for a customer to wait
     public float startWaitTime = 40;
     public float currentWaitTime;
+    public float percentWaited;
     public Slider waitTimeSlider;
     public bool customerHasLeft = false;
     public List<string> formattedGroceryList;
@@ -28,6 +29,7 @@ public class ShoppingListBehavior : MonoBehaviour
     {
         currentWaitTime = startWaitTime;
         waitTimeSlider.maxValue = startWaitTime;
+        percentWaited = 0;
 
         // set the image of the customer
         int customerIndex = Random.Range(0, customerPicturePrefabs.Length);
@@ -117,6 +119,7 @@ public class ShoppingListBehavior : MonoBehaviour
         {
             currentWaitTime -= Time.deltaTime / (LevelManager.currentPowerup == LevelManager.PowerUp.SlowTime? 2 : 1);
             waitTimeSlider.value = currentWaitTime;
+            percentWaited = 1 - (currentWaitTime / startWaitTime);
         }
         // If the customer is done waiting, destroy the customer's list
         else if (currentWaitTime <= 0 && !customerHasLeft)
@@ -130,5 +133,11 @@ public class ShoppingListBehavior : MonoBehaviour
     public void DestroyCustomer()
     {
         Destroy(gameObject, 1);
+    }
+
+    // return the wait time of the customer
+    public float GetTimeWaited()
+    {
+        return percentWaited;
     }
 }
