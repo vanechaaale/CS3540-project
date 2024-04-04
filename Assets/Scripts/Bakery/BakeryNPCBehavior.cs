@@ -13,8 +13,8 @@ public class BakeryNPCBehavior : MonoBehaviour
     }
 
     public GameObject player;
-    public static bool orderReady;
-    public static bool orderInProgress;
+    public bool orderReady;
+    public bool orderInProgress;
     public static bool clickedOn;
 
     NPCStates currentState;
@@ -157,5 +157,11 @@ public class BakeryNPCBehavior : MonoBehaviour
         transform.rotation = Quaternion.Slerp(
                 transform.rotation, lookRotation, 10 * Time.deltaTime);
 
+    }
+
+    public void PickUpOrder()
+    {
+        orderReady = false;
+        Debug.Log("Order picked up!");
     }
 }

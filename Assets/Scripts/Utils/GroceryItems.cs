@@ -6,5 +6,9 @@ public enum GroceryItems
     Cereal,
     Pea_Stew,
     Minestrone,
+}
+
+public enum BakeryItems
+{
     Bakery
 }

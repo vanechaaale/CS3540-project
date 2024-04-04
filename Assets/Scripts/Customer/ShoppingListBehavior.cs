@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static GroceryItems;
+using static BakeryItems;
 
 public class ShoppingListBehavior : MonoBehaviour
 {
@@ -46,19 +47,38 @@ public class ShoppingListBehavior : MonoBehaviour
         // the regular grocery list of strings
         List<string> groceryList = new List<string>();
 
+        // array of all the items in the GroceryItems and BakeryItems enums
+        string[] groceryValues = System.Enum.GetNames(typeof(GroceryItems));
+        string[] bakeryValues = System.Enum.GetNames(typeof(BakeryItems));
+        string[] combinedValues = new string[groceryValues.Length + bakeryValues.Length];
+
+        Debug.Log("combinedValues.Length: " + combinedValues.Length);
+
+        // if LevelManager allows for bakery items, combine the two enums
+            if (FindObjectOfType<LevelManager>().isBakery) {
+                groceryValues.CopyTo(combinedValues, 0);
+                bakeryValues.CopyTo(combinedValues, groceryValues.Length);
+            }
+            // if not, just use the GroceryItems enum
+            else {
+                groceryValues.CopyTo(combinedValues, 0);    
+            }
+        Debug.Log("combinedValues contents: " + string.Join(", ", combinedValues));
+
+
         // update the shopping list's Label component
         for (int i = 0; i < numItems; i++)
         {
-            // Get a random item from the GroceryItems enum
-            GroceryItems item = (GroceryItems)Random.Range(0, System.Enum.GetValues(typeof(GroceryItems)).Length);
-            string itemStr = "- " + item.ToString().Replace("_", " ");
+            // get random item from the combined enum
+            int randomIndex = Random.Range(0, combinedValues.Length);
+            
+            string itemStr = "- " + combinedValues[randomIndex].Replace("_", " ");
 
-            // FOR UNIQUE ITEMS
             // if item isn't already on the list, add it
             if (!formattedGroceryList.Contains(itemStr))
             {
                 formattedGroceryList.Add(itemStr);
-                groceryList.Add(item.ToString().Replace("_", " "));
+                groceryList.Add(combinedValues[randomIndex].ToString().Replace("_", " "));
             }
             // if it is, decrement the counter and try again
             else

@@ -20,6 +20,7 @@ public class Interactions : MonoBehaviour
         GameObject[] groceryItems = GameObject.FindGameObjectsWithTag("Item");
         GameObject[] powerups = GameObject.FindGameObjectsWithTag("Powerup");
         GameObject trashCan = GameObject.FindGameObjectWithTag("TrashCan");
+        GameObject baker = GameObject.FindGameObjectWithTag("Baker");
 
         // items, powerups, and trash can into one array
         GameObject[] interactables = new GameObject[groceryItems.Length + powerups.Length + 1];
@@ -47,6 +48,22 @@ public class Interactions : MonoBehaviour
             {
                 TrashTextTip();
             }
+            else if (closestItem.CompareTag("Baker"))
+            {
+                BakeryNPCBehavior bakeryNPC = FindObjectOfType<BakeryNPCBehavior>();
+                if (bakeryNPC.orderReady && !bakeryNPC.orderInProgress)
+                {
+                    StartBakeryOrderTextTip();
+                }
+                else if (bakeryNPC.orderInProgress)
+                {
+                    BakeryOrderInProgressTextTip();
+                }
+                else if (bakeryNPC.orderReady)
+                {
+                    PickUpBakeryOrderTextTip();
+                }
+            }
         }
         else
         {
@@ -68,11 +85,18 @@ public class Interactions : MonoBehaviour
             {
                 FindObjectOfType<ItemCollection>().TrashItem();
             }
+            else if (closestItem.CompareTag("Baker")) {
+                // if the baker has an order ready, pick it up
+                BakeryNPCBehavior bakeryNPC = FindObjectOfType<BakeryNPCBehavior>();
+                if (bakeryNPC.orderReady)
+                {
+                    bakeryNPC.PickUpOrder();
+                }
+        }
         }
 
-
-        
     }
+    
 
     GameObject FindClosestItem(GameObject[] interactables, out float closestItemDistance)
     {
@@ -121,6 +145,24 @@ public class Interactions : MonoBehaviour
     {
         tipText.text = "Throw Away Item";
             tipText.color = new Color(0.5f, 0.5f, 0.5f);
+    }
+
+    public void StartBakeryOrderTextTip()
+    {
+        tipText.text = "Start Bakery Order";
+        tipText.color = new Color(1, 1, 0);
+    }
+
+    public void BakeryOrderInProgressTextTip()
+    {
+        tipText.text = "Order In Progress";
+        tipText.color = new Color(1, 0, 0);
+    }
+
+    public void PickUpBakeryOrderTextTip()
+    {
+        tipText.text = "Pick Up Order";
+        tipText.color = new Color(1, 1, 0);
     }
 
     public void ClearTextTip()

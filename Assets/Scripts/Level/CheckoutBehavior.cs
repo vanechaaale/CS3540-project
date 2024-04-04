@@ -63,8 +63,6 @@ public class CheckoutBehavior : MonoBehaviour
     void CheckoutCustomer()
     {
 
-        Debug.Log("Timer: " + checkoutCountdown.ToString());
-
         if (CustomerStillThere())
         {
 

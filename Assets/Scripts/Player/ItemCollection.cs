@@ -48,96 +48,6 @@ public class ItemCollection : MonoBehaviour
     void Update()
     {
         DisplayBasketText();
-        //if user clicks with mouse
-        if (Input.GetMouseButtonDown(0))
-        {
-            //create a ray that follows the mouse's current position
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit hit;
-
-
-            if (Physics.Raycast(ray, out hit))
-            {
-
-                // get player position
-                Vector3 playerPos = transform.position;
-                // get the player's x and z coordinates
-                float playerX = playerPos.x;
-                float playerZ = playerPos.z;
-
-                // get item position
-                Vector3 itemPos = hit.collider.gameObject.transform.position;
-
-
-                // get the item's x and z coordinates
-                float itemX = itemPos.x;
-                float itemZ = itemPos.z;
-
-                // distance from player to item
-                float distance = Mathf.Sqrt(Mathf.Pow((itemX - playerX), 2) + Mathf.Pow((itemZ - playerZ), 2));
-
-                //if an item is clicked and the player is close enough,
-                //  then add it to the list of items and destroy it
-                if (hit.collider.CompareTag("Item") && distance <= range && itemList.Count < maxItems)
-                {
-                    //play audio clip when the item is clicked on 
-                    AudioSource.PlayClipAtPoint(pickupSFX, Camera.main.transform.position);
-
-                    string item_name = hit.collider.name.Replace("_", " ");
-                    itemList.Add(item_name);
-                    Destroy(hit.collider.gameObject);
-
-                }
-
-                else if (hit.collider.CompareTag("Powerup") && distance <= range && FindObjectOfType<LevelManager>().score >= powerupCost)
-                {
-                    Debug.Log("Powerup selected");
-                    FindObjectOfType<LevelManager>().score -= powerupCost;
-                    var possiblePowerups = (LevelManager.PowerUp[])Enum.GetValues(typeof(LevelManager.PowerUp));
-                    while (LevelManager.currentPowerup != LevelManager.PowerUp.None)
-                    {
-                        LevelManager.currentPowerup = possiblePowerups[UnityEngine.Random.Range(0, possiblePowerups.Length)];
-                    }
-
-                    AudioSource.PlayClipAtPoint(trashSFX, hit.collider.transform.position);
-                }
-                //if the player clicks on the trash can, remove the last item from the player's inventory
-                else if (hit.collider.CompareTag("TrashCan") && distance <= range && itemList.Count > 0)
-                {
-                    Debug.Log("trash can");
-
-                    //play audio clip when an item is thrown out 
-                    AudioSource.PlayClipAtPoint(trashSFX, Camera.main.transform.position);
-
-                    itemList.RemoveAt(itemList.Count - 1);
-                }
-                //if the player clicks on the baker, check for available bakery item or start bakery order
-                else if (hit.collider.CompareTag("Baker") && distance <= bakeryRange)
-                {
-                    // the bakery has no order in progress or any order ready
-                    if (!BakeryNPCBehavior.orderReady && !BakeryNPCBehavior.orderInProgress)
-                    {
-                        BakeryNPCBehavior.clickedOn = true;
-                    }
-                    // the bakery is in progress of an order
-                    else if (BakeryNPCBehavior.orderInProgress)
-                    {
-                        // UI (order in progress)
-                    }
-                    // the baker has an item available
-                    else if (BakeryNPCBehavior.orderReady)
-                    {
-                        // puts a bakery item in the basket
-                        //play audio clip when the item is clicked on 
-                        AudioSource.PlayClipAtPoint(pickupSFX, Camera.main.transform.position);
-
-                        itemList.Add("Bakery");
-                    }
-
-                }
-            }
-        }
 
         // if the player's list of items is full, then their movement speed is reduced
         if (itemList.Count >= maxItems)
@@ -157,26 +67,22 @@ public class ItemCollection : MonoBehaviour
 
     public void PickupItem(string item)
     {
-        // add the item to the player's basket
-        itemList.Add(item);
-        // play the sound effect for picking up an item
-        AudioSource.PlayClipAtPoint(pickupSFX, transform.position);
+        if (itemList.Count < maxItems)
+        {
+            // add the item to the player's basket
+            itemList.Add(item);
+            // play the sound effect for picking up an item
+            AudioSource.PlayClipAtPoint(pickupSFX, transform.position);
+        }
     }
 
     public void PurchasePowerup(string powerup)
     {
         // check if the player has enough money to purchase the powerup
-<<<<<<< HEAD
         if (FindObjectOfType<LevelManager>().score >= powerupCost)
         {
             // remove the cost of the powerup from the player's money
             FindObjectOfType<LevelManager>().score -= powerupCost;
-=======
-        if (LevelManager.money >= powerupCost)
-        {
-            // remove the cost of the powerup from the player's money
-            LevelManager.money -= powerupCost;
->>>>>>> main
             // add the powerup to the player's basket
             itemList.Add(powerup);
         }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.625131, g: 0.69543827, b: 0.78916645, a: 1}
+  m_IndirectSpecularColor: {r: 0.62346005, g: 0.69389, b: 0.7883626, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1374,6 +1374,80 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30d9b9580755bc146b34b329870e2034, type: 3}
+--- !u!1001 &350072835
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7131871292539855442}
+    m_Modifications:
+    - target: {fileID: 144508, guid: 42a6db452f1ec474b940437392d4d1f4, type: 3}
+      propertyPath: m_Name
+      value: Baker
+      objectReference: {fileID: 0}
+    - target: {fileID: 411112, guid: 42a6db452f1ec474b940437392d4d1f4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 411112, guid: 42a6db452f1ec474b940437392d4d1f4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 411112, guid: 42a6db452f1ec474b940437392d4d1f4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 411112, guid: 42a6db452f1ec474b940437392d4d1f4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.26800004
+      objectReference: {fileID: 0}
+    - target: {fileID: 411112, guid: 42a6db452f1ec474b940437392d4d1f4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.13639985
+      objectReference: {fileID: 0}
+    - target: {fileID: 411112, guid: 42a6db452f1ec474b940437392d4d1f4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.3040001
+      objectReference: {fileID: 0}
+    - target: {fileID: 411112, guid: 42a6db452f1ec474b940437392d4d1f4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 411112, guid: 42a6db452f1ec474b940437392d4d1f4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 411112, guid: 42a6db452f1ec474b940437392d4d1f4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 411112, guid: 42a6db452f1ec474b940437392d4d1f4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 411112, guid: 42a6db452f1ec474b940437392d4d1f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 411112, guid: 42a6db452f1ec474b940437392d4d1f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 411112, guid: 42a6db452f1ec474b940437392d4d1f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 42a6db452f1ec474b940437392d4d1f4, type: 3}
+--- !u!4 &350072836 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 411112, guid: 42a6db452f1ec474b940437392d4d1f4, type: 3}
+  m_PrefabInstance: {fileID: 350072835}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &376785813 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3277224742290944192, guid: bf52ae0cc5cbc59459c964cad6fb59b5, type: 3}
@@ -8505,8 +8579,12 @@ PrefabInstance:
       value: Bakery
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5779771598843928563, guid: edd2a40943d79f648b5ef5fdf16cf24d, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2172925073568330029, guid: edd2a40943d79f648b5ef5fdf16cf24d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 350072836}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edd2a40943d79f648b5ef5fdf16cf24d, type: 3}
 --- !u!1001 &3997868548164060095
