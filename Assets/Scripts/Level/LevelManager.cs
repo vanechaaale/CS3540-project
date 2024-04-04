@@ -130,6 +130,8 @@ public class LevelManager : MonoBehaviour
         // check if player won the level
         if (score >= pointsToWin) {
             gameText.text = "You Win!";
+            // advance to next level if there is one
+            Invoke("NextLevel", 2.0f);
         } else {
             gameText.text = "You Lose!";
         }
@@ -144,6 +146,14 @@ public class LevelManager : MonoBehaviour
 
         // clear the level info text
         levelInfoText.text = "";
+    }
+
+    public void NextLevel() {
+        // get the current scene index
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        // load the next scene
+        SceneManager.LoadScene(currentSceneIndex + 1);
     }
 
     public void AddScore(int scoreToAdd) {
