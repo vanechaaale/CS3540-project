@@ -71,6 +71,7 @@ public class LevelManager : MonoBehaviour
         levelInfoText.text = levelName + ":\n Help All the Customers!";
 
         Invoke("StartGame", 3.5f);
+
     }
 
     // Update is called once per frame
@@ -147,6 +148,12 @@ public class LevelManager : MonoBehaviour
 
     public void AddScore(int scoreToAdd) {
         score += scoreToAdd;
+        scoreText.text = score.ToString();
+    }
+
+    public void RemoveScore(int scoreToRemove)
+    {
+        score -= scoreToRemove;
         scoreText.text = score.ToString();
     }
 

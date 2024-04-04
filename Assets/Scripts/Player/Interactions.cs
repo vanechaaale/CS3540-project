@@ -74,7 +74,7 @@ public class Interactions : MonoBehaviour
             }
             else if (closestItem.CompareTag("Powerup"))
             {
-                FindObjectOfType<ItemCollection>().PurchasePowerup(closestItem.name);
+                FindObjectOfType<ItemCollection>().PurchasePowerup();
             }
             else if (closestItem.CompareTag("TrashCan"))
             {

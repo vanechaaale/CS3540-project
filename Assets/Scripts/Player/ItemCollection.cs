@@ -76,15 +76,21 @@ public class ItemCollection : MonoBehaviour
         }
     }
 
-    public void PurchasePowerup(string powerup)
+    public void PurchasePowerup()
     {
         // check if the player has enough money to purchase the powerup
         if (FindObjectOfType<LevelManager>().score >= powerupCost)
         {
             // remove the cost of the powerup from the player's money
-            FindObjectOfType<LevelManager>().score -= powerupCost;
-            // add the powerup to the player's basket
-            itemList.Add(powerup);
+            FindObjectOfType<LevelManager>().RemoveScore(powerupCost);
+
+            var possiblePowerups = (LevelManager.PowerUp[])Enum.GetValues(typeof(LevelManager.PowerUp));
+            while (LevelManager.currentPowerup == LevelManager.PowerUp.None)
+            {
+                LevelManager.currentPowerup = possiblePowerups[UnityEngine.Random.Range(0, possiblePowerups.Length)];
+            }
+
+            AudioSource.PlayClipAtPoint(powerupSFX, Camera.main.transform.position);
         }
     }
 
