@@ -13,12 +13,15 @@ public class BakeryNPCBehavior : MonoBehaviour
     }
 
     public GameObject player;
+    // the notification icon that appears above the NPC when the order is ready
+    //public GameObject notification;
+    public GameObject bakedGood;
     public bool orderReady;
     public bool orderInProgress;
     public static bool clickedOn;
 
-    NPCStates currentState;
-    float distanceToPlayer;
+    public NPCStates currentState;
+    float distanceToPlayer; 
     Vector3 returnPosition;
     public GameObject[] wanderPoints;
     Vector3 nextDestination;
@@ -31,6 +34,8 @@ public class BakeryNPCBehavior : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        //notification.SetActive(false);
+        bakedGood.SetActive(false);
         returnPosition = transform.position;
         currentState = NPCStates.Waiting;
         wanderPoints = GameObject.FindGameObjectsWithTag("BakeryWanderPoints");
@@ -68,7 +73,19 @@ public class BakeryNPCBehavior : MonoBehaviour
     {
         agent.speed = 0f;
         anim.SetInteger("animState", 0);
-        // 
+
+        if (orderReady)
+        {
+            //notification.SetActive(true);
+            //notification.transform.position = new Vector3(notification.transform.position.x, notification.transform.position.y + Mathf.Sin(Time.time * 3) * 0.011f, notification.transform.position.z);
+            bakedGood.SetActive(true);
+        }
+        else
+        {
+            // notification.SetActive(false);
+            bakedGood.SetActive(false);
+        }
+
         if (clickedOn)
         {
             orderInProgress = true;
@@ -80,18 +97,16 @@ public class BakeryNPCBehavior : MonoBehaviour
     }
 
     void UpdateBakingState()
-    {
-        
+    {                
 
         if (countdown > 0) {
             if (stationaryTime > 0 ) {
-                anim.SetInteger("animState", 4);
+                anim.SetInteger("animState", 2);
                 agent.speed = 0f;
                 stationaryTime -= Time.deltaTime;
 
             }
             countdown -= Time.deltaTime;
-            
         } 
         if (countdown <= 0 || stationaryTime <= 0) {
             if (countdown <= 0) {
@@ -101,7 +116,6 @@ public class BakeryNPCBehavior : MonoBehaviour
                 FindNextPoint();
                 FaceTarget(nextDestination);
             }
-            
             currentState = NPCStates.Walking;
             stationaryTime = 3f;
         }
@@ -115,11 +129,12 @@ public class BakeryNPCBehavior : MonoBehaviour
         agent.stoppingDistance = 1;
 
         agent.speed = 3.5f;
+        float distance = Vector3.Distance(transform.position, nextDestination);
 
         if (countdown >= 0)
         {
-
-            if (Vector3.Distance(transform.position, nextDestination) < 0.5)
+            // distance from baker to next destination
+            if (distance < 1)
             {
                 currentState = NPCStates.Baking;
             }
@@ -131,7 +146,7 @@ public class BakeryNPCBehavior : MonoBehaviour
             nextDestination = returnPosition;
             agent.SetDestination(nextDestination);
 
-            if (Vector3.Distance(transform.position, nextDestination) < 0.5)
+            if (distance < 1)
             {
                 clickedOn = false;
                 orderInProgress = false;
@@ -162,6 +177,12 @@ public class BakeryNPCBehavior : MonoBehaviour
     public void PickUpOrder()
     {
         orderReady = false;
-        Debug.Log("Order picked up!");
+        player.GetComponent<ItemCollection>().PickupItem("Cake");
+    }
+
+    public void StartOrder()
+    {
+        clickedOn = true;
+        orderInProgress = true;
     }
 }

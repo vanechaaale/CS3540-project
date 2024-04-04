@@ -10,5 +10,5 @@ public enum GroceryItems
 
 public enum BakeryItems
 {
-    Bakery
+    Cake,
 }
