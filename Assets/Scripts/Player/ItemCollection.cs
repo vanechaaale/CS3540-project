@@ -19,7 +19,7 @@ public class ItemCollection : MonoBehaviour
     // whether or not the basket is full
     public bool isBasketFull = false;
 
-    public float powerupCost = 5.00f;
+    public int powerupCost = 5;
 
     // range that the player can collect items from
     float range = Constants.ITEM_PICKUP_DISTANCE;
@@ -34,6 +34,9 @@ public class ItemCollection : MonoBehaviour
 
     //sound that plays when an item is thrown out
     public AudioClip trashSFX;
+
+    //sound that plays when a powerup is bought
+    public AudioClip powerupSFX;
 
     // Start is called before the first frame update
     void Start()
@@ -87,15 +90,17 @@ public class ItemCollection : MonoBehaviour
 
                 }
 
-                else if (hit.collider.CompareTag("Powerup") && distance <= range && LevelManager.money >= powerupCost)
+                else if (hit.collider.CompareTag("Powerup") && distance <= range && FindObjectOfType<LevelManager>().score >= powerupCost)
                 {
                     Debug.Log("Powerup selected");
-                    LevelManager.money -= powerupCost;
+                    FindObjectOfType<LevelManager>().score -= powerupCost;
                     var possiblePowerups = (LevelManager.PowerUp[])Enum.GetValues(typeof(LevelManager.PowerUp));
                     while (LevelManager.currentPowerup != LevelManager.PowerUp.None)
                     {
                         LevelManager.currentPowerup = possiblePowerups[UnityEngine.Random.Range(0, possiblePowerups.Length)];
                     }
+
+                    AudioSource.PlayClipAtPoint(trashSFX, hit.collider.transform.position);
                 }
                 //if the player clicks on the trash can, remove the last item from the player's inventory
                 else if (hit.collider.CompareTag("TrashCan") && distance <= range && itemList.Count > 0)
@@ -161,10 +166,10 @@ public class ItemCollection : MonoBehaviour
     public void PurchasePowerup(string powerup)
     {
         // check if the player has enough money to purchase the powerup
-        if (FindObjectOfType<LevelManager>().money >= powerupCost)
+        if (FindObjectOfType<LevelManager>().score >= powerupCost)
         {
             // remove the cost of the powerup from the player's money
-            FindObjectOfType<LevelManager>().money -= powerupCost;
+            FindObjectOfType<LevelManager>().score -= powerupCost;
             // add the powerup to the player's basket
             itemList.Add(powerup);
         }

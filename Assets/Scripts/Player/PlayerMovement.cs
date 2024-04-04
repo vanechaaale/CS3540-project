@@ -60,7 +60,8 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(direction);
             if (isSpeedBoosted)
             {
-                gameObject.GetComponent<Animator>().SetInteger("moveState", 2);
+                // Seems to cause issues with cat spinning in place
+                //gameObject.GetComponent<Animator>().SetInteger("moveState", 2);
             }
             else
             {
