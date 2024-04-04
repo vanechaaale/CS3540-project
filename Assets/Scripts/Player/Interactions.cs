@@ -65,8 +65,8 @@ public class Interactions : MonoBehaviour
             ClearTextTip();
         }
 
-        // if the player is close enough to the item and hits Enter, pick up the item
-        if (closestItemDistance <= maxDistance && Input.GetKeyDown(KeyCode.Return))
+        // if the player is close enough to the item and hits Enter or clicks, interact with the item
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetMouseButtonDown(0) && closestItemDistance <= maxDistance)
         {
             if (closestItem.CompareTag("Item"))
             {

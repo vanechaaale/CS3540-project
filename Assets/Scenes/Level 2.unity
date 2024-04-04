@@ -9346,13 +9346,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1018952428}
     - target: {fileID: 3033175025886689155, guid: 637fddcd8d2850e4caa97f70ccb30f60, type: 3}
+      propertyPath: readySFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 31e0dde28fa56a14d894e20ed5b90cb9, type: 3}
+    - target: {fileID: 3033175025886689155, guid: 637fddcd8d2850e4caa97f70ccb30f60, type: 3}
       propertyPath: bakedGood
       value: 
       objectReference: {fileID: 1828156836994885}
     - target: {fileID: 3033175025886689155, guid: 637fddcd8d2850e4caa97f70ccb30f60, type: 3}
+      propertyPath: orderReady
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3033175025886689155, guid: 637fddcd8d2850e4caa97f70ccb30f60, type: 3}
       propertyPath: notification
       value: 
       objectReference: {fileID: 1828155420384140, guid: 31cd80546c3d1474f9335e444db120ee, type: 3}
+    - target: {fileID: 3033175025886689155, guid: 637fddcd8d2850e4caa97f70ccb30f60, type: 3}
+      propertyPath: orderReadySFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 31e0dde28fa56a14d894e20ed5b90cb9, type: 3}
     - target: {fileID: 8126286580471215528, guid: 637fddcd8d2850e4caa97f70ccb30f60, type: 3}
       propertyPath: m_Name
       value: Baker

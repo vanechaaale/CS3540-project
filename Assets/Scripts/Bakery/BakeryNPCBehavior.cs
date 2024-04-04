@@ -16,6 +16,7 @@ public class BakeryNPCBehavior : MonoBehaviour
     // the notification icon that appears above the NPC when the order is ready
     //public GameObject notification;
     public GameObject bakedGood;
+    public AudioClip orderReadySFX;
     public bool orderReady;
     public bool orderInProgress;
     public static bool clickedOn;
@@ -151,6 +152,8 @@ public class BakeryNPCBehavior : MonoBehaviour
                 clickedOn = false;
                 orderInProgress = false;
                 orderReady = true;
+                // 
+                AudioSource.PlayClipAtPoint(orderReadySFX, Camera.main.transform.position);
                 currentState = NPCStates.Waiting;
             }
         }
