@@ -52,33 +52,37 @@ public class ShoppingListBehavior : MonoBehaviour
         string[] bakeryValues = System.Enum.GetNames(typeof(BakeryItems));
         string[] combinedValues = new string[groceryValues.Length + bakeryValues.Length];
 
-        Debug.Log("combinedValues.Length: " + combinedValues.Length);
-
         // if LevelManager allows for bakery items, combine the two enums
-            if (FindObjectOfType<LevelManager>().isBakery) {
-                groceryValues.CopyTo(combinedValues, 0);
-                bakeryValues.CopyTo(combinedValues, groceryValues.Length);
-            }
-            // if not, just use the GroceryItems enum
-            else {
-                groceryValues.CopyTo(combinedValues, 0);    
-            }
-        Debug.Log("combinedValues contents: " + string.Join(", ", combinedValues));
-
+        if (FindObjectOfType<LevelManager>().isBakery) {
+            groceryValues.CopyTo(combinedValues, 0);
+            bakeryValues.CopyTo(combinedValues, groceryValues.Length);
+        }
+        // if not, just use the GroceryItems enum
+        else {
+            groceryValues.CopyTo(combinedValues, 0);    
+        }
 
         // update the shopping list's Label component
         for (int i = 0; i < numItems; i++)
         {
             // get random item from the combined enum
             int randomIndex = Random.Range(0, combinedValues.Length);
+            string item = combinedValues[randomIndex];
+
+            // if the item is null, try again
+            if (item == null)
+            {
+                i--;
+                continue;
+            }
             
-            string itemStr = "- " + combinedValues[randomIndex].Replace("_", " ");
+            string itemStr = "- "  + item.Replace("_", " ");
 
             // if item isn't already on the list, add it
             if (!formattedGroceryList.Contains(itemStr))
             {
                 formattedGroceryList.Add(itemStr);
-                groceryList.Add(combinedValues[randomIndex].ToString().Replace("_", " "));
+                groceryList.Add(item.Replace("_", " "));
             }
             // if it is, decrement the counter and try again
             else
