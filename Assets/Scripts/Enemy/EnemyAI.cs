@@ -22,6 +22,7 @@ public class EnemyAI : MonoBehaviour
     public GameObject player;
     
     public float enemyRunSpeed = 5;
+    public AudioClip[] barkSFX;
     GameObject[] wanderPoints;
     Vector3 nextDestination;
 
@@ -148,6 +149,8 @@ public class EnemyAI : MonoBehaviour
 
     private void BiteAttack() {
         if (distanceToPlayer <= attackDistance) {
+             // Play SFX
+            AudioSource.PlayClipAtPoint(barkSFX[Random.Range(0, barkSFX.Length - 1)], Camera.main.transform.position);
             player.GetComponent<ItemCollection>().LoseItem();
         }
         

@@ -25,7 +25,7 @@ public class ItemCollection : MonoBehaviour
     float range = Constants.ITEM_PICKUP_DISTANCE;
 
     // range that the player can start a bakery order
-    float bakeryRange = 3f;
+    float bakeryRange = Constants.BAKERY_PICKUP_DISTANCE;
 
     public GameObject loseItemVFX;
 
@@ -166,10 +166,17 @@ public class ItemCollection : MonoBehaviour
     public void PurchasePowerup(string powerup)
     {
         // check if the player has enough money to purchase the powerup
+<<<<<<< HEAD
         if (FindObjectOfType<LevelManager>().score >= powerupCost)
         {
             // remove the cost of the powerup from the player's money
             FindObjectOfType<LevelManager>().score -= powerupCost;
+=======
+        if (LevelManager.money >= powerupCost)
+        {
+            // remove the cost of the powerup from the player's money
+            LevelManager.money -= powerupCost;
+>>>>>>> main
             // add the powerup to the player's basket
             itemList.Add(powerup);
         }
