@@ -2081,6 +2081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  offsetAmt: 0
 --- !u!82 &514344364
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9260,6 +9261,10 @@ PrefabInstance:
       objectReference: {fileID: 1586307868}
     - target: {fileID: 8426464018087617928, guid: 44da339fdc890d34db28a1d027f30587, type: 3}
       propertyPath: m_Name
+      value: Checkout
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426464018087617928, guid: 44da339fdc890d34db28a1d027f30587, type: 3}
+      propertyPath: m_TagString
       value: Checkout
       objectReference: {fileID: 0}
     - target: {fileID: 9047983997237985594, guid: 44da339fdc890d34db28a1d027f30587, type: 3}

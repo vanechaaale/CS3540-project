@@ -100,6 +100,13 @@ public class ShoppingListBehavior : MonoBehaviour
             FindObjectOfType<CustomerManagerBehavior>().AddGroceryList(groceryList);
         }
 
+        // if the customer has "Cake" in their list, add 5 seconds to their wait time
+        if (groceryList.Contains("Cake"))
+        {
+            currentWaitTime += 5;
+            waitTimeSlider.maxValue = currentWaitTime;
+        }
+
     }
 
     // Update is called once per frame

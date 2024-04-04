@@ -17,21 +17,7 @@ public class Interactions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject[] groceryItems = GameObject.FindGameObjectsWithTag("Item");
-        GameObject[] powerups = GameObject.FindGameObjectsWithTag("Powerup");
-        GameObject trashCan = GameObject.FindGameObjectWithTag("TrashCan");
-
-        // items, powerups, and trash can into one array
-        GameObject[] interactables = new GameObject[groceryItems.Length + powerups.Length + 1];
-        groceryItems.CopyTo(interactables, 0);
-        powerups.CopyTo(interactables, groceryItems.Length);
-        interactables[interactables.Length - 1] = trashCan;
-
-        if (FindObjectOfType<BakeryNPCBehavior>() != null)
-        {
-            GameObject baker = GameObject.FindGameObjectWithTag("Baker");
-            interactables[interactables.Length - 2] = baker;
-        }
+        GameObject[] interactables = GenerateInteractablesArray();
 
         float closestItemDistance;
 
@@ -52,6 +38,10 @@ public class Interactions : MonoBehaviour
             else if (closestItem.CompareTag("TrashCan"))
             {
                 TrashTextTip();
+            }
+            else if (closestItem.CompareTag("Checkout"))
+            {
+                CheckoutTextTip();
             }
             else if (closestItem.CompareTag("Baker"))
             {
@@ -75,8 +65,8 @@ public class Interactions : MonoBehaviour
             ClearTextTip();
         }
 
-        // if the player is close enough to the item and hits Enter, pick up the item
-        if (closestItemDistance <= maxDistance && Input.GetKeyDown(KeyCode.Return))
+        // if the player is close enough to the item and hits Enter or clicks, interact with the item
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetMouseButtonDown(0) && closestItemDistance <= maxDistance)
         {
             if (closestItem.CompareTag("Item"))
             {
@@ -90,6 +80,9 @@ public class Interactions : MonoBehaviour
             {
                 FindObjectOfType<ItemCollection>().TrashItem();
             }
+            else if (closestItem.CompareTag("Checkout")) {
+                FindObjectOfType<CheckoutBehavior>().CheckoutCustomer();
+            }
             else if (closestItem.CompareTag("Baker")) {
                 // if the baker has an order ready, pick it up
                 BakeryNPCBehavior bakeryNPC = FindObjectOfType<BakeryNPCBehavior>();
@@ -97,9 +90,41 @@ public class Interactions : MonoBehaviour
                 {
                     bakeryNPC.PickUpOrder();
                 }
+                else if (!bakeryNPC.orderInProgress)
+                {
+                    bakeryNPC.StartOrder();
+                }
         }
         }
 
+    }
+
+    GameObject[] GenerateInteractablesArray() {
+        GameObject[] groceryItems = GameObject.FindGameObjectsWithTag("Item");
+        GameObject[] powerups = GameObject.FindGameObjectsWithTag("Powerup");
+        GameObject trashCan = GameObject.FindGameObjectWithTag("TrashCan");
+        GameObject checkout = GameObject.FindGameObjectWithTag("Checkout");
+
+        if (FindObjectOfType<BakeryNPCBehavior>() != null)
+        {
+            GameObject baker = GameObject.FindGameObjectWithTag("Baker");
+            GameObject[] interactables = new GameObject[groceryItems.Length + powerups.Length + 3];
+            groceryItems.CopyTo(interactables, 0);
+            powerups.CopyTo(interactables, groceryItems.Length);
+            interactables[interactables.Length - 1] = trashCan;
+            interactables[interactables.Length - 2] = checkout;
+            interactables[interactables.Length - 3] = baker;
+            return interactables;
+        }
+        else
+        {
+            GameObject[] interactables = new GameObject[groceryItems.Length + powerups.Length + 2];
+            groceryItems.CopyTo(interactables, 0);
+            powerups.CopyTo(interactables, groceryItems.Length);
+            interactables[interactables.Length - 1] = trashCan;
+            interactables[interactables.Length - 2] = checkout;
+            return interactables;
+        }
     }
     
 
@@ -138,6 +163,12 @@ public class Interactions : MonoBehaviour
             // light gray
             tipText.color = new Color(0.5f, 0.5f, 0.5f);
         }
+    }
+
+    public void CheckoutTextTip()
+    {
+        tipText.text = "Checkout Customer";
+        tipText.color = new Color(0, 0, 1);
     }
 
     public void PowerupTextTip(string powerupName)
