@@ -62,9 +62,6 @@ public class BakeryNPCBehavior : MonoBehaviour
                 break;
 
         }
-        Debug.Log("State: " + currentState);
-        Debug.Log("Countdown: " + countdown.ToString());
-        Debug.Log("StationaryTime: " + stationaryTime.ToString());
     }
 
     void UpdateWaitingState()
@@ -88,7 +85,7 @@ public class BakeryNPCBehavior : MonoBehaviour
 
         if (countdown > 0) {
             if (stationaryTime > 0 ) {
-                anim.SetInteger("animState", 3);
+                anim.SetInteger("animState", 4);
                 agent.speed = 0f;
                 stationaryTime -= Time.deltaTime;
 
@@ -115,7 +112,7 @@ public class BakeryNPCBehavior : MonoBehaviour
     {
         anim.SetInteger("animState", 1);
 
-        agent.stoppingDistance = 0;
+        agent.stoppingDistance = 1;
 
         agent.speed = 3.5f;
 

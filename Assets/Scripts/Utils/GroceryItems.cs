@@ -5,5 +5,6 @@ public enum GroceryItems
     Tomato_Soup,
     Cereal,
     Pea_Stew,
-    Minestrone
+    Minestrone,
+    Bakery
 }
