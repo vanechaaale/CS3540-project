@@ -20,14 +20,18 @@ public class Interactions : MonoBehaviour
         GameObject[] groceryItems = GameObject.FindGameObjectsWithTag("Item");
         GameObject[] powerups = GameObject.FindGameObjectsWithTag("Powerup");
         GameObject trashCan = GameObject.FindGameObjectWithTag("TrashCan");
-        GameObject baker = GameObject.FindGameObjectWithTag("Baker");
 
         // items, powerups, and trash can into one array
         GameObject[] interactables = new GameObject[groceryItems.Length + powerups.Length + 1];
         groceryItems.CopyTo(interactables, 0);
         powerups.CopyTo(interactables, groceryItems.Length);
         interactables[interactables.Length - 1] = trashCan;
-        interactables[interactables.Length - 2] = baker;
+
+        if (FindObjectOfType<BakeryNPCBehavior>() != null)
+        {
+            GameObject baker = GameObject.FindGameObjectWithTag("Baker");
+            interactables[interactables.Length - 2] = baker;
+        }
 
         float closestItemDistance;
 
@@ -51,7 +55,6 @@ public class Interactions : MonoBehaviour
             }
             else if (closestItem.CompareTag("Baker"))
             {
-                Debug.Log("baker");
                 BakeryNPCBehavior bakeryNPC = FindObjectOfType<BakeryNPCBehavior>();
                 if (!bakeryNPC.orderReady && !bakeryNPC.orderInProgress)
                 {
