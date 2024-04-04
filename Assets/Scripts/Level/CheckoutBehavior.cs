@@ -6,22 +6,26 @@ public class CheckoutBehavior : MonoBehaviour
 {
     public GameObject player;
     public List<string> customerList;
-    public float checkoutTimer = 0.5f;
+    public float checkoutTimer = 1f;
     float minDistance = 4f;
-    float checkoutCountdown = 0.5f;
+    float checkoutCountdown;
 
     public AudioClip checkoutSFX;
     // the partcle system that will be played when the player completes an order
     public GameObject moneyEarned;
+    string removedItem;
 
 
     // Start is called before the first frame update
     void Start()
-    { 
-        if (player == null) {
+    {
+        if (player == null)
+        {
             player = GameObject.FindGameObjectWithTag("Player");
         }
+        checkoutCountdown = checkoutTimer;
         customerList = new List<string>();
+        removedItem = "";
 
         GetNextCustomer();
     }
@@ -30,41 +34,101 @@ public class CheckoutBehavior : MonoBehaviour
     void Update()
     {
         float dist = Vector3.Distance(transform.position, player.transform.position);
-        if (dist <= minDistance) {
+        if (dist <= minDistance)
+        {
             CheckoutCustomer();
         }
-        if (customerList.Count == 0) {
+        if (customerList.Count == 0)
+        {
             GetNextCustomer();
-        } 
+        }
     }
 
-    void CheckoutCustomer() {
+    void GetItemToBeRemoved()
+    {
 
-        if (checkoutCountdown <= 0) {
-            List<string> removedItems = new List<string>();
-            // check if any of the the customer's shopping list items are found in the player's basket
-            
-            foreach (string customerItem in customerList) {
-                if (ItemCollection.itemList.Contains(customerItem)) {
-                    // Debug.Log("Customer wants " + customerItem);
-                    // remove the item from the player's basket
-                    ItemCollection.itemList.Remove(customerItem);
-                    removedItems.Add(customerItem);
+        // check if customer's shopping list items are found in the player's basket
+        int index = 0;
+        for (int i = 0; i < customerList.Count; i++)
+        {
+            if (ItemCollection.itemList.Contains(customerList[index]))
+            {
+                removedItem = customerList[index];
+                break;
+            }
+        }
+
+    }
+
+    void CheckoutCustomer()
+    {
+
+        Debug.Log("Timer: " + checkoutCountdown.ToString());
+
+        if (CustomerStillThere())
+        {
+
+            if (checkoutCountdown <= 0)
+            {
+
+                if (!string.IsNullOrEmpty(removedItem))
+                {
+                    // remove the items from the player's shopping list
+                    ItemCollection.itemList.Remove(removedItem);
+                    // remove the items from the customer's shopping list
+                    customerList.Remove(removedItem);
+                    // update the shopping list of the customer in line with the new list
+                    FindObjectOfType<CustomerManagerBehavior>().UpdateShoppingList(new List<string>() { removedItem });
+                    removedItem = "";
+
                 }
+                else
+                {
+
+                    if (customerList.Count == 0)
+                    {
+
+                        // remove the customer from the Shopping list
+                        FindObjectOfType<CustomerManagerBehavior>().RemoveCustomer();
+
+                        // increment score in level manager
+                        FindObjectOfType<LevelManager>().AddScore(25);
+
+                        // Play SFX
+                        AudioSource.PlayClipAtPoint(checkoutSFX, Camera.main.transform.position);
+
+                        // play the particle system at the checkout register
+                        Instantiate(moneyEarned, transform.position, Quaternion.identity);
+
+                        // restart the countdown timer
+                        checkoutCountdown = checkoutTimer;
+                    }
+                    else
+                    {
+                        GetItemToBeRemoved();
+                    }
+                }
+
+                checkoutCountdown = checkoutTimer;
+
+                // for (int i = 0; i < removedItems.Count; i++) {
+                //     customerList.Remove(removedItems[i]);
+                // }
+
+
+
             }
+            else if (customerList.Count > 0)
+            {
 
-            // remove the items from the customer's shopping list
-            for (int i = 0; i < removedItems.Count; i++) {
-                customerList.Remove(removedItems[i]);
+                // decrease the timer for the item being checked out
+                checkoutCountdown -= Time.deltaTime;
             }
-
-            // update the shopping list of the customer in line with the new list
-            FindObjectOfType<CustomerManagerBehavior>().UpdateShoppingList(removedItems);
-
-            if (customerList.Count == 0) {
+            else
+            {
                 // remove the customer from the Shopping list
                 FindObjectOfType<CustomerManagerBehavior>().RemoveCustomer();
-                
+
                 // increment score in level manager
                 FindObjectOfType<LevelManager>().AddScore(25);
 
@@ -76,20 +140,30 @@ public class CheckoutBehavior : MonoBehaviour
 
                 // restart the countdown timer
                 checkoutCountdown = checkoutTimer;
-
-                // destroy the first ShoppingList object
-                GameObject.FindGameObjectWithTag("ShoppingLists").GetComponentInChildren<ShoppingListBehavior>().DestroyCustomer();
             }
-            
-        } else if (customerList.Count > 0) {
-            // decrease the timer for the item being checked out
-            checkoutCountdown -= Time.deltaTime;
+        }
+        else
+        {
+            removedItem = "";
+            GetNextCustomer();
         }
     }
 
-    void GetNextCustomer() {
+    bool CustomerStillThere()
+    {
         List<List<string>> custList = GameObject.Find("CustomerManager").GetComponent<CustomerManagerBehavior>().groceryLists;
-        if (custList != null && custList.Count > 0 ) {
+        if (custList.Contains(customerList))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    void GetNextCustomer()
+    {
+        List<List<string>> custList = GameObject.Find("CustomerManager").GetComponent<CustomerManagerBehavior>().groceryLists;
+        if (custList != null && custList.Count > 0)
+        {
             customerList = custList[0];
         }
     }

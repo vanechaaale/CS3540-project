@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour
     bool isGameOver;
     public bool startGame;
 
-    public float money = 0f;
+    public static float money = 0f;
     public int pointsToWin = 50;
     public static PowerUp currentPowerup = PowerUp.None;
 

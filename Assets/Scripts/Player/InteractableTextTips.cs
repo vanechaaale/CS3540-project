@@ -7,7 +7,7 @@ public class InteractableTextTips : MonoBehaviour
 {
     public Text tipText;
     float maxDistance = Constants.ITEM_PICKUP_DISTANCE;
-    float bakeryRange = 3f;
+    float bakeryRange = Constants.BAKERY_PICKUP_DISTANCE;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +39,7 @@ public class InteractableTextTips : MonoBehaviour
 
             // distance from player to item
             float distance = Mathf.Sqrt(Mathf.Pow((itemX - playerX), 2) + Mathf.Pow((itemZ - playerZ), 2));
+            Debug.Log("Distance: " + distance);
 
             if (hit.collider.CompareTag("Item") && distance <= maxDistance)
             {
