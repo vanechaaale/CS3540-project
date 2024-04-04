@@ -58,12 +58,12 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CoffeeShopStarterPack\Scripts\Editor\ScreenShotImportSettings.cs" />
-    <Compile Include="Assets\CoffeeShopStarterPack\Scripts\Editor\SliceHelperEditor.cs" />
-    <Compile Include="Assets\CoffeeShopStarterPack\Scripts\Editor\ScreenShotHelperEditor.cs" />
-    <Compile Include="Assets\CoffeeShopStarterPack\Scripts\Editor\ProductManagerEditor.cs" />
-    <Compile Include="Assets\CoffeeShopStarterPack\Scripts\Editor\BewerageMakerEditor.cs" />
-    <Compile Include="Assets\CoffeeShopStarterPack\Scripts\Editor\ProductEditor.cs" />
+    <Compile Include="Assets\Imports\CoffeeShopStarterPack\Scripts\Editor\ScreenShotImportSettings.cs" />
+    <Compile Include="Assets\Imports\CoffeeShopStarterPack\Scripts\Editor\SliceHelperEditor.cs" />
+    <Compile Include="Assets\Imports\CoffeeShopStarterPack\Scripts\Editor\ScreenShotHelperEditor.cs" />
+    <Compile Include="Assets\Imports\CoffeeShopStarterPack\Scripts\Editor\ProductManagerEditor.cs" />
+    <Compile Include="Assets\Imports\CoffeeShopStarterPack\Scripts\Editor\BewerageMakerEditor.cs" />
+    <Compile Include="Assets\Imports\CoffeeShopStarterPack\Scripts\Editor\ProductEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
