@@ -84,8 +84,12 @@ public class CustomerManagerBehavior : MonoBehaviour
         // Whatever Canvas with the tag "ShoppingLists" is, set the parent of the new customer to that
         newCustomer.transform.SetParent(GameObject.FindGameObjectWithTag("ShoppingLists").transform, false);
         // x shift the customer to the right for each customer in line
+        float x = newCustomer.transform.position.x - (width * (currentCustomers - 1));
+        // Debug.Log("newCustomerx: " + newCustomer.transform.position.x);
+        // Debug.Log("x value: " + x);
+        // Debug.Log("currentCustomers: " + currentCustomers);
         newCustomer.transform.position = new Vector3(
-            newCustomer.transform.position.x + (width * 2.4f  * (currentCustomers - 1)), 
+            x,
             newCustomer.transform.position.y, 
             newCustomer.transform.position.z
             );
