@@ -22,15 +22,12 @@ public class CustomerManagerBehavior : MonoBehaviour
 
     public List<List<string>> groceryLists;
 
-    public int spawnRate = 30;
+    public int spawnRate;
     
     public GameObject shoppingListPrefab;
 
     public AudioClip customerEnterSFX;
     public AudioClip customerLeaveSFX;
-
-    // the canvas to instantiate shoppinglists to
-    public Canvas canvas;
 
     // Start is called before the first frame update
     void Start()
@@ -82,17 +79,16 @@ public class CustomerManagerBehavior : MonoBehaviour
     {
         currentCustomers++;
         
-        GameObject newCustomer = Instantiate(shoppingListPrefab, canvas.transform);
-
+        GameObject newCustomer = Instantiate(shoppingListPrefab);
         float width = newCustomer.GetComponent<RectTransform>().rect.width;
-    
-        // // shopping list position based on screen width and # of customers
-        // float x = (width * (currentCustomers - 1)) + width / 3;
-        // float y = width / 2;
-        // newCustomer.GetComponent<RectTransform>().localPosition = new Vector3(x, y, 0);
-
+        // Whatever Canvas with the tag "ShoppingLists" is, set the parent of the new customer to that
         newCustomer.transform.SetParent(GameObject.FindGameObjectWithTag("ShoppingLists").transform, false);
-
+        // x shift the customer to the right for each customer in line
+        newCustomer.transform.position = new Vector3(
+            newCustomer.transform.position.x + (width * 2.4f  * (currentCustomers - 1)), 
+            newCustomer.transform.position.y, 
+            newCustomer.transform.position.z
+            );
 
     }
 
