@@ -119,6 +119,7 @@ public class ShoppingListBehavior : MonoBehaviour
         {
             currentWaitTime -= Time.deltaTime / (LevelManager.currentPowerup == LevelManager.PowerUp.SlowTime? 2 : 1);
             waitTimeSlider.value = currentWaitTime;
+            Debug.Log("waitTimeSlider.value: " + waitTimeSlider.value);
             percentWaited = 1 - (currentWaitTime / startWaitTime);
         }
         // If the customer is done waiting, destroy the customer's list
