@@ -337,6 +337,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 899499401306069871, guid: ebf425f9dfbc515428afb5f4f8e00a3f, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1234473935}
+    - target: {fileID: 899499401306069871, guid: ebf425f9dfbc515428afb5f4f8e00a3f, type: 3}
       propertyPath: spawnRate
       value: 80
       objectReference: {fileID: 0}
@@ -4722,7 +4726,7 @@ GameObject:
   - component: {fileID: 1234473933}
   m_Layer: 5
   m_Name: ScoreInfo
-  m_TagString: Untagged
+  m_TagString: ShoppingLists
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4756,7 +4760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -7527,37 +7531,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 177317649217918460, guid: 373652df69c2ae441b47a711fc5b269c, type: 3}
   m_PrefabInstance: {fileID: 3997868548164060095}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1990684141
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1990684142}
-  m_Layer: 0
-  m_Name: PowerUpInfo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1990684142
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1990684141}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.820917, y: 2.3677511, z: 11.0151615}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2054559250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8250,10 +8223,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 47950052}
     m_Modifications:
-    - target: {fileID: 1118597036798593942, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 248
-      objectReference: {fileID: 0}
     - target: {fileID: 3572066010042250728, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -8261,10 +8230,6 @@ PrefabInstance:
     - target: {fileID: 3572066010042250728, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4217092318451563168, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 242
       objectReference: {fileID: 0}
     - target: {fileID: 4890175021566309422, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
       propertyPath: m_Pivot.x
@@ -8352,25 +8317,9 @@ PrefabInstance:
 
         Help All the customers!'
       objectReference: {fileID: 0}
-    - target: {fileID: 7401918647308323977, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
-      propertyPath: m_TargetGraphic
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8946024563273268645, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
       propertyPath: m_Name
       value: GameInfo
-      objectReference: {fileID: 0}
-    - target: {fileID: 9108018003147925951, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9108018003147925951, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9108018003147925951, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
-      propertyPath: m_Color.r
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9184,4 +9133,3 @@ SceneRoots:
   - {fileID: 47950052}
   - {fileID: 514344362}
   - {fileID: 1469445067}
-  - {fileID: 1990684142}

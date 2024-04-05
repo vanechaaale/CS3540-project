@@ -29,6 +29,9 @@ public class CustomerManagerBehavior : MonoBehaviour
     public AudioClip customerEnterSFX;
     public AudioClip customerLeaveSFX;
 
+    // the canvas to instantiate shoppinglists to
+    public Canvas canvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -78,8 +81,18 @@ public class CustomerManagerBehavior : MonoBehaviour
     public void CreateCustomer()
     {
         currentCustomers++;
-        GameObject newCustomer = Instantiate(shoppingListPrefab, new Vector3(450 + (100 * currentCustomers), 300, 0), Quaternion.identity);
-        newCustomer.transform.SetParent(GameObject.FindGameObjectWithTag("ShoppingLists").transform);
+        
+        GameObject newCustomer = Instantiate(shoppingListPrefab, canvas.transform);
+
+        float width = newCustomer.GetComponent<RectTransform>().rect.width;
+    
+        // shopping list position based on screen width and # of customers
+        float x_ratio = Screen.width / width;
+        float x = (width * currentCustomers) - (width * 2.5f) - (x_ratio);
+        float y_ratio = Screen.height / width;
+        float y = Screen.height / (y_ratio * .95f);
+        newCustomer.GetComponent<RectTransform>().localPosition = new Vector3(x, y, 0);
+
     }
 
     public void AddGroceryList(List<string> shoppingList)
