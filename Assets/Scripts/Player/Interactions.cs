@@ -160,8 +160,7 @@ public class Interactions : MonoBehaviour
         {
             string item_name = itemName.Replace("_", " ");
             tipText.text = "Pick up " + item_name;
-            // light gray
-            tipText.color = new Color(0.5f, 0.5f, 0.5f);
+            tipText.color = new Color(0, 0, 0);
         }
     }
 
@@ -186,7 +185,7 @@ public class Interactions : MonoBehaviour
     public void StartBakeryOrderTextTip()
     {
         tipText.text = "Start Bakery Order";
-        tipText.color = new Color(1, 1, 0);
+        tipText.color = new Color(0, 0, 0);
     }
 
     public void BakeryOrderInProgressTextTip()
@@ -198,7 +197,7 @@ public class Interactions : MonoBehaviour
     public void PickUpBakeryOrderTextTip()
     {
         tipText.text = "Pick Up Order";
-        tipText.color = new Color(1, 1, 0);
+        tipText.color = new Color(0, 0.5f, 0);
     }
 
     public void ClearTextTip()

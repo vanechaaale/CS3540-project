@@ -72,7 +72,7 @@ public class ItemCollection : MonoBehaviour
             // add the item to the player's basket
             itemList.Add(item);
             // play the sound effect for picking up an item
-            AudioSource.PlayClipAtPoint(pickupSFX, transform.position);
+            AudioSource.PlayClipAtPoint(pickupSFX, Camera.main.transform.position);
         }
     }
 
@@ -101,7 +101,7 @@ public class ItemCollection : MonoBehaviour
         {
             itemList.RemoveAt(itemList.Count - 1);
             // play the sound effect for throwing out an item
-            AudioSource.PlayClipAtPoint(trashSFX, transform.position);
+            AudioSource.PlayClipAtPoint(trashSFX, Camera.main.transform.position);
         }
     }
 
