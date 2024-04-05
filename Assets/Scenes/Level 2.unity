@@ -338,11 +338,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 899499401306069871, guid: ebf425f9dfbc515428afb5f4f8e00a3f, type: 3}
       propertyPath: spawnRate
-      value: 45
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 899499401306069871, guid: ebf425f9dfbc515428afb5f4f8e00a3f, type: 3}
+      propertyPath: customerLimit
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 899499401306069871, guid: ebf425f9dfbc515428afb5f4f8e00a3f, type: 3}
       propertyPath: totalCustomers
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 899499401306069871, guid: ebf425f9dfbc515428afb5f4f8e00a3f, type: 3}
       propertyPath: customerLeaveSFX
@@ -6302,6 +6306,10 @@ PrefabInstance:
       propertyPath: customersLeftText
       value: 
       objectReference: {fileID: 8749055286219515999}
+    - target: {fileID: 1765387891803682366, guid: ce45b03dccb1cc84fba06ae90e3ea5b2, type: 3}
+      propertyPath: levelInfoTextPanel
+      value: 
+      objectReference: {fileID: 1905572870}
     - target: {fileID: 5342648929362680756, guid: ce45b03dccb1cc84fba06ae90e3ea5b2, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -7364,6 +7372,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4379549780084284, guid: f11cc9e6e7553224ea19d6a2022331c8, type: 3}
   m_PrefabInstance: {fileID: 1874724476}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1905572870 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6856187697642641264, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
+  m_PrefabInstance: {fileID: 1642695372073244141}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1941957704
 Mesh:
   m_ObjectHideFlags: 0
@@ -8403,6 +8416,24 @@ PrefabInstance:
     - target: {fileID: 4890175021566309422, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108196462362754764, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
+      propertyPath: m_Text
+      value: 'Level 2:
+
+        [NEW] Bakery!
+
+        [New] Beware the dog!
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108196462362754764, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108196462362754764, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8946024563273268645, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
       propertyPath: m_Name

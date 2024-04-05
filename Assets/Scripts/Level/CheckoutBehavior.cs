@@ -58,8 +58,9 @@ public class CheckoutBehavior : MonoBehaviour
                     ItemCollection.itemList.Remove(customerList[i]); 
                     removedItems.Add(customerList[i]);
                     customerList.Remove(customerList[i]);
-                    FindObjectOfType<CustomerManagerBehavior>().UpdateShoppingList(removedItems);
                     }
+                    FindObjectOfType<CustomerManagerBehavior>().UpdateShoppingList(removedItems);
+
             }
                 if (customerList.Count == 0)
                 {

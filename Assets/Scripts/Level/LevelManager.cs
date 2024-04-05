@@ -20,6 +20,8 @@ public class LevelManager : MonoBehaviour
 
     public Text goalScoreText;
 
+    // panel that contains the level info text
+    public GameObject levelInfoTextPanel;
     public Text levelInfoText;
 
     //public float levelDuration = 60.0f;
@@ -61,15 +63,6 @@ public class LevelManager : MonoBehaviour
         //SetTimerText();
         SetCustomersLeftText();
         SetScoreGoalText();
-
-        // Level 1
-        // Help All the Customers and Earn Enough Points to Win!
-        // after 2 seconds, the level will start
-        // get level name
-
-        string levelName = SceneManager.GetActiveScene().name;
-        levelInfoText.text = levelName + ":\n Help All the Customers!";
-
         Invoke("StartGame", 3.5f);
 
     }
@@ -134,6 +127,9 @@ public class LevelManager : MonoBehaviour
             Invoke("NextLevel", 2.0f);
         } else {
             gameText.text = "You Lose!";
+            // restart the level
+            Invoke("RestartLevel", 2.0f);
+
         }
         
         gameText.gameObject.SetActive(true);
@@ -146,6 +142,7 @@ public class LevelManager : MonoBehaviour
 
         // clear the level info text
         levelInfoText.text = "";
+        levelInfoTextPanel.SetActive(false);
     }
 
     public void NextLevel() {
@@ -154,6 +151,14 @@ public class LevelManager : MonoBehaviour
 
         // load the next scene
         SceneManager.LoadScene(currentSceneIndex + 1);
+    }
+
+    public void RestartLevel() {
+        // get the current scene index
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        // reload the current scene
+        SceneManager.LoadScene(currentSceneIndex);
     }
 
     public void AddScore(int scoreToAdd) {
