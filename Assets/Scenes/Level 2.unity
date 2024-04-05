@@ -11242,7 +11242,7 @@ GameObject:
   - component: {fileID: 1234473933}
   m_Layer: 5
   m_Name: ScoreInfo
-  m_TagString: ShoppingLists
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14648,7 +14648,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1765387891803682366, guid: ce45b03dccb1cc84fba06ae90e3ea5b2, type: 3}
       propertyPath: score
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1765387891803682366, guid: ce45b03dccb1cc84fba06ae90e3ea5b2, type: 3}
       propertyPath: gameText
@@ -18501,7 +18501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4957215325304923281, guid: 1b11dc9089b513f49ae6b155d7453a2f, type: 3}
       propertyPath: m_Text
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4957215325304923281, guid: 1b11dc9089b513f49ae6b155d7453a2f, type: 3}
       propertyPath: m_FontData.m_Font
