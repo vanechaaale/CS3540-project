@@ -45,12 +45,6 @@ public class LevelManager : MonoBehaviour
     {
         isGameOver = false;
         startGame = false;
-        //countDown = levelDuration;
-
-        // if(timerText == null) {
-        //     timerText = GameObject.Find("TimerText").GetComponent<Text>();
-        // }
-
         if(gameText == null) {
             gameText = GameObject.Find("GameText").GetComponent<Text>();
         }
@@ -63,6 +57,11 @@ public class LevelManager : MonoBehaviour
         //SetTimerText();
         SetCustomersLeftText();
         SetScoreGoalText();
+        powerupText.gameObject.SetActive(false);
+        powerUpSlider.gameObject.SetActive(false);
+        powerUpSlider.maxValue = powerupDuration;
+        powerUpSlider.value = powerupDuration;
+        
         Invoke("StartGame", 3.5f);
 
     }
@@ -188,14 +187,13 @@ public class LevelManager : MonoBehaviour
 
     public void HandlePowerups()
     {
-        powerUpSlider.value = (powerupDuration - powerupCountDown) / powerupDuration * 20;
+        powerUpSlider.value -= Time.deltaTime;
+        powerupCountDown += Time.deltaTime;
         if (currentPowerup == PowerUp.SlowTime)
         {
             powerupText.gameObject.SetActive(true);
-            powerupText.text = "Slow Time";
+            powerupText.text = "Slow Down Time!";
             powerUpSlider.gameObject.SetActive(true);
-            powerupCountDown += Time.deltaTime;
-            powerUpSlider.value = (powerupDuration - powerupCountDown) / powerupDuration * 20;
             if (powerupCountDown > powerupDuration)
             {
                 currentPowerup = PowerUp.None;
@@ -209,13 +207,11 @@ public class LevelManager : MonoBehaviour
         else if (currentPowerup == PowerUp.SpeedBoost)
         {
             powerupText.gameObject.SetActive(true);
-            powerupText.text = "Speed Boost";
+            powerupText.text = "Speed Boost (Left Shift)";
             powerUpSlider.gameObject.SetActive(true);
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 FindObjectOfType<PlayerMovement>().isSpeedBoosted = true;
-                powerupCountDown += Time.deltaTime;
-                powerUpSlider.value = (powerupDuration - powerupCountDown)/powerupDuration * 20;
             }
             else
             {
