@@ -8640,7 +8640,7 @@ GameObject:
   - component: {fileID: 1379858694}
   m_Layer: 0
   m_Name: ShoppingListsCanvas
-  m_TagString: Untagged
+  m_TagString: ShoppingLists
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14772,6 +14772,10 @@ PrefabInstance:
     - target: {fileID: 4435523301788983830, guid: 630005e4fdc0558479eb8bba4a384818, type: 3}
       propertyPath: m_Name
       value: ScoreInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 4435523301788983830, guid: 630005e4fdc0558479eb8bba4a384818, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
