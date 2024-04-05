@@ -135,4 +135,8 @@ public class ItemCollection : MonoBehaviour
         }
     }
 
+    public void ClearItems() {
+        itemList.Clear();
+    }
+
 }

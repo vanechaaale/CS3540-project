@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
             if (isSpeedBoosted)
             {
                 // Seems to cause issues with cat spinning in place
-                //gameObject.GetComponent<Animator>().SetInteger("moveState", 2);
+                gameObject.GetComponent<Animator>().SetInteger("moveState", 2);
             }
             else
             {

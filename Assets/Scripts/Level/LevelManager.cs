@@ -159,6 +159,20 @@ public class LevelManager : MonoBehaviour
 
         // reload the current scene
         SceneManager.LoadScene(currentSceneIndex);
+
+        // reset the score
+        score = 0;
+
+        // reset the customers left
+        FindObjectOfType<CustomerManagerBehavior>().InitializeCustomers();
+
+        // reset the game over flag
+        isGameOver = false;
+        startGame = false;
+
+        // reset play inventory
+        FindObjectOfType<ItemCollection>().ClearItems();
+
     }
 
     public void AddScore(int scoreToAdd) {
@@ -178,9 +192,9 @@ public class LevelManager : MonoBehaviour
         if (currentPowerup == PowerUp.SlowTime)
         {
             powerupText.gameObject.SetActive(true);
+            powerupText.text = "Slow Time";
             powerUpSlider.gameObject.SetActive(true);
             powerupCountDown += Time.deltaTime;
-            Debug.Log(powerupCountDown.ToString());
             powerUpSlider.value = (powerupDuration - powerupCountDown) / powerupDuration * 20;
             if (powerupCountDown > powerupDuration)
             {
@@ -195,11 +209,11 @@ public class LevelManager : MonoBehaviour
         else if (currentPowerup == PowerUp.SpeedBoost)
         {
             powerupText.gameObject.SetActive(true);
+            powerupText.text = "Speed Boost";
             powerUpSlider.gameObject.SetActive(true);
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 FindObjectOfType<PlayerMovement>().isSpeedBoosted = true;
-
                 powerupCountDown += Time.deltaTime;
                 powerUpSlider.value = (powerupDuration - powerupCountDown)/powerupDuration * 20;
             }

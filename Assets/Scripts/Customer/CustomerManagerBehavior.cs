@@ -32,9 +32,14 @@ public class CustomerManagerBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InitializeCustomers();
+        
+    }
+
+    public void InitializeCustomers()
+    {
         groceryLists = new List<List<string>>();
         currentCustomers = startCustomers;
-        
     }
 
     // Update is called once per frame

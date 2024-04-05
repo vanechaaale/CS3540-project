@@ -53,40 +53,42 @@ public class CheckoutBehavior : MonoBehaviour
             // remove all items that are a match
             for (int i = 0; i < customerList.Count; i++)
             {
-                    if (ItemCollection.itemList.Contains(customerList[i]))
-                    { 
-                    ItemCollection.itemList.Remove(customerList[i]); 
-                    removedItems.Add(customerList[i]);
-                    customerList.Remove(customerList[i]);
+                    if (ItemCollection.itemList.Contains(customerList[i])) { 
+                        ItemCollection.itemList.Remove(customerList[i]);
+                        removedItems.Add(customerList[i]);
                     }
-                    FindObjectOfType<CustomerManagerBehavior>().UpdateShoppingList(removedItems);
-
             }
-                if (customerList.Count == 0)
+            foreach (string item in removedItems)
+            {
+                customerList.Remove(item);
+                
+            }
+            FindObjectOfType<CustomerManagerBehavior>().UpdateShoppingList(removedItems);
+            if (customerList.Count == 0)
+            {
+
+                // remove the customer from the Shopping list
+                FindObjectOfType<CustomerManagerBehavior>().RemoveCustomer();
+
+                // Get the wait time for the customer by getting the first shoppingListBehavior
+                float percentWaited = FindObjectOfType<ShoppingListBehavior>().GetTimeWaited();
+
+                // if the customer has waited less than 50% of their wait time, score multiplier is 2
+                if (percentWaited < 0.5)
                 {
-
-                    // remove the customer from the Shopping list
-                    FindObjectOfType<CustomerManagerBehavior>().RemoveCustomer();
-
-                    // Get the wait time for the customer by getting the first shoppingListBehavior
-                    float percentWaited = FindObjectOfType<ShoppingListBehavior>().GetTimeWaited();
-
-                    // if the customer has waited less than 50% of their wait time, score multiplier is 2
-                    if (percentWaited < 0.5)
-                    {
-                        FindObjectOfType<LevelManager>().AddScore(50);
-                    }
-                    // increment score in level manager
-                    else {
-                        FindObjectOfType<LevelManager>().AddScore(25);
-                    }
-                    // Play SFX
-                    AudioSource.PlayClipAtPoint(checkoutSFX, Camera.main.transform.position);
-
-                    // play the particle system at the checkout register and rotate X by 270
-
-                    Instantiate(moneyEarned, transform.position, Quaternion.Euler(270, 0, 0));
+                    FindObjectOfType<LevelManager>().AddScore(50);
                 }
+                // increment score in level manager
+                else {
+                    FindObjectOfType<LevelManager>().AddScore(25);
+                }
+                // Play SFX
+                AudioSource.PlayClipAtPoint(checkoutSFX, Camera.main.transform.position);
+
+                // play the particle system at the checkout register and rotate X by 270
+
+                Instantiate(moneyEarned, transform.position, Quaternion.Euler(270, 0, 0));
+            }
         }
     }
 
