@@ -91,6 +91,9 @@ public class CustomerManagerBehavior : MonoBehaviour
         float y = width / 2;
         newCustomer.GetComponent<RectTransform>().localPosition = new Vector3(x, y, 0);
 
+        newCustomer.transform.SetParent(GameObject.FindGameObjectWithTag("ShoppingLists").transform, false);
+
+
     }
 
     public void AddGroceryList(List<string> shoppingList)
