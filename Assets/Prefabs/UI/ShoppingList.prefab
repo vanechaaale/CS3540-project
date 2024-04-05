@@ -937,6 +937,10 @@ PrefabInstance:
       propertyPath: m_Value
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 659782031300075732, guid: 28707226a798d6d44b435d1eb9d0f843, type: 3}
+      propertyPath: m_MaxValue
+      value: 45
+      objectReference: {fileID: 0}
     - target: {fileID: 6851320185314531159, guid: 28707226a798d6d44b435d1eb9d0f843, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

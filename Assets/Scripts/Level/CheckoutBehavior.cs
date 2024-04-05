@@ -24,71 +24,73 @@ public class CheckoutBehavior : MonoBehaviour
         }
         //checkoutCountdown = checkoutTimer;
         customerList = new List<string>();
-
-        GetNextCustomer();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float dist = Vector3.Distance(transform.position, player.transform.position);
-        if (dist <= minDistance)
-        {
-            //CheckoutCustomer();
-        }
+        // float dist = Vector3.Distance(transform.position, player.transform.position);
+        // if (dist <= minDistance)
+        // {
+        //     //CheckoutCustomer();
+        // }
         if (customerList.Count == 0)
         {
             GetNextCustomer();
         }
     }
 
+    public void UpdateCustomerList(List<string> list)
+    {
+        customerList = list;
+    }
 
 
+    // checkout the first customer in the list
     public void CheckoutCustomer()
     {
-
-        if (CustomerStillThere())
+        while (!CustomerStillThere())
         {
-            List<string> removedItems = new List<string>();
-            // remove all items that are a match
-            for (int i = 0; i < customerList.Count; i++)
-            {
-                    if (ItemCollection.itemList.Contains(customerList[i])) { 
-                        ItemCollection.itemList.Remove(customerList[i]);
-                        removedItems.Add(customerList[i]);
-                    }
-            }
-            foreach (string item in removedItems)
-            {
-                customerList.Remove(item);
-                
-            }
-            FindObjectOfType<CustomerManagerBehavior>().UpdateShoppingList(removedItems);
-            if (customerList.Count == 0)
-            {
-
-                // remove the customer from the Shopping list
-                FindObjectOfType<CustomerManagerBehavior>().RemoveCustomer();
-
-                // Get the wait time for the customer by getting the first shoppingListBehavior
-                float percentWaited = FindObjectOfType<ShoppingListBehavior>().GetTimeWaited();
-
-                // if the customer has waited less than 50% of their wait time, score multiplier is 2
-                if (percentWaited < 0.5)
-                {
-                    FindObjectOfType<LevelManager>().AddScore(50);
+            GetNextCustomer();
+        }
+        List<string> removedItems = new List<string>();
+        // remove all items that are a match
+        for (int i = 0; i < customerList.Count; i++)
+        {
+                if (ItemCollection.itemList.Contains(customerList[i])) { 
+                    ItemCollection.itemList.Remove(customerList[i]);
+                    removedItems.Add(customerList[i]);
                 }
-                // increment score in level manager
-                else {
-                    FindObjectOfType<LevelManager>().AddScore(25);
-                }
-                // Play SFX
-                AudioSource.PlayClipAtPoint(checkoutSFX, Camera.main.transform.position);
+        }
+        foreach (string item in removedItems)
+        {
+            customerList.Remove(item);
+        }
+        FindObjectOfType<CustomerManagerBehavior>().UpdateShoppingList(removedItems);
+        if (customerList.Count == 0)
+        {
 
-                // play the particle system at the checkout register and rotate X by 270
+            // remove the customer from the Shopping list
+            FindObjectOfType<CustomerManagerBehavior>().RemoveCustomer();
 
-                Instantiate(moneyEarned, transform.position, Quaternion.Euler(270, 0, 0));
+            // Get the wait time for the customer by getting the first shoppingListBehavior
+            float percentWaited = FindObjectOfType<ShoppingListBehavior>().GetTimeWaited();
+
+            // if the customer has waited less than 50% of their wait time, score multiplier is 2
+            if (percentWaited < 0.5)
+            {
+                FindObjectOfType<LevelManager>().AddScore(50);
             }
+            // increment score in level manager
+            else {
+                FindObjectOfType<LevelManager>().AddScore(25);
+            }
+            // Play SFX
+            AudioSource.PlayClipAtPoint(checkoutSFX, Camera.main.transform.position);
+
+            // play the particle system at the checkout register and rotate X by 270
+
+            Instantiate(moneyEarned, transform.position, Quaternion.Euler(270, 0, 0));
         }
     }
 

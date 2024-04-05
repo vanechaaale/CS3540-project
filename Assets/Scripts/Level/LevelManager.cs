@@ -43,8 +43,6 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isGameOver = false;
-        startGame = false;
         if(gameText == null) {
             gameText = GameObject.Find("GameText").GetComponent<Text>();
         }
@@ -63,6 +61,18 @@ public class LevelManager : MonoBehaviour
         powerUpSlider.value = powerupDuration;
         
         Invoke("StartGame", 3.5f);
+
+        // reset the score
+        score = 0;
+        // reset the customers left
+        FindObjectOfType<CustomerManagerBehavior>().InitializeCustomers();
+        // reset the game over flags
+        isGameOver = false;
+        startGame = false;
+        // reset play inventory
+        FindObjectOfType<ItemCollection>().ClearItems();
+        // reset any powerups
+        currentPowerup = PowerUp.None;
 
     }
 
@@ -159,18 +169,6 @@ public class LevelManager : MonoBehaviour
         // reload the current scene
         SceneManager.LoadScene(currentSceneIndex);
 
-        // reset the score
-        score = 0;
-
-        // reset the customers left
-        FindObjectOfType<CustomerManagerBehavior>().InitializeCustomers();
-
-        // reset the game over flag
-        isGameOver = false;
-        startGame = false;
-
-        // reset play inventory
-        FindObjectOfType<ItemCollection>().ClearItems();
 
     }
 
