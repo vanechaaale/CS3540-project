@@ -132,7 +132,7 @@ public class ShoppingListBehavior : MonoBehaviour
 
     public void DestroyCustomer()
     {
-        Destroy(gameObject, 1);
+        Destroy(gameObject);
     }
 
     // return the wait time of the customer
