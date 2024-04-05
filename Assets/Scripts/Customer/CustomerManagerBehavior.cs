@@ -87,10 +87,8 @@ public class CustomerManagerBehavior : MonoBehaviour
         float width = newCustomer.GetComponent<RectTransform>().rect.width;
     
         // shopping list position based on screen width and # of customers
-        float x_ratio = Screen.width / width;
-        float x = (width * currentCustomers) - (width * 2.5f) - (x_ratio);
-        float y_ratio = Screen.height / width;
-        float y = Screen.height / (y_ratio * .95f);
+        float x = (width * (currentCustomers - 1)) + width / 3;
+        float y = width / 2;
         newCustomer.GetComponent<RectTransform>().localPosition = new Vector3(x, y, 0);
 
     }
