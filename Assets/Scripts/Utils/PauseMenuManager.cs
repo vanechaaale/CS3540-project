@@ -19,6 +19,10 @@ public class PauseMenuManager : MonoBehaviour
     public TMP_Text levelsBeat;
     public TMP_Text levelsLost;
 
+    GameObject[] shoppingLists;
+    GameObject basket;
+    GameObject[] levelTexts;
+
     private void Start()
     {
         volumeSlider.value = PlayerPrefs.GetFloat("volume", 1f);
@@ -36,11 +40,31 @@ public class PauseMenuManager : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+
             Debug.Log("updates");
             if (!open)
             {
+                levelTexts = GameObject.FindGameObjectsWithTag("LevelText");
+                basket = GameObject.FindGameObjectWithTag("Basket");
+                shoppingLists = GameObject.FindGameObjectsWithTag("ShoppingLists");
+
                 open = true;
                 Time.timeScale = 0;
+                // set ShoppingLists tagged item to inactive
+                foreach (GameObject shoppingList in shoppingLists)
+                {
+                    shoppingList.SetActive(false);
+                }
+
+                // set basket text to inactive
+                basket.SetActive(false);
+
+                // set level texts to inactive
+                foreach (GameObject levelText in levelTexts)
+                {
+                    levelText.SetActive(false);
+                }
+
                 panel.SetActive(true);
                 pauseMenu.SetActive(true);
             }
@@ -107,6 +131,20 @@ public class PauseMenuManager : MonoBehaviour
         onStatsQuit();
         pauseMenu.SetActive(false);
         panel.SetActive(false);
+
+        // set ShoppingLists tagged item to active
+        foreach (GameObject shoppingList in shoppingLists)
+        {
+            shoppingList.SetActive(true);
+        }
+        // set basket text to active
+        basket.SetActive(true);
+
+        // set level texts to active
+        foreach (GameObject levelText in levelTexts)
+        {
+            levelText.SetActive(true);
+        }
     }
 
     public void onVolumeUpdate()
