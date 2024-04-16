@@ -19,9 +19,12 @@ public class DeliNPCBehavior : MonoBehaviour
     public GameObject sausagePrefab; // 1
     public GameObject chickenPrefab;  // 2
     public GameObject steakPrefab; // 3
+
+    public GameObject deliMenu;
+
     GameObject currentDeliItem;
 
-    int deliItemIdx;
+    string deliItem;
 
     public AudioClip orderReadySFX;
     public bool orderReady;
@@ -82,6 +85,12 @@ public class DeliNPCBehavior : MonoBehaviour
                 break;
 
         }
+
+        // if distance from player is too far and menu is open, close it
+        if (distanceToPlayer > 10 && deliMenu.activeSelf)
+        {
+            deliMenu.SetActive(false);
+        }
     } 
 
     void UpdateWaitingState()
@@ -93,18 +102,18 @@ public class DeliNPCBehavior : MonoBehaviour
         {
             //notification.SetActive(true);
             //notification.transform.position = new Vector3(notification.transform.position.x, notification.transform.position.y + Mathf.Sin(Time.time * 3) * 0.011f, notification.transform.position.z);
-            switch (deliItemIdx)
+            switch (deliItem)
             {
-                case 0:
+                case "Fish":
                     currentDeliItem = fishPrefab;
                     break;
-                case 1:
+                case "Sausage":
                     currentDeliItem = sausagePrefab;
                     break;
-                case 2:
+                case "Chicken":
                     currentDeliItem = chickenPrefab;
                     break;
-                case 3:
+                case "Steak":
                     currentDeliItem = steakPrefab;
                     break;
             }
@@ -118,7 +127,6 @@ public class DeliNPCBehavior : MonoBehaviour
 
         if (clickedOn)
         {
-            deliItemIdx = Random.Range(0, 4);
             orderInProgress = true;
             countdown = prepTime;
             FindNextPoint();
@@ -211,25 +219,40 @@ public class DeliNPCBehavior : MonoBehaviour
     {
         orderReady = false;
         currentDeliItem.SetActive(false);
-        switch (deliItemIdx)
+        switch (deliItem)
         {
-            case 0:
+            case "Fish":
                 player.GetComponent<ItemCollection>().PickupItem("Fish");
                 break;
-            case 1:
+            case "Sausage":
                 player.GetComponent<ItemCollection>().PickupItem("Sausage");
                 break;
-            case 2: 
+            case "Chicken":
                 player.GetComponent<ItemCollection>().PickupItem("Chicken");
                 break;
-            case 3:
+            case "Steak":
                 player.GetComponent<ItemCollection>().PickupItem("Steak");
                 break;
         }
     }
 
-    public void StartOrder()
+    public void OrderDeliItem() {
+        if (!orderInProgress) {
+            OpenMenu();
+        }
+    }
+
+    public void OpenMenu() {
+        deliMenu.SetActive(true);
+    }
+
+    public void CloseMenu() {
+        deliMenu.SetActive(false);
+    }
+
+    public void StartOrder(string itemName)
     {
+        deliItem = itemName;
         clickedOn = true;
         orderInProgress = true;
     }

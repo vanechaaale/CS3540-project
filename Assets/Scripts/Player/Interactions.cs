@@ -119,7 +119,7 @@ public class Interactions : MonoBehaviour
                 }
                 else if (!deliNPC.orderInProgress)
                 {
-                    deliNPC.StartOrder();
+                    deliNPC.OrderDeliItem();
                 }
             }
         }
@@ -128,24 +128,22 @@ public class Interactions : MonoBehaviour
 
     GameObject[] GenerateInteractablesArray() {
         GameObject[] groceryItems = GameObject.FindGameObjectsWithTag("Item");
-        GameObject[] powerups = GameObject.FindGameObjectsWithTag("Powerup");
-        GameObject[] trashCan = GameObject.FindGameObjectsWithTag("TrashCan");
-        GameObject[] checkout = GameObject.FindGameObjectsWithTag("Checkout");
+        GameObject powerups = GameObject.FindGameObjectWithTag("Powerup");
+        GameObject trashCan = GameObject.FindGameObjectWithTag("TrashCan");
+        GameObject checkout = GameObject.FindGameObjectWithTag("Checkout");
 
         interactables = groceryItems;
-        interactables.Concat(powerups);
-        interactables.Concat(trashCan);
-        interactables.Concat(checkout);
+        interactables = interactables.Concat(new GameObject[] {powerups}).ToArray();
+        interactables = interactables.Concat(new GameObject[] {trashCan}).ToArray();
+        interactables = interactables.Concat(new GameObject[] {checkout}).ToArray();
 
         if (FindObjectOfType<DeliNPCBehavior>() != null) {
-            GameObject[] butcher = GameObject.FindGameObjectsWithTag("Butcher");
-            interactables.Concat(butcher);
-            Debug.Log("Butcher found");
+            GameObject butcher = GameObject.FindGameObjectWithTag("Butcher");
+            interactables = interactables.Concat(new GameObject[] {butcher}).ToArray();
         }
         if (FindObjectOfType<BakeryNPCBehavior>() != null) {
-            GameObject[] baker = GameObject.FindGameObjectsWithTag("Baker");
-            interactables.Concat(baker);
-            Debug.Log("Baker found");
+            GameObject baker = GameObject.FindGameObjectWithTag("Baker");
+            interactables = interactables.Concat(new GameObject[] {baker}).ToArray();
         }
 
         return interactables;

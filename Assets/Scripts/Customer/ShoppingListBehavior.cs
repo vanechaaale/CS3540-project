@@ -62,7 +62,7 @@ public class ShoppingListBehavior : MonoBehaviour
 
         // if LevelManager allows for bakery items 
         if (FindObjectOfType<LevelManager>().isBakery) {
-            combinedValues.Concat(bakeryValues).ToArray();
+            combinedValues = groceryValues.Concat(bakeryValues).ToArray();
         }
         // if LevelManager allows for deli items and bakery items
         if (FindObjectOfType<LevelManager>().isDeli) {
