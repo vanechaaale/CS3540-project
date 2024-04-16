@@ -15,7 +15,7 @@ public class EnemyAI : MonoBehaviour
     public FSMStates currentState;
     public float enemySpeed = 3;
     public float chaseDistance = 10;
-    public float attackDistance = 3;
+    public float attackDistance = 5;
     public float biteRate;
     public float elapsedTime = 0;
 
@@ -23,6 +23,8 @@ public class EnemyAI : MonoBehaviour
     
     public float enemyRunSpeed = 5;
     public AudioClip[] barkSFX;
+    public Transform enemyEyes;
+    float fieldOfView = 45f;
     GameObject[] wanderPoints;
     Vector3 nextDestination;
 
@@ -113,9 +115,12 @@ public class EnemyAI : MonoBehaviour
 
         if (Vector3.Distance(transform.position, nextDestination) <= 3) {
             FindNextPoint();
-        } else if (distanceToPlayer <= chaseDistance) {
+        } else if (IsPlayerInClearFOV()) {
             currentState = FSMStates.Chase;
         }
+        // } else if (distanceToPlayer <= chaseDistance) {
+        //     currentState = FSMStates.Chase;
+        // }
         else if (distanceToPlayer <= attackDistance) {
             currentState = FSMStates.Attack;
         }
@@ -160,5 +165,23 @@ public class EnemyAI : MonoBehaviour
         nextDestination = wanderPoints[currentDestinationIndex].transform.position;
 
         currentDestinationIndex = (currentDestinationIndex + 1) % wanderPoints.Length;
+    }
+
+    bool IsPlayerInClearFOV() {
+
+        RaycastHit hit;
+        Vector3 directionToPlayer = player.transform.position - enemyEyes.position;
+
+        if (Vector3.Angle(directionToPlayer, enemyEyes.forward) <= fieldOfView) {
+            print("in field of view");
+            if (Physics.Raycast(enemyEyes.position, directionToPlayer, out hit, chaseDistance)) {
+                print (hit.collider.name);
+                if (hit.collider.CompareTag("Player")) {
+                    print("Player in Sight!");
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
