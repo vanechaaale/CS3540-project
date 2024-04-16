@@ -2,23 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Interactions : MonoBehaviour
 {
     public Text tipText;
     float maxDistance = Constants.ITEM_PICKUP_DISTANCE;
+    GameObject[] interactables;
 
     // Start is called before the first frame update
     void Start()
     {
         tipText.text = string.Empty;
+        GenerateInteractablesArray();
     }
-
+ 
     // Update is called once per frame
     void Update()
     {
-        GameObject[] interactables = GenerateInteractablesArray();
-
         float closestItemDistance;
 
         // find the closest item to the player
@@ -59,6 +60,21 @@ public class Interactions : MonoBehaviour
                     PickUpBakeryOrderTextTip();
                 }
             }
+            else if (closestItem.CompareTag("Butcher")) {
+                DeliNPCBehavior deliNPC = FindObjectOfType<DeliNPCBehavior>();
+                if (!deliNPC.orderReady && !deliNPC.orderInProgress)
+                {
+                    StartDeliOrderTextTip();
+                }
+                else if (deliNPC.orderInProgress)
+                {
+                    DeliOrderInProgressTextTip();
+                }
+                else if (deliNPC.orderReady)
+                {
+                    PickUpDeliOrderTextTip();
+                }
+            }
         }
         else
         {
@@ -94,7 +110,18 @@ public class Interactions : MonoBehaviour
                 {
                     bakeryNPC.StartOrder();
                 }
-        }
+            }
+            else if (closestItem.CompareTag("Butcher")) {
+                DeliNPCBehavior deliNPC = FindObjectOfType<DeliNPCBehavior>();
+                if (deliNPC.orderReady)
+                {
+                    deliNPC.PickUpOrder();
+                }
+                else if (!deliNPC.orderInProgress)
+                {
+                    deliNPC.StartOrder();
+                }
+            }
         }
 
     }
@@ -102,29 +129,26 @@ public class Interactions : MonoBehaviour
     GameObject[] GenerateInteractablesArray() {
         GameObject[] groceryItems = GameObject.FindGameObjectsWithTag("Item");
         GameObject[] powerups = GameObject.FindGameObjectsWithTag("Powerup");
-        GameObject trashCan = GameObject.FindGameObjectWithTag("TrashCan");
-        GameObject checkout = GameObject.FindGameObjectWithTag("Checkout");
+        GameObject[] trashCan = GameObject.FindGameObjectsWithTag("TrashCan");
+        GameObject[] checkout = GameObject.FindGameObjectsWithTag("Checkout");
 
-        if (FindObjectOfType<BakeryNPCBehavior>() != null)
-        {
-            GameObject baker = GameObject.FindGameObjectWithTag("Baker");
-            GameObject[] interactables = new GameObject[groceryItems.Length + powerups.Length + 3];
-            groceryItems.CopyTo(interactables, 0);
-            powerups.CopyTo(interactables, groceryItems.Length);
-            interactables[interactables.Length - 1] = trashCan;
-            interactables[interactables.Length - 2] = checkout;
-            interactables[interactables.Length - 3] = baker;
-            return interactables;
+        interactables = groceryItems;
+        interactables.Concat(powerups);
+        interactables.Concat(trashCan);
+        interactables.Concat(checkout);
+
+        if (FindObjectOfType<DeliNPCBehavior>() != null) {
+            GameObject[] butcher = GameObject.FindGameObjectsWithTag("Butcher");
+            interactables.Concat(butcher);
+            Debug.Log("Butcher found");
         }
-        else
-        {
-            GameObject[] interactables = new GameObject[groceryItems.Length + powerups.Length + 2];
-            groceryItems.CopyTo(interactables, 0);
-            powerups.CopyTo(interactables, groceryItems.Length);
-            interactables[interactables.Length - 1] = trashCan;
-            interactables[interactables.Length - 2] = checkout;
-            return interactables;
+        if (FindObjectOfType<BakeryNPCBehavior>() != null) {
+            GameObject[] baker = GameObject.FindGameObjectsWithTag("Baker");
+            interactables.Concat(baker);
+            Debug.Log("Baker found");
         }
+
+        return interactables;
     }
     
 
@@ -195,6 +219,24 @@ public class Interactions : MonoBehaviour
     }
 
     public void PickUpBakeryOrderTextTip()
+    {
+        tipText.text = "Pick Up Order";
+        tipText.color = new Color(0, 0.5f, 0);
+    }
+
+    public void StartDeliOrderTextTip()
+    {
+        tipText.text = "Start Deli Order";
+        tipText.color = new Color(0, 0, 0);
+    }
+
+    public void DeliOrderInProgressTextTip()
+    {
+        tipText.text = "Order In Progress";
+        tipText.color = new Color(1, 0, 0);
+    }
+
+    public void PickUpDeliOrderTextTip()
     {
         tipText.text = "Pick Up Order";
         tipText.color = new Color(0, 0.5f, 0);

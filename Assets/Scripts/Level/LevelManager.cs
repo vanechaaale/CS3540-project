@@ -14,6 +14,8 @@ public class LevelManager : MonoBehaviour
     }
 
     public bool isBakery = false;
+    public bool isDeli = false;
+    public bool moreProduce = false;
 
     public int score = 0;
     public Text scoreText;

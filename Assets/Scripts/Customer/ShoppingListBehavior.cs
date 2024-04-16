@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 using static GroceryItems;
 using static BakeryItems;
+using static DeliItems;
+using static MoreProduce;
+
 
 public class ShoppingListBehavior : MonoBehaviour
 {
@@ -52,16 +56,21 @@ public class ShoppingListBehavior : MonoBehaviour
         // array of all the items in the GroceryItems and BakeryItems enums
         string[] groceryValues = System.Enum.GetNames(typeof(GroceryItems));
         string[] bakeryValues = System.Enum.GetNames(typeof(BakeryItems));
-        string[] combinedValues = new string[groceryValues.Length + bakeryValues.Length];
+        string[] deliValues = System.Enum.GetNames(typeof(DeliItems));
+        string[] moreProduceValues = System.Enum.GetNames(typeof(MoreProduce));
+        string[] combinedValues = groceryValues;
 
-        // if LevelManager allows for bakery items, combine the two enums
+        // if LevelManager allows for bakery items 
         if (FindObjectOfType<LevelManager>().isBakery) {
-            groceryValues.CopyTo(combinedValues, 0);
-            bakeryValues.CopyTo(combinedValues, groceryValues.Length);
+            combinedValues.Concat(bakeryValues).ToArray();
         }
-        // if not, just use the GroceryItems enum
-        else {
-            groceryValues.CopyTo(combinedValues, 0);    
+        // if LevelManager allows for deli items and bakery items
+        if (FindObjectOfType<LevelManager>().isDeli) {
+            combinedValues = combinedValues.Concat(deliValues).ToArray();
+        }
+        // more produce
+        if (FindObjectOfType<LevelManager>().moreProduce) {
+            combinedValues = combinedValues.Concat(moreProduceValues).ToArray();
         }
 
         // update the shopping list's Label component
