@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class LevelManager : MonoBehaviour
 {
@@ -45,7 +46,8 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(gameText == null) {
+
+        if (gameText == null) {
             gameText = GameObject.Find("GameText").GetComponent<Text>();
         }
 
@@ -160,13 +162,21 @@ public class LevelManager : MonoBehaviour
         // get the current scene index
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
+        // update level beat stat
+        PlayerPrefs.SetInt("levels beat", PlayerPrefs.GetInt("levels beat", 0) + 1);
+
         // load the next scene
         SceneManager.LoadScene(currentSceneIndex + 1);
+
+        
     }
 
     public void RestartLevel() {
         // get the current scene index
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        // update level lost stat
+        PlayerPrefs.SetInt("levels lost", PlayerPrefs.GetInt("levels lost", 0) + 1);
 
         // reload the current scene
         SceneManager.LoadScene(currentSceneIndex);
