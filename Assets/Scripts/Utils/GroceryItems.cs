@@ -12,3 +12,17 @@ public enum BakeryItems
 {
     Cake,
 }
+
+public enum DeliItems
+{
+    Fish,
+    Sausage,
+    Chicken,
+    Steak,
+}
+
+public enum MoreProduce {
+    Potato,
+    Carrot,
+    Lemon,
+}
