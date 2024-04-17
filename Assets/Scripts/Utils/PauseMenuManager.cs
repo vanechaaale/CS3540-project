@@ -57,7 +57,10 @@ public class PauseMenuManager : MonoBehaviour
                 }
 
                 // set basket text to inactive
-                basket.SetActive(false);
+                if (basket != null)
+                {
+                    basket.SetActive(false);
+                }
 
                 // set level texts to inactive
                 foreach (GameObject levelText in levelTexts)
@@ -138,7 +141,10 @@ public class PauseMenuManager : MonoBehaviour
             shoppingList.SetActive(true);
         }
         // set basket text to active
-        basket.SetActive(true);
+        if (basket != null)
+        {
+            basket.SetActive(true);
+        }
 
         // set level texts to active
         foreach (GameObject levelText in levelTexts)

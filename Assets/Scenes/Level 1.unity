@@ -13580,7 +13580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4750196697971976479, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 234
+      value: 194
       objectReference: {fileID: 0}
     - target: {fileID: 4890175021566309422, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
       propertyPath: m_Pivot.x
@@ -13670,13 +13670,16 @@ PrefabInstance:
       propertyPath: m_Text
       value: 'Level 1:
 
-        Help All the customers!
+        Complete grocery orders for customers!
 
-
-        - Press WASD to
-        move
+        -
+        Press WASD to move
 
         - enter / Left Click to interact with items'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108196462362754764, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 5108196462362754764, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
       propertyPath: m_FontData.m_HorizontalOverflow
