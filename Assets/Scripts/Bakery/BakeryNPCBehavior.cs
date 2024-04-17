@@ -94,12 +94,12 @@ public class BakeryNPCBehavior : MonoBehaviour
 
         if (clickedOn)
         {
-            AudioSource.PlayClipAtPoint(meowSFX, Camera.main.transform.position);
             orderInProgress = true;
             countdown = bakingTime;
             FindNextPoint();
             FaceTarget(nextDestination);
             currentState = NPCStates.Walking;
+            AudioSource.PlayClipAtPoint(meowSFX, Camera.main.transform.position);
         }
     }
 
