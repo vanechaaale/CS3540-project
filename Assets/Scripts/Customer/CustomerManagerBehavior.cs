@@ -63,7 +63,9 @@ public class CustomerManagerBehavior : MonoBehaviour
     public void SpawnCustomers()
     {
         // spawn a new shopping list ticket at the top left of the screen
-        if (currentCustomers < customerLimit && spawnedCustomers < totalCustomers)
+        // if game isn't paused
+        if (currentCustomers < customerLimit && spawnedCustomers < totalCustomers
+        && Time.timeScale != 0)
         {
 
             if ((Time.frameCount % (spawnRate * 60) == 0) || currentCustomers == 0)

@@ -21,7 +21,7 @@ public class DeliNPCBehavior : MonoBehaviour
     public GameObject steakPrefab; // 3
     public GameObject spoiledMeat;
 
-    float readyFoodWait = 12f;
+    float readyFoodWait = 9f;
     float goodsTimer;
 
     public AudioClip meowSFX;

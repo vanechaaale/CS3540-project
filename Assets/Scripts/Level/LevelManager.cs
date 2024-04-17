@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour
     }
 
     public bool isBakery = false;
+    public bool isDeli = false;
+    public bool moreProduce = false;
 
     public int score = 0;
     public Text scoreText;
@@ -94,7 +96,7 @@ public class LevelManager : MonoBehaviour
             //SetTimerText();
 
             // if all customers have left, the level is over
-            if (FindObjectOfType<CustomerManagerBehavior>().customersLeft == FindObjectOfType<CustomerManagerBehavior>().totalCustomers)
+            if (FindObjectOfType<CustomerManagerBehavior>().customersLeft == FindObjectOfType<CustomerManagerBehavior>().totalCustomers && !isGameOver)
             {
                 LevelBeat();
             }
@@ -189,8 +191,16 @@ public class LevelManager : MonoBehaviour
 
     public void RemoveScore(int scoreToRemove)
     {
+        if (score - scoreToRemove < 0)
+        { 
+            score = 0;
+        }
+        else
+        {
         score -= scoreToRemove;
         scoreText.text = score.ToString();
+
+        }
     }
 
     public void HandlePowerups()

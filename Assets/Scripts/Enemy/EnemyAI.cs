@@ -20,6 +20,8 @@ public class EnemyAI : MonoBehaviour
     public float elapsedTime = 0;
 
     public GameObject player;
+    public GameObject loseItemVFX;
+    int removeScore = 15;
     
     public float enemyRunSpeed = 5;
     public AudioClip[] barkSFX;
@@ -147,11 +149,15 @@ public class EnemyAI : MonoBehaviour
         
     }
 
-    private void BiteAttack() {
+     private void BiteAttack() {
         if (distanceToPlayer <= attackDistance) {
              // Play SFX
             AudioSource.PlayClipAtPoint(barkSFX[Random.Range(0, barkSFX.Length - 1)], Camera.main.transform.position);
             player.GetComponent<ItemCollection>().LoseItem();
+            // Lose Score in LevelManager
+            FindObjectOfType<LevelManager>().RemoveScore(removeScore);
+            // particle system for when player gets bit
+            Instantiate(loseItemVFX, transform.position, Quaternion.identity);
         }
         
     }

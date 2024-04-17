@@ -17,6 +17,7 @@ public class BakeryNPCBehavior : MonoBehaviour
     //public GameObject notification;
     public GameObject bakedGood;
     public AudioClip orderReadySFX;
+    public AudioClip meowSFX;
     public bool orderReady;
     public bool orderInProgress;
     public static bool clickedOn;
@@ -27,7 +28,7 @@ public class BakeryNPCBehavior : MonoBehaviour
     public GameObject[] wanderPoints;
     Vector3 nextDestination;
     float stationaryTime;
-    float bakingTime = 20f;
+    float bakingTime = 15f;
     float countdown;
     Animator anim;
     NavMeshAgent agent;
@@ -93,6 +94,7 @@ public class BakeryNPCBehavior : MonoBehaviour
 
         if (clickedOn)
         {
+            AudioSource.PlayClipAtPoint(meowSFX, Camera.main.transform.position);
             orderInProgress = true;
             countdown = bakingTime;
             FindNextPoint();

@@ -112,8 +112,6 @@ public class ItemCollection : MonoBehaviour
         {
             int index = UnityEngine.Random.Range(0, itemList.Count);
             itemList.RemoveAt(index);
-            // particle system for when player loses an item
-            Instantiate(loseItemVFX, transform.position, Quaternion.identity);
         }
 
     }
