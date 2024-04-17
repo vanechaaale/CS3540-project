@@ -63,9 +63,7 @@ public class CustomerManagerBehavior : MonoBehaviour
     public void SpawnCustomers()
     {
         // spawn a new shopping list ticket at the top left of the screen
-        // if the game isn't in the pause menu (if timeScale is 1)
-
-        if (currentCustomers < customerLimit && spawnedCustomers < totalCustomers && Time.timeScale == 1)
+        if (currentCustomers < customerLimit && spawnedCustomers < totalCustomers)
         {
 
             if ((Time.frameCount % (spawnRate * 60) == 0) || currentCustomers == 0)
@@ -147,11 +145,6 @@ public class CustomerManagerBehavior : MonoBehaviour
     {
         // get the child text components of the first ShoppingList prefab
         if (groceryLists == null || groceryLists.Count == 0)
-        {
-            return;
-        }
-
-        if (GameObject.FindGameObjectWithTag("ShoppingLists") == null)
         {
             return;
         }

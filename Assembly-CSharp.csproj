@@ -61,6 +61,7 @@
     <Compile Include="Assets\Imports\CoffeeShopStarterPack\Scripts\DrinkableProduct.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Imports\CoffeeShopStarterPack\Scripts\Utilities\SliceHelper.cs" />
+    <Compile Include="Assets\Scripts\Utils\MainMenu.cs" />
     <Compile Include="Assets\Imports\CoffeeShopStarterPack\Scripts\CreateProductOnPlaceHolder.cs" />
     <Compile Include="Assets\Imports\CoffeeShopStarterPack\Scripts\OnClickCoverHelper.cs" />
     <Compile Include="Assets\Imports\CoffeeShopStarterPack\Scripts\FillCupHelper.cs" />
@@ -69,7 +70,9 @@
     <Compile Include="Assets\Scripts\Level\CheckoutBehavior.cs" />
     <Compile Include="Assets\Scripts\Level\DoorBehavior.cs" />
     <Compile Include="Assets\Imports\CoffeeShopStarterPack\Scripts\Utilities\BasicGameEvents.cs" />
+    <Compile Include="Assets\Scripts\Utils\PauseMenuManager.cs" />
     <Compile Include="Assets\Scripts\Utils\GroceryItems.cs" />
+    <Compile Include="Assets\Scripts\Utils\MenuCameraMover.cs" />
     <Compile Include="Assets\Scripts\Player\ItemCollection.cs" />
     <Compile Include="Assets\Scripts\Player\Interactions.cs" />
     <Compile Include="Assets\Imports\CoffeeShopStarterPack\Scripts\CookingGameObject.cs" />
@@ -100,9 +103,9 @@
     <Compile Include="Assets\Scripts\Enemy\ChasePlayer.cs" />
     <Compile Include="Assets\Scripts\Level\LevelManager.cs" />
     <Compile Include="Assets\Imports\CoffeeShopStarterPack\Scripts\HeatableProduct.cs" />
-    <Compile Include="Assets\Scripts\Utils\MenuCameraMover.cs" />
-    <Compile Include="Assets\Scripts\Utils\MainMenu.cs" />
-    <Compile Include="Assets\Scripts\Utils\PauseMenuManager.cs" />
+    <Compile Include="Assets\DeliNPCBehavior.cs" />
+    <Compile Include="Assets\DeliMenuBehavior.cs" />
+    <Compile Include="Assets\DeliMenuManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -125,6 +128,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Imports\LowPolyMetalRack\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Imports\SkySeries Freebie\Hdri setup.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />

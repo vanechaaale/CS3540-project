@@ -97,10 +97,6 @@ public class CheckoutBehavior : MonoBehaviour
     bool CustomerStillThere()
     {
         List<List<string>> custList = GameObject.Find("CustomerManager").GetComponent<CustomerManagerBehavior>().groceryLists;
-        if (custList == null)
-        {
-            return false;
-        }
         if (custList.Contains(customerList))
         {
             return true;
