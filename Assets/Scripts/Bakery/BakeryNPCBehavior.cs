@@ -17,6 +17,7 @@ public class BakeryNPCBehavior : MonoBehaviour
     //public GameObject notification;
     public GameObject bakedGood;
     public AudioClip orderReadySFX;
+    public AudioClip meowSFX;
     public bool orderReady;
     public bool orderInProgress;
     public static bool clickedOn;
@@ -98,6 +99,7 @@ public class BakeryNPCBehavior : MonoBehaviour
             FindNextPoint();
             FaceTarget(nextDestination);
             currentState = NPCStates.Walking;
+            AudioSource.PlayClipAtPoint(meowSFX, Camera.main.transform.position);
         }
     }
 
