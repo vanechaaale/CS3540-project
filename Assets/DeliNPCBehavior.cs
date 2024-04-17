@@ -153,16 +153,6 @@ public class DeliNPCBehavior : MonoBehaviour
             AudioSource.PlayClipAtPoint(spoilageSFX, Camera.main.transform.position);
         }
 
-        if (clickedOn)
-        {
-            orderInProgress = true;
-            countdown = prepTime;
-            goodsTimer = readyFoodWait;
-            FindNextPoint();
-            FaceTarget(nextDestination);
-            currentState = NPCStates.Walking;
-            AudioSource.PlayClipAtPoint(meowSFX, Camera.main.transform.position);
-        }
     }
 
     void UpdateMakingState()
@@ -325,5 +315,12 @@ public class DeliNPCBehavior : MonoBehaviour
         deliItem = itemName;
         clickedOn = true;
         orderInProgress = true;
+
+        countdown = prepTime;
+        goodsTimer = readyFoodWait;
+        FindNextPoint();
+        FaceTarget(nextDestination);
+        currentState = NPCStates.Walking;
+        AudioSource.PlayClipAtPoint(meowSFX, Camera.main.transform.position);
     }
 }
