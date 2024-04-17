@@ -32,6 +32,7 @@ public class EnemyAI : MonoBehaviour
 
     Animator anim;
     int currentDestinationIndex = 0;
+    int removeScore = 15;
     float distanceToPlayer;
 
     NavMeshAgent agent;
@@ -160,7 +161,7 @@ public class EnemyAI : MonoBehaviour
             AudioSource.PlayClipAtPoint(barkSFX[Random.Range(0, barkSFX.Length - 1)], Camera.main.transform.position);
             player.GetComponent<ItemCollection>().LoseItem();
             // Lose Score in LevelManager
-            FindObjectOfType<LevelManager>().RemoveScore(10);
+            FindObjectOfType<LevelManager>().RemoveScore(removeScore);
             // particle system for when player gets bit
             Instantiate(loseItemVFX, transform.position, Quaternion.identity);
         }
