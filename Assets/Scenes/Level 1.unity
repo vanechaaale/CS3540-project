@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.625131, g: 0.69543827, b: 0.78916645, a: 1}
+  m_IndirectSpecularColor: {r: 0.62346005, g: 0.69389, b: 0.7883626, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6719,7 +6719,6 @@ MonoBehaviour:
   maxItems: 4
   isBasketFull: 0
   powerupCost: 100
-  loseItemVFX: {fileID: 6782340904917583287, guid: 0a71c672d394e3144949feec841687f4, type: 3}
   pickupSFX: {fileID: 8300000, guid: 4aabd0beb96284d5e821517629e887fd, type: 3}
   trashSFX: {fileID: 8300000, guid: a2d001254aa304a5bbcbd4475940c960, type: 3}
   powerupSFX: {fileID: 8300000, guid: 52f79d83127b4d648a80896946b0734f, type: 3}
@@ -13575,6 +13574,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4750196697971976479, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750196697971976479, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 234
+      objectReference: {fileID: 0}
     - target: {fileID: 4890175021566309422, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -13663,7 +13670,17 @@ PrefabInstance:
       propertyPath: m_Text
       value: 'Level 1:
 
-        Help All the customers!'
+        Help All the customers!
+
+
+        - Press WASD to
+        move
+
+        - enter / Left Click to interact with items'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108196462362754764, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8946024563273268645, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
       propertyPath: m_Name

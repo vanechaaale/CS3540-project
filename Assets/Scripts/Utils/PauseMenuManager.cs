@@ -41,7 +41,7 @@ public class PauseMenuManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
 
-            Debug.Log("updates");
+            //Debug.Log("updates");
             if (!open)
             {
                 levelTexts = GameObject.FindGameObjectsWithTag("LevelText");
