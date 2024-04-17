@@ -21,8 +21,6 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
-        mainMenuObjects.SetActive(true);
-        optionsMenuObjects.SetActive(false);
         AudioListener.volume = PlayerPrefs.GetFloat("volume", 1f);
     }
 
@@ -76,6 +74,7 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuObjects.SetActive(false);
         optionsMenuObjects.SetActive(true);
+
         volumeSlider.value = PlayerPrefs.GetFloat("volume", 1f);
     }
 
@@ -93,7 +92,6 @@ public class MainMenu : MonoBehaviour
 
     public void onQuit()
     {
-        Debug.Log("Quit");
         Application.Quit();
     }
 }

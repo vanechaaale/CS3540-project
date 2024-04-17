@@ -15,8 +15,6 @@ public class LevelManager : MonoBehaviour
     }
 
     public bool isBakery = false;
-    public bool isDeli = false;
-    public bool moreProduce = false;
 
     public int score = 0;
     public Text scoreText;
@@ -191,16 +189,8 @@ public class LevelManager : MonoBehaviour
 
     public void RemoveScore(int scoreToRemove)
     {
-        if (score - scoreToRemove < 0)
-        {
-            score = 0;
-        }
-        else
-        {
         score -= scoreToRemove;
         scoreText.text = score.ToString();
-
-        }
     }
 
     public void HandlePowerups()

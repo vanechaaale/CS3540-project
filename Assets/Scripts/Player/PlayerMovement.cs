@@ -45,14 +45,6 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-
-        // if there is a deli and deliMenu is open, don't move
-        if (GameObject.Find("DeliMenu") != null && GameObject.Find("DeliMenu").activeSelf)
-        {
-            rb.velocity = Vector3.zero;
-            gameObject.GetComponent<Animator>().SetInteger("moveState", 0);
-            return;
-        }
         
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");   

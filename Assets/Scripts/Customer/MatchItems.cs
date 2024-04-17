@@ -14,7 +14,7 @@ public class MatchItems : MonoBehaviour
         customerList = FindObjectOfType<CustomerManagerBehavior>().groceryLists[0];
         playerCollected = ItemCollection.itemList;
 
-        //Debug.Log("size: " + customerList.Count);
+        Debug.Log("size: " + customerList.Count);
         foreach (string item in customerList) {
             Debug.Log("Boop: " + item);
         }
