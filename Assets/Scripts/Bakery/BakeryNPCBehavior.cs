@@ -16,8 +16,8 @@ public class BakeryNPCBehavior : MonoBehaviour
     // the notification icon that appears above the NPC when the order is ready
     //public GameObject notification;
     public GameObject bakedGood;
-    public GameObject rottenCake;
     public AudioClip orderReadySFX;
+    public AudioClip meowSFX;
     public bool orderReady;
     public bool orderInProgress;
     public static bool clickedOn;
@@ -30,8 +30,6 @@ public class BakeryNPCBehavior : MonoBehaviour
     float stationaryTime;
     float bakingTime = 20f;
     float countdown;
-    float readyFoodWait = 10f;
-    float goodsTimer;
     Animator anim;
     NavMeshAgent agent;
     // Start is called before the first frame update
@@ -50,7 +48,6 @@ public class BakeryNPCBehavior : MonoBehaviour
         orderInProgress = false;
         orderReady = false;
         clickedOn = false;
-        goodsTimer = readyFoodWait;
 
     }
 
@@ -80,35 +77,23 @@ public class BakeryNPCBehavior : MonoBehaviour
         anim.SetInteger("animState", 0);
 
 
-        if (orderReady && goodsTimer > 0)
-        {
-            //notification.SetActive(true);
-            //notification.transform.position = new Vector3(notification.transform.position.x, notification.transform.position.y + Mathf.Sin(Time.time * 3) * 0.011f, notification.transform.position.z);
+        if (orderReady) {
             bakedGood.SetActive(true);
-            rottenCake.SetActive(false);
-            goodsTimer -= Time.deltaTime;
-        }
-        else if (orderReady && goodsTimer <= 0)
-        {
-            // notification.SetActive(false);
+            //notification.SetActive(true);
+        } else {
             bakedGood.SetActive(false);
-            rottenCake.SetActive(true);
-            //set spoiled goods active
-        } 
-        else {
-            bakedGood.SetActive(false);
-            rottenCake.SetActive(false);
-            //set spoiled goods not active
+            //notification.SetActive(false);
         }
 
         if (clickedOn)
         {
             orderInProgress = true;
             countdown = bakingTime;
-            goodsTimer = readyFoodWait;
             FindNextPoint();
             FaceTarget(nextDestination);
             currentState = NPCStates.Walking;
+            // play meow sound
+            AudioSource.PlayClipAtPoint(meowSFX, Camera.main.transform.position);
         }
     }
 
@@ -195,11 +180,7 @@ public class BakeryNPCBehavior : MonoBehaviour
     public void PickUpOrder()
     {
         orderReady = false;
-        if (goodsTimer > 0 ) {
-            player.GetComponent<ItemCollection>().PickupItem("Cake");
-        } else {
-            player.GetComponent<ItemCollection>().PickupItem("Rotten Cake");
-        }
+        player.GetComponent<ItemCollection>().PickupItem("Cake");
     }
 
     public void StartOrder()

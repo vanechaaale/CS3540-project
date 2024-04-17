@@ -27,6 +27,8 @@ public class EnemyAI : MonoBehaviour
     float fieldOfView = 45f;
     GameObject[] wanderPoints;
     Vector3 nextDestination;
+    
+    public GameObject loseItemVFX;
 
     Animator anim;
     int currentDestinationIndex = 0;
@@ -157,6 +159,10 @@ public class EnemyAI : MonoBehaviour
              // Play SFX
             AudioSource.PlayClipAtPoint(barkSFX[Random.Range(0, barkSFX.Length - 1)], Camera.main.transform.position);
             player.GetComponent<ItemCollection>().LoseItem();
+            // Lose Score in LevelManager
+            FindObjectOfType<LevelManager>().RemoveScore(10);
+            // particle system for when player gets bit
+            Instantiate(loseItemVFX, transform.position, Quaternion.identity);
         }
         
     }

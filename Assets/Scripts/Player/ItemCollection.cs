@@ -27,8 +27,6 @@ public class ItemCollection : MonoBehaviour
     // range that the player can start a bakery order
     float bakeryRange = Constants.BAKERY_PICKUP_DISTANCE;
 
-    public GameObject loseItemVFX;
-
     //sound that plays when an item is picked up
     public AudioClip pickupSFX;
 
@@ -112,8 +110,6 @@ public class ItemCollection : MonoBehaviour
         {
             int index = UnityEngine.Random.Range(0, itemList.Count);
             itemList.RemoveAt(index);
-            // particle system for when player loses an item
-            Instantiate(loseItemVFX, transform.position, Quaternion.identity);
         }
 
     }
