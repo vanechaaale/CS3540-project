@@ -32,6 +32,7 @@ public class EnemyAI : MonoBehaviour
 
     Animator anim;
     int currentDestinationIndex = 0;
+    int removeScore = 15;
     float distanceToPlayer;
 
     NavMeshAgent agent;
@@ -99,10 +100,10 @@ public class EnemyAI : MonoBehaviour
 
         if (distanceToPlayer <= attackDistance) {
             currentState = FSMStates.Attack;
-        } else if (distanceToPlayer > chaseDistance) {
+        } else if (!IsPlayerInClearFOV()) {
             currentState = FSMStates.Patrol;
         }
-        else if (distanceToPlayer > attackDistance && distanceToPlayer <= chaseDistance) {
+        else if (IsPlayerInClearFOV()) {
             currentState = FSMStates.Chase;
         }
 
@@ -160,7 +161,7 @@ public class EnemyAI : MonoBehaviour
             AudioSource.PlayClipAtPoint(barkSFX[Random.Range(0, barkSFX.Length - 1)], Camera.main.transform.position);
             player.GetComponent<ItemCollection>().LoseItem();
             // Lose Score in LevelManager
-            FindObjectOfType<LevelManager>().RemoveScore(10);
+            FindObjectOfType<LevelManager>().RemoveScore(removeScore);
             // particle system for when player gets bit
             Instantiate(loseItemVFX, transform.position, Quaternion.identity);
         }
@@ -179,7 +180,7 @@ public class EnemyAI : MonoBehaviour
         Vector3 directionToPlayer = player.transform.position - enemyEyes.position;
 
         if (Vector3.Angle(directionToPlayer, enemyEyes.forward) <= fieldOfView) {
-            //print("in field of view");
+            // print("in field of view");
             if (Physics.Raycast(enemyEyes.position, directionToPlayer, out hit, chaseDistance)) {
                 //print (hit.collider.name);
                 if (hit.collider.CompareTag("Player")) {
