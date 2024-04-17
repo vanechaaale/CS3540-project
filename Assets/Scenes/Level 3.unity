@@ -949,7 +949,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 899499401306069871, guid: ebf425f9dfbc515428afb5f4f8e00a3f, type: 3}
       propertyPath: customerLimit
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 899499401306069871, guid: ebf425f9dfbc515428afb5f4f8e00a3f, type: 3}
       propertyPath: startCustomers
@@ -957,7 +957,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 899499401306069871, guid: ebf425f9dfbc515428afb5f4f8e00a3f, type: 3}
       propertyPath: totalCustomers
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 899499401306069871, guid: ebf425f9dfbc515428afb5f4f8e00a3f, type: 3}
       propertyPath: customerLeaveSFX
@@ -21202,6 +21202,7 @@ MonoBehaviour:
   maxItems: 4
   isBasketFull: 0
   powerupCost: 100
+  loseItemVFX: {fileID: 0}
   pickupSFX: {fileID: 8300000, guid: 4aabd0beb96284d5e821517629e887fd, type: 3}
   trashSFX: {fileID: 8300000, guid: a2d001254aa304a5bbcbd4475940c960, type: 3}
   powerupSFX: {fileID: 8300000, guid: 52f79d83127b4d648a80896946b0734f, type: 3}
@@ -30573,7 +30574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1765387891803682366, guid: ce45b03dccb1cc84fba06ae90e3ea5b2, type: 3}
       propertyPath: pointsToWin
-      value: 700
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 1765387891803682366, guid: ce45b03dccb1cc84fba06ae90e3ea5b2, type: 3}
       propertyPath: powerupText
