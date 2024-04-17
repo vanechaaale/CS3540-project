@@ -99,10 +99,10 @@ public class EnemyAI : MonoBehaviour
 
         if (distanceToPlayer <= attackDistance) {
             currentState = FSMStates.Attack;
-        } else if (distanceToPlayer > chaseDistance) {
+        } else if (!IsPlayerInClearFOV()) {
             currentState = FSMStates.Patrol;
         }
-        else if (distanceToPlayer > attackDistance && distanceToPlayer <= chaseDistance) {
+        else if (IsPlayerInClearFOV()) {
             currentState = FSMStates.Chase;
         }
 
@@ -179,7 +179,7 @@ public class EnemyAI : MonoBehaviour
         Vector3 directionToPlayer = player.transform.position - enemyEyes.position;
 
         if (Vector3.Angle(directionToPlayer, enemyEyes.forward) <= fieldOfView) {
-            print("in field of view");
+            // print("in field of view");
             if (Physics.Raycast(enemyEyes.position, directionToPlayer, out hit, chaseDistance)) {
                 print (hit.collider.name);
                 if (hit.collider.CompareTag("Player")) {
