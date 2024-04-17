@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8945090041428179835
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4728174580892897608}
+  m_Layer: 0
+  m_Name: enemyEyes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4728174580892897608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8945090041428179835}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.23, z: 0.51}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8013112847764551723}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7547737015629029312
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1338,7 +1369,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5e0cd0d588ba8854b9af1c34983c79a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4728174580892897608}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5e0cd0d588ba8854b9af1c34983c79a0, type: 3}
       insertIndex: -1
@@ -1382,6 +1416,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8c2ecbab1b0df4bc9bba331782a2f4b6, type: 3}
   - {fileID: 8300000, guid: 25563be172fda491cb5a053d77574981, type: 3}
   - {fileID: 8300000, guid: 6a0160407e3c2440ea2d99c1091d9dd6, type: 3}
+  enemyEyes: {fileID: 4728174580892897608}
+  fieldOfView: 45
 --- !u!54 &2479830333688022885
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1454,3 +1490,8 @@ NavMeshAgent:
   m_BaseOffset: 0.3
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!4 &8013112847764551723 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5e0cd0d588ba8854b9af1c34983c79a0, type: 3}
+  m_PrefabInstance: {fileID: 7547737015629029312}
+  m_PrefabAsset: {fileID: 0}

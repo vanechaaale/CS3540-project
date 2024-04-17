@@ -19,7 +19,13 @@ public class DeliNPCBehavior : MonoBehaviour
     public GameObject sausagePrefab; // 1
     public GameObject chickenPrefab;  // 2
     public GameObject steakPrefab; // 3
+    public GameObject spoiledMeat;
 
+    float readyFoodWait = 5f;
+    float goodsTimer;
+
+    public AudioClip meowSFX;
+    public AudioClip spoilageSFX;
     public GameObject deliMenu;
 
     GameObject currentDeliItem;
@@ -37,7 +43,7 @@ public class DeliNPCBehavior : MonoBehaviour
     public GameObject[] wanderPoints;
     Vector3 nextDestination;
     float stationaryTime;
-    float prepTime = 20f;
+    float prepTime = 10f;
     float countdown;
     Animator anim;
     NavMeshAgent agent;
@@ -53,6 +59,8 @@ public class DeliNPCBehavior : MonoBehaviour
         chickenPrefab.SetActive(false);
         steakPrefab.SetActive(false);
         currentDeliItem = fishPrefab;
+
+        goodsTimer = readyFoodWait;
 
         returnPosition = transform.position;
         currentState = NPCStates.Waiting;
@@ -98,40 +106,56 @@ public class DeliNPCBehavior : MonoBehaviour
         agent.speed = 0f;
         anim.SetInteger("animState", 0);
 
-        if (orderReady)
+        switch (deliItem)
         {
-            //notification.SetActive(true);
-            //notification.transform.position = new Vector3(notification.transform.position.x, notification.transform.position.y + Mathf.Sin(Time.time * 3) * 0.011f, notification.transform.position.z);
-            switch (deliItem)
-            {
-                case "Fish":
-                    currentDeliItem = fishPrefab;
-                    break;
-                case "Sausage":
-                    currentDeliItem = sausagePrefab;
-                    break;
-                case "Chicken":
-                    currentDeliItem = chickenPrefab;
-                    break;
-                case "Steak":
-                    currentDeliItem = steakPrefab;
-                    break;
-            }
+            case "Fish":
+                currentDeliItem = fishPrefab;
+                break;
+            case "Sausage":
+                currentDeliItem = sausagePrefab;
+                break;
+            case "Chicken":
+                currentDeliItem = chickenPrefab;
+                break;
+            case "Steak":
+                currentDeliItem = steakPrefab;
+                break;
+        }
+
+        if (orderReady && goodsTimer > 0)
+        {
+            // if the order is ready, start the countdown to spoilage
+            goodsTimer -= Time.deltaTime;
+            // notification.SetActive(true);
             currentDeliItem.SetActive(true);
+            spoiledMeat.SetActive(false);
+        }
+        else if (orderReady && goodsTimer <= 0)
+        {
+            // if the order is not picked up in time, spoil the order
+            spoiledMeat.SetActive(true);
         }
         else
         {
-            // notification.SetActive(false);
+            // if the order is not ready, hide the order and spoiled goods
             currentDeliItem.SetActive(false);
+            spoiledMeat.SetActive(false);
+        }
+
+        if (goodsTimer == 0) 
+        {
+            AudioSource.PlayClipAtPoint(spoilageSFX, Camera.main.transform.position);
         }
 
         if (clickedOn)
         {
             orderInProgress = true;
             countdown = prepTime;
+            goodsTimer = readyFoodWait;
             FindNextPoint();
             FaceTarget(nextDestination);
             currentState = NPCStates.Walking;
+            AudioSource.PlayClipAtPoint(meowSFX, Camera.main.transform.position);
         }
     }
 
@@ -219,20 +243,12 @@ public class DeliNPCBehavior : MonoBehaviour
     {
         orderReady = false;
         currentDeliItem.SetActive(false);
-        switch (deliItem)
-        {
-            case "Fish":
-                player.GetComponent<ItemCollection>().PickupItem("Fish");
-                break;
-            case "Sausage":
-                player.GetComponent<ItemCollection>().PickupItem("Sausage");
-                break;
-            case "Chicken":
-                player.GetComponent<ItemCollection>().PickupItem("Chicken");
-                break;
-            case "Steak":
-                player.GetComponent<ItemCollection>().PickupItem("Steak");
-                break;
+
+        if (goodsTimer <= 0) {
+            player.GetComponent<ItemCollection>().PickupItem("Spoiled " + deliItem);
+        }
+        else {
+            player.GetComponent<ItemCollection>().PickupItem(deliItem);
         }
     }
 

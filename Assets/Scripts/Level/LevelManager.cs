@@ -191,8 +191,16 @@ public class LevelManager : MonoBehaviour
 
     public void RemoveScore(int scoreToRemove)
     {
+        if (score - scoreToRemove < 0)
+        {
+            score = 0;
+        }
+        else
+        {
         score -= scoreToRemove;
         scoreText.text = score.ToString();
+
+        }
     }
 
     public void HandlePowerups()
