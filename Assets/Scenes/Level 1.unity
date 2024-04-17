@@ -39,6 +39,7 @@ RenderSettings:
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
   m_IndirectSpecularColor: {r: 0.6251373, g: 0.6954416, b: 0.78916764, a: 1}
+  m_IndirectSpecularColor: {r: 0.62346005, g: 0.69389, b: 0.7883626, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13574,6 +13575,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4750196697971976479, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750196697971976479, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 194
+      objectReference: {fileID: 0}
     - target: {fileID: 4890175021566309422, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -13662,7 +13671,20 @@ PrefabInstance:
       propertyPath: m_Text
       value: 'Level 1:
 
-        Help All the customers!'
+        Complete grocery orders for customers!
+
+        -
+        Press WASD to move
+
+        - enter / Left Click to interact with items'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108196462362754764, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108196462362754764, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8946024563273268645, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
       propertyPath: m_Name

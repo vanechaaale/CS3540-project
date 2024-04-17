@@ -13028,7 +13028,7 @@ PrefabInstance:
       objectReference: {fileID: 774120946}
     - target: {fileID: 7449969221068211830, guid: 8de7cd4d6b380194c8d0954be83496c3, type: 3}
       propertyPath: m_UseGravity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7449969221068211830, guid: 8de7cd4d6b380194c8d0954be83496c3, type: 3}
       propertyPath: m_IsKinematic
@@ -19455,6 +19455,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4750196697971976479, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 172
+      objectReference: {fileID: 0}
     - target: {fileID: 4890175021566309422, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -19538,6 +19542,20 @@ PrefabInstance:
     - target: {fileID: 4890175021566309422, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108196462362754764, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
+      propertyPath: m_Text
+      value: 'Level 2:
+
+        [NEW] Bakery!
+
+        - order & wait for cake
+
+
+        [New]
+        Beware the dog!
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 8946024563273268645, guid: 60c481b3c57f0b74d862e055744ba3ec, type: 3}
       propertyPath: m_Name

@@ -182,9 +182,9 @@ public class EnemyAI : MonoBehaviour
         if (Vector3.Angle(directionToPlayer, enemyEyes.forward) <= fieldOfView) {
             // print("in field of view");
             if (Physics.Raycast(enemyEyes.position, directionToPlayer, out hit, chaseDistance)) {
-                print (hit.collider.name);
+                //print (hit.collider.name);
                 if (hit.collider.CompareTag("Player")) {
-                    print("Player in Sight!");
+                    //print("Player in Sight!");
                     return true;
                 }
             }

@@ -21,7 +21,7 @@ public class DeliNPCBehavior : MonoBehaviour
     public GameObject steakPrefab; // 3
     public GameObject spoiledMeat;
 
-    float readyFoodWait = 5f;
+    float readyFoodWait = 12f;
     float goodsTimer;
 
     public AudioClip meowSFX;
@@ -29,6 +29,8 @@ public class DeliNPCBehavior : MonoBehaviour
     public GameObject deliMenu;
 
     GameObject currentDeliItem;
+    int currentDeliItemIndex;
+    public GameObject[] deliItemButtons;
 
     string deliItem;
 
@@ -58,7 +60,9 @@ public class DeliNPCBehavior : MonoBehaviour
         sausagePrefab.SetActive(false);
         chickenPrefab.SetActive(false);
         steakPrefab.SetActive(false);
+
         currentDeliItem = fishPrefab;
+        currentDeliItemIndex = 0;
 
         goodsTimer = readyFoodWait;
 
@@ -79,6 +83,8 @@ public class DeliNPCBehavior : MonoBehaviour
     void Update()
     {
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+
+        handleMenuSelect();
 
         switch (currentState)
         {
@@ -253,13 +259,61 @@ public class DeliNPCBehavior : MonoBehaviour
     }
 
     public void OrderDeliItem() {
-        if (!orderInProgress) {
+        if (!orderInProgress && !deliMenu.activeSelf) {
             OpenMenu();
+            currentDeliItemIndex = 0;
         }
     }
 
     public void OpenMenu() {
         deliMenu.SetActive(true);
+    }
+
+    public void handleMenuSelect() {
+        // set the deli button to the first button
+        // up down / left right keys to navigate buttons
+        // enter to select
+
+        // highlight the selected button
+        if (deliMenu.activeSelf) {
+        
+            // d key, s key, down arrow, right arrow
+            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.S)) {
+                currentDeliItemIndex++;
+                if (currentDeliItemIndex >= deliItemButtons.Length) {
+                    currentDeliItemIndex = 0;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A)) {
+                currentDeliItemIndex--;
+                if (currentDeliItemIndex < 0) {
+                    currentDeliItemIndex = deliItemButtons.Length - 1;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Return)) {
+                StartOrder(deliItemButtons[currentDeliItemIndex].name);
+                CloseMenu();
+            }
+            // x to close menu
+            if (Input.GetKeyDown(KeyCode.X)) {
+                CloseMenu();
+            }
+
+            handleButtonDisplay();
+
+        }
+
+    }
+
+    private void handleButtonDisplay() {
+        for (int i = 0; i < deliItemButtons.Length; i++) {
+            if (i == currentDeliItemIndex) {
+                deliItemButtons[i].transform.localScale = new Vector3(1.1f, 1f, 1f);
+                }
+            else {
+                deliItemButtons[i].transform.localScale = new Vector3(1f, 1f, 1f);
+            }
+        }
     }
 
     public void CloseMenu() {

@@ -54,6 +54,10 @@ public class BakeryNPCBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player == null)
+        {
+            return;
+        }
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
         switch (currentState)

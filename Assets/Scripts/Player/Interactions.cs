@@ -194,8 +194,9 @@ public class Interactions : MonoBehaviour
 
     public void PowerupTextTip(string powerupName)
     {
-        tipText.text = "Purchase Power Up (100 Coins)";
-        tipText.color = new Color(0, 0.5f, 0);
+        tipText.text = "Purchase Random Power Up (100 Coins)";
+        // dark moss green
+        tipText.color = new Color(0.3f, 0.5f, 0.3f);
     }
 
     public void TrashTextTip()
