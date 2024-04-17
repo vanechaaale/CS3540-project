@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.625131, g: 0.69543827, b: 0.78916645, a: 1}
+  m_IndirectSpecularColor: {r: 0.6251373, g: 0.6954416, b: 0.78916764, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2884,7 +2884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 492366, guid: f43818c9cb19fac4fa43f52d4a211840, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.82
+      value: 9.75
       objectReference: {fileID: 0}
     - target: {fileID: 492366, guid: f43818c9cb19fac4fa43f52d4a211840, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6719,7 +6719,6 @@ MonoBehaviour:
   maxItems: 4
   isBasketFull: 0
   powerupCost: 100
-  loseItemVFX: {fileID: 6782340904917583287, guid: 0a71c672d394e3144949feec841687f4, type: 3}
   pickupSFX: {fileID: 8300000, guid: 4aabd0beb96284d5e821517629e887fd, type: 3}
   trashSFX: {fileID: 8300000, guid: a2d001254aa304a5bbcbd4475940c960, type: 3}
   powerupSFX: {fileID: 8300000, guid: 52f79d83127b4d648a80896946b0734f, type: 3}
@@ -14653,6 +14652,26 @@ PrefabInstance:
     - target: {fileID: 1120591915220140440, guid: 630005e4fdc0558479eb8bba4a384818, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472428226455822151, guid: 630005e4fdc0558479eb8bba4a384818, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472428226455822151, guid: 630005e4fdc0558479eb8bba4a384818, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472428226455822151, guid: 630005e4fdc0558479eb8bba4a384818, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472428226455822151, guid: 630005e4fdc0558479eb8bba4a384818, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 14.700012
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472428226455822151, guid: 630005e4fdc0558479eb8bba4a384818, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 17.399994
       objectReference: {fileID: 0}
     - target: {fileID: 4435523301788983830, guid: 630005e4fdc0558479eb8bba4a384818, type: 3}
       propertyPath: m_Name
