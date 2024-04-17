@@ -96,7 +96,7 @@ public class LevelManager : MonoBehaviour
             //SetTimerText();
 
             // if all customers have left, the level is over
-            if (FindObjectOfType<CustomerManagerBehavior>().customersLeft == FindObjectOfType<CustomerManagerBehavior>().totalCustomers && !isGameOver)
+            if (FindObjectOfType<CustomerManagerBehavior>().customersLeft == FindObjectOfType<CustomerManagerBehavior>().totalCustomers)
             {
                 LevelBeat();
             }
@@ -137,6 +137,7 @@ public class LevelManager : MonoBehaviour
         if (score >= pointsToWin) {
             gameText.text = "You Win!";
             // advance to next level if there is one
+            Debug.Log("going to next level");
             Invoke("NextLevel", 2.0f);
         } else {
             gameText.text = "You Lose!";
@@ -161,10 +162,12 @@ public class LevelManager : MonoBehaviour
     public void NextLevel() {
         // get the current scene index
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log("Current Scene Index: " + currentSceneIndex);
 
         // update level beat stat
         PlayerPrefs.SetInt("levels beat", PlayerPrefs.GetInt("levels beat", 0) + 1);
 
+        Debug.Log("Loading Scene: " + (currentSceneIndex + 1));
         // load the next scene
         SceneManager.LoadScene(currentSceneIndex + 1);
 
