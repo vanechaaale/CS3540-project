@@ -45,6 +45,7 @@ public class CustomerManagerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("# customers: " + currentCustomers);
         // if level manager has started the game, spawn customers
         if (GameObject.Find("LevelManager").GetComponent<LevelManager>().startGame)
         {
@@ -54,7 +55,10 @@ public class CustomerManagerBehavior : MonoBehaviour
         // if there are customers in line, update the shopping list text
         if (currentCustomers > 0)
         {
-            UpdateShoppingListText();
+            for (int i = 0; i < currentCustomers; i++)
+            {
+                UpdateShoppingListText(i);
+            }
         }
         
         
@@ -102,25 +106,39 @@ public class CustomerManagerBehavior : MonoBehaviour
     {
         // Add the shopping list to the customer manager's list of customer shopping lists
         groceryLists.Add(shoppingList);
+        for (int i = 0; i < shoppingList.Count; i++)
+        {
+            Debug.Log("shoppingList: " + shoppingList[i]);
+        }
     }
 
-    public void RemoveCustomer()
+    // remove the customer at the given index
+    public void RemoveCustomer(int index)
     {
         // Decrement the number of customers
         currentCustomers--;
-        // shift all the customers to the left by 100 to account for the removed customer
-        foreach (Transform child in GameObject.FindGameObjectWithTag("ShoppingLists").transform)
+        // shift all the customers after the one at the given index
+        //  to the left by 100 to account for the removed customer
+        
+        // get shoppingList objects after the one at the given index
+        ShoppingListBehavior[] shoppingLists = GameObject.FindGameObjectWithTag("ShoppingLists").GetComponentsInChildren<ShoppingListBehavior>();
+        for (int i = index; i < shoppingLists.Length; i++)
         {
-            child.position = new Vector3(child.position.x - 100, child.position.y, child.position.z);
+            // shift the shopping list to the left by 100
+            shoppingLists[i].transform.position = new Vector3(
+                shoppingLists[i].transform.position.x - 100,
+                shoppingLists[i].transform.position.y,
+                shoppingLists[i].transform.position.z
+            );
         }
-        // remove the first customer from the list of customer shopping lists
-        groceryLists.RemoveAt(0);
+        // remove the customer from the list of customer shopping lists
+        groceryLists.RemoveAt(index);
 
         // increment the number of customers that have left the store
         customersLeft++;
 
-        // destroy the first ShoppingList object
-        GameObject.FindGameObjectWithTag("ShoppingLists").GetComponentInChildren<ShoppingListBehavior>().DestroyCustomer();
+        // destroy the ShoppingList object at the given index
+        GameObject.FindGameObjectWithTag("ShoppingLists").GetComponentsInChildren<ShoppingListBehavior>()[index].DestroyCustomer();
 
         // Play SFX when customer leaves
         Invoke("PlayLeaveSFX", 0.5f);
@@ -131,38 +149,43 @@ public class CustomerManagerBehavior : MonoBehaviour
         AudioSource.PlayClipAtPoint(customerLeaveSFX, Camera.main.transform.position);
     }
     
-    public void UpdateShoppingList(List<string> removedItems)
+    // update the shopping list of the customer in line with the given index
+    public void UpdateShoppingList(List<string> removedItems, int index)
     {
-        // remove the given items from the shopping list of the first customer in line
+        
+        
         for (int i = 0; i < removedItems.Count; i++)
         {
-            groceryLists[0].Remove(removedItems[i]);
+            groceryLists[index].Remove(removedItems[i]);
         }
 
         // update the shopping list text
-        UpdateShoppingListText();
+        //UpdateShoppingListText(index);
     }
 
-    public void UpdateShoppingListText()
+    public void UpdateShoppingListText(int index)
     {
-        // get the child text components of the first ShoppingList prefab
-        if (groceryLists == null || groceryLists.Count == 0)
+        // get the child text components of the ShoppingList object with the given index
+        if (groceryLists == null || groceryLists.Count <= index || groceryLists[index] == null)
         {
             return;
         }
 
-        Text[] groceryListText = GameObject.FindGameObjectWithTag("ShoppingLists").GetComponentInChildren<ShoppingListBehavior>().GetComponentsInChildren<Text>();
-    
-        // update the label with the new shopping list
-        for (int i = 0; i < 4; i++)
+        Text[] groceryListText = GameObject.FindGameObjectWithTag("ShoppingLists").GetComponentsInChildren<ShoppingListBehavior>()[index].GetComponentsInChildren<Text>();
+        Debug.Log("groceryListText: " + groceryListText.Length);
+        // update the four text components with the items in the customer's shopping list
+        for (int i = 0; i < groceryLists[index].Count; i++)
         {
-            if (i >= groceryLists[0].Count) {
-                groceryListText[i].text = "";
-            } else {
-                groceryListText[i].text = "- " + groceryLists[0][i] + "\n";
+            foreach (string item in groceryLists[index]) {
+                Debug.Log("item: " + item);
             }
-            
+            Debug.Log("current index: " + i);
+            groceryListText[i].text = "- " +groceryLists[index][i];
         }
-
+        // clear the remaining text components
+        for (int i = groceryLists[index].Count; i < 4; i++)
+        {
+            groceryListText[i].text = "";
+        }
     }
 }

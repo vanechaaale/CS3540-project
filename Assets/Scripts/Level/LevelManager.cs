@@ -162,12 +162,14 @@ public class LevelManager : MonoBehaviour
     public void NextLevel() {
         // get the current scene index
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        Debug.Log("Current Scene Index: " + currentSceneIndex);
+        //Debug.Log("Current Scene Index: " + currentSceneIndex);
 
         // update level beat stat
         PlayerPrefs.SetInt("levels beat", PlayerPrefs.GetInt("levels beat", 0) + 1);
 
-        Debug.Log("Loading Scene: " + (currentSceneIndex + 1));
+        Resources.UnloadUnusedAssets();
+
+        //Debug.Log("Loading Scene: " + (currentSceneIndex + 1));
         // load the next scene
         SceneManager.LoadScene(currentSceneIndex + 1);
 

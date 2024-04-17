@@ -135,7 +135,7 @@ public class ShoppingListBehavior : MonoBehaviour
         {
             customerHasLeft = true;
             DestroyCustomer();
-            FindObjectOfType<CustomerManagerBehavior>().RemoveCustomer();
+            FindObjectOfType<CustomerManagerBehavior>().RemoveCustomer(0);
         }
     }
 

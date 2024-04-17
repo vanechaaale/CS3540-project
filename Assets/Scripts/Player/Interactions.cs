@@ -97,7 +97,7 @@ public class Interactions : MonoBehaviour
                 FindObjectOfType<ItemCollection>().TrashItem();
             }
             else if (closestItem.CompareTag("Checkout")) {
-                FindObjectOfType<CheckoutBehavior>().CheckoutCustomer();
+                FindObjectOfType<CheckoutBehavior>().CheckoutAllCustomers();
             }
             else if (closestItem.CompareTag("Baker")) {
                 // if the baker has an order ready, pick it up
@@ -188,7 +188,7 @@ public class Interactions : MonoBehaviour
 
     public void CheckoutTextTip()
     {
-        tipText.text = "Checkout Customer";
+        tipText.text = "Checkout Customers";
         tipText.color = new Color(0, 0, 1);
     }
 

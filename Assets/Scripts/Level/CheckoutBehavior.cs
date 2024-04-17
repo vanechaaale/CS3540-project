@@ -5,7 +5,6 @@ using UnityEngine;
 public class CheckoutBehavior : MonoBehaviour
 {
     public GameObject player;
-    public List<string> customerList;
     //public float checkoutTimer = 1f;
     float minDistance = 4f;
     //float checkoutCountdown;
@@ -13,6 +12,8 @@ public class CheckoutBehavior : MonoBehaviour
     public AudioClip checkoutSFX;
     // the partcle system that will be played when the player completes an order
     public GameObject moneyEarned;
+
+    List<List<string>> customerLists;
 
 
     // Start is called before the first frame update
@@ -22,56 +23,57 @@ public class CheckoutBehavior : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }
-        //checkoutCountdown = checkoutTimer;
-        customerList = new List<string>();
+        // empty lists
+        customerLists = new List<List<string>>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // float dist = Vector3.Distance(transform.position, player.transform.position);
-        // if (dist <= minDistance)
-        // {
-        //     //CheckoutCustomer();
-        // }
-        if (customerList.Count == 0)
-        {
-            GetNextCustomer();
-        }
+        // Update list of customers
+        UpdateCustomerList(FindObjectOfType<CustomerManagerBehavior>().groceryLists);
     }
 
-    public void UpdateCustomerList(List<string> list)
+    public void UpdateCustomerList(List<List<string>> list)
     {
-        customerList = list;
+        customerLists = list;
     }
 
-
-    // checkout the first customer in the list
-    public void CheckoutCustomer()
+    // checkout for all customers in line
+    public void CheckoutAllCustomers()
     {
-        while (!CustomerStillThere())
-        {
-            GetNextCustomer();
-        }
         List<string> removedItems = new List<string>();
-        // remove all items that are a match
-        for (int i = 0; i < customerList.Count; i++)
+        for (int i = 0; i < customerLists.Count; i++)
         {
-                if (ItemCollection.itemList.Contains(customerList[i])) { 
-                    ItemCollection.itemList.Remove(customerList[i]);
-                    removedItems.Add(customerList[i]);
+            for (int j = 0; j < customerLists[i].Count; j++)
+            {
+                if (ItemCollection.itemList.Contains(customerLists[i][j]))
+                {
+                    ItemCollection.itemList.Remove(customerLists[i][j]);
+                    removedItems.Add(customerLists[i][j]);
                 }
+            }
+
+            Debug.Log("removing " + removedItems.Count + " items from customer " + i);
+            foreach (string item in removedItems)
+            {
+                customerLists[i].Remove(item);
+            }
+
+            CheckoutCustomer(customerLists[i], removedItems, i);
+
+            removedItems.Clear();
         }
-        foreach (string item in removedItems)
-        {
-            customerList.Remove(item);
-        }
-        FindObjectOfType<CustomerManagerBehavior>().UpdateShoppingList(removedItems);
+    }
+
+    // checkout for a single customers in line
+    public void CheckoutCustomer(List<string> customerList, List<string> removedItems, int index)
+    {   
+        FindObjectOfType<CustomerManagerBehavior>().UpdateShoppingList(removedItems, index);
         if (customerList.Count == 0)
         {
-
             // remove the customer from the Shopping list
-            FindObjectOfType<CustomerManagerBehavior>().RemoveCustomer();
+            FindObjectOfType<CustomerManagerBehavior>().RemoveCustomer(index);
 
             // Get the wait time for the customer by getting the first shoppingListBehavior
             float percentWaited = FindObjectOfType<ShoppingListBehavior>().GetTimeWaited();
@@ -94,22 +96,4 @@ public class CheckoutBehavior : MonoBehaviour
         }
     }
 
-    bool CustomerStillThere()
-    {
-        List<List<string>> custList = GameObject.Find("CustomerManager").GetComponent<CustomerManagerBehavior>().groceryLists;
-        if (custList.Contains(customerList))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    void GetNextCustomer()
-    {
-        List<List<string>> custList = GameObject.Find("CustomerManager").GetComponent<CustomerManagerBehavior>().groceryLists;
-        if (custList != null && custList.Count > 0)
-        {
-            customerList = custList[0];
-        }
-    }
 }
